@@ -1,0 +1,42 @@
+\documentclass[tikz,convert={outfile=\jobname.svg}]{standalone}
+
+\usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{matrix, positioning}
+
+\begin{document}
+\begin{tikzpicture}[
+    cell/.style={rectangle,draw=black},
+    space/.style={
+      minimum height=1.5em,
+      matrix of nodes,
+      row sep=-\pgflinewidth,
+      column sep=-\pgflinewidth,
+      column 1/.style={font=\ttfamily}},
+    text depth=0.5ex,
+    text height=2ex,
+    nodes in empty cells
+  ]
+
+  \tikzset{listarrow/.style={->, thick}}
+
+  \matrix (lists) [matrix of nodes,%
+     column sep=-\pgflinewidth,%
+     row sep=5mm,%
+     nodes in empty cells,
+     nodes={draw, minimum width=1cm, outer sep=0pt, minimum
+       height=1cm, anchor=center}
+  ] {
+    |[label={[label distance=-2mm]\scriptsize \mintinline{java}{first}}]| &[4mm] |[label={[label distance=-2mm]\scriptsize \mintinline{java}{prev}}]| & |[label={[label distance=-2mm]\scriptsize \mintinline{java}{value}}]| \mintinline{java}{a} & |[label={[label distance=-2mm]\scriptsize \mintinline{java}{next}}]| &[4mm] & \mintinline{java}{b} & &[4mm] & \mintinline{java}{c} & &[4mm] |[label={[label distance=-2mm]\scriptsize \mintinline{java}{last}}]| \\
+  };
+
+  \draw[listarrow] (lists-1-1.center) -- (lists-1-2.west);
+  \draw[listarrow] (lists-1-11.center) -- (lists-1-10.east);
+  \draw (lists-1-2.north east) -- (lists-1-2.south west);
+  \draw[listarrow, bend left] (lists-1-4.center) to (lists-1-5.west);
+  \draw[listarrow, bend left] (lists-1-5.center) to (lists-1-4.east);
+  \draw[listarrow, bend left] (lists-1-7.center) to (lists-1-8.west);
+  \draw[listarrow, bend left] (lists-1-8.center) to (lists-1-7.east);
+  \draw (lists-1-10.north east) -- (lists-1-10.south west);
+\end{tikzpicture}
+\end{document}

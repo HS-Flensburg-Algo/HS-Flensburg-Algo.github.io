@@ -1,0 +1,32 @@
+\documentclass[tikz,convert={outfile=\jobname.svg}]{standalone}
+
+\usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{matrix, positioning}
+
+\begin{document}
+\begin{tikzpicture}[
+  cell/.style={rectangle,draw=black},
+  space/.style={minimum height=1.5em,matrix of nodes,row sep=-\pgflinewidth,column sep=-\pgflinewidth,column 1/.style={font=\ttfamily}},text depth=0.5ex,text height=2ex,nodes in empty cells]
+
+\node (case) {Nicht verschieben};
+
+\matrix (before) [
+right=of case.east,%
+matrix of nodes,%
+   column sep=-\pgflinewidth,%
+   row sep=5mm,%
+   nodes in empty cells,
+   nodes={draw, minimum width=.5cm, outer sep=0pt, minimum
+     height=.7cm, anchor=center}] {
+     \mintinline{java}{a} & \mintinline{java}{b} & \mintinline{java}{c} & & & \\
+};
+
+\node (index2) [below] at (before-1-4.south) {\mintinline{java}{i}};
+\draw[->, shorten <=5pt] (index2.center) -- (before-1-4);
+
+\node (result) [right=of before.east] {3. Schritt};
+
+\draw[->] (before.east) -- (result.west);
+\end{tikzpicture}
+\end{document}

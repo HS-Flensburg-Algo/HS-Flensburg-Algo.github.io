@@ -1,0 +1,46 @@
+\documentclass[tikz,convert={outfile=\jobname.svg}]{standalone}
+
+\usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{matrix, positioning}
+
+\begin{document}
+\begin{tikzpicture}[
+  cell/.style={rectangle,draw=black},
+  space/.style={minimum height=1.5em,matrix of nodes,row sep=-\pgflinewidth,column sep=-\pgflinewidth,column 1/.style={font=\ttfamily}},text depth=0.5ex,text height=2ex,nodes in empty cells]
+
+\node (case) {Vergrößern};
+
+\matrix (before) [
+right=of case.east,%
+matrix of nodes,%
+   column sep=-\pgflinewidth,%
+   row sep=5mm,%
+   nodes in empty cells,
+   nodes={draw, minimum width=.5cm, outer sep=0pt, minimum
+     height=.7cm, anchor=center}] {
+     \mintinline{java}{a} & \mintinline{java}{b} & \mintinline{java}{c} & \mintinline{java}{d} & \mintinline{java}{e} & \mintinline{java}{f}\\
+};
+% \node (index) [below] at (before-1-3.south) {\mintinline{java}{i}};
+% \draw[->, shorten <=5pt] (index.center) -- (before-1-3);
+
+\matrix (after)
+   [right=of before.east,%
+   matrix of nodes,%
+   column sep=-\pgflinewidth,%
+   row sep=5mm,%
+   nodes in empty cells,
+   nodes={draw, minimum width=.5cm, outer sep=0pt, minimum
+     height=.7cm, anchor=center}] {
+     \mintinline{java}{a} & \mintinline{java}{b} & \mintinline{java}{c} & \mintinline{java}{d} & \mintinline{java}{e} & \mintinline{java}{f} & & \\
+};
+% \node (index) [below] at (after-1-3.south) {\mintinline{java}{i}};
+% \draw[->, shorten <=5pt] (index.center) -- (after-1-3);
+
+\draw[->] (before.east) -- (after.west);
+
+\node (result) [right=of after.east] {2. Schritt};
+
+\draw[->] (after.east) -- (result.west);
+\end{tikzpicture}
+\end{document}

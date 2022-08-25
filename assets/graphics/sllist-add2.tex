@@ -1,0 +1,116 @@
+\documentclass[tikz,convert={outfile=\jobname.svg}]{standalone}
+
+\usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{matrix, positioning, decorations.pathreplacing, decorations.markings}
+
+
+\begin{document}
+\tikzset{
+  strike thru arrow/.style={
+    decoration={markings, mark=at position 0.5 with {
+        \draw[black, thick,-]
+            ++ (-0.15cm,-0.15cm)
+            -- (0.15cm,0.15cm);}
+    },
+    postaction={decorate},
+  }
+}
+\begin{tikzpicture}[
+  cell/.style={rectangle,draw=black},
+  space/.style={
+    minimum height=1.5em,
+    matrix of nodes,
+    row sep=-\pgflinewidth,
+    column sep=-\pgflinewidth,
+    column 1/.style={font=\ttfamily}},
+  text depth=0.5ex,
+  text height=2ex,
+  nodes in empty cells,
+  node/.style={
+    draw,
+    minimum width=.7cm,
+    outer sep=0pt,
+    minimum height=.7cm,
+    anchor=center}
+]
+
+\tikzset{
+  listarrow/.style={->, thick},
+}
+
+
+% step 1
+
+\matrix (step1) [
+matrix of nodes,%
+   column sep=-\pgflinewidth,%
+   row sep=5mm,%
+   nodes in empty cells,
+   nodes=node,
+   column 1/.style={nodes={draw=none}},
+   column 6/.style={nodes={draw=none}},
+] {
+  \dots &[6mm] \mintinline{java}{a} & &[4mm] \mintinline{java}{b} & &[4mm] \dots\\
+};
+
+\draw[listarrow] (step1-1-1.east) -- (step1-1-2.west);
+\draw[listarrow] (step1-1-3.center) -- (step1-1-4.west);
+\draw[listarrow] (step1-1-5.center) -- (step1-1-6.west);
+
+\draw [decorate,decoration={brace,amplitude=10pt,raise=4pt},yshift=0pt] (step1-1-4.north west) -- ([xshift=-4mm]step1-1-6.north west) node [yshift=25pt, midway] {Knoten an Index \mintinline{java}{i}};
+
+
+% step 2
+
+\matrix (step2) [
+below=of step1.south,%
+matrix of nodes,%
+   column sep=-\pgflinewidth,%
+   row sep=5mm,%
+   nodes in empty cells,
+   nodes=node,
+   column 1/.style={nodes={draw=none}},
+   column 6/.style={nodes={draw=none}},
+] {
+  \dots &[6mm] \mintinline{java}{a} & &[4mm] \mintinline{java}{b} & &[4mm] \dots\\
+        &[6mm] |[draw=none]| & |[draw=none]| &[4mm] \mintinline{java}{x} &\\
+};
+
+\node[above=0.5cm of step2-1-2.north east] (pred) {\mintinline{java}{pred}};
+\draw[listarrow] (pred) -- (step2-1-2.north east);
+
+\draw[listarrow] (step2-1-1.east) -- (step2-1-2.west);
+\draw[listarrow] (step2-1-3.center) -- (step2-1-4.west);
+\draw[listarrow] (step2-1-5.center) -- (step2-1-6.west);
+\draw (step2-2-5.north east) -- (step2-2-5.south west);
+
+
+% step 3
+
+\matrix (step3) [
+below=of step2.south,%
+matrix of nodes,%
+   column sep=-\pgflinewidth,%
+   row sep=5mm,%
+   nodes in empty cells,
+   nodes=node,
+   column 1/.style={nodes={draw=none}},
+   column 6/.style={nodes={draw=none}},
+] {
+  \dots &[6mm] \mintinline{java}{a} & &[4mm] \mintinline{java}{b} & &[4mm] \dots\\
+            &[6mm] |[draw=none]| & |[draw=none]| &[4mm] \mintinline{java}{x} &\\
+};
+
+\node[above=0.5cm of step3-1-2.north east] (pred) {\mintinline{java}{pred}};
+
+\draw[listarrow] (pred) -- (step3-1-2.north east);
+
+\draw[listarrow] (step3-1-1.east) -- (step3-1-2.west);
+\draw[listarrow] (step3-1-5.center) -- (step3-1-6.west);
+
+\draw[listarrow] (step3-1-3.center) to[out=300,in=180] (step3-2-4.west);
+\draw[listarrow] (step3-2-5.center) to[out=90, in=270] (step3-1-4.south east);
+
+\end{tikzpicture}
+\end{document}
