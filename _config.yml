@@ -1,0 +1,12 @@
+title: Algorithmen
+author:
+  name: Jan Christiansen
+  email: jan.christiansen@hs-flensburg.de
+description: >
+  Hochschule Flensburg / Fachbereich 3 Information und Kommunikation / Angewandte Informatik
+
+markdown: kramdown
+remote_theme: jekyll/minima
+header_pages:
+  - index.md
+  - introduction.md
