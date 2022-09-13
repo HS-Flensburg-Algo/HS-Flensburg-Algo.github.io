@@ -1,0 +1,25 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+
+\begin{document}
+\begin{tikzpicture}[samples=30]
+    \draw[->] (0,0)coordinate(O) -- (6,0);
+    \draw[->] (0,0) -- (0,8);
+
+    % Ticks on the x axis
+    \foreach \tick in {1, 2, ..., 5} {
+      \draw (\tick, -2.5pt) -- (\tick, 2.5pt) node[below=8pt] {\tick};
+    }
+
+    % Ticks on the y axis
+    \foreach \tick in {1, 2, ..., 7} {
+      \draw (-2.5pt, \tick) -- (2.5pt, \tick) node[left=8pt] {\tick};
+    }
+
+    \draw[domain=0:5, smooth, variable=\x, blue,name path=f1] plot ({\x},{\x})node[right, black]{$l(x) = x$};
+    \draw[domain=0:3, smooth, variable=\x, red,name path=f2] plot ({\x},{\x*\x})node[right,black]{$q(x) = x^2$};
+\end{tikzpicture}
+\end{document}

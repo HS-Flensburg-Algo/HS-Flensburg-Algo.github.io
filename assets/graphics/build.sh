@@ -1,3 +1,5 @@
+set -euxo pipefail
+
 # pdflatex --shell-escape example1.tex
 # pdflatex --shell-escape example2.tex
 # pdflatex --shell-escape example3.tex
@@ -14,4 +16,9 @@
 # pdflatex --shell-escape dllist-add1.tex
 # pdflatex --shell-escape dllist-add2.tex
 # pdflatex --shell-escape dllist-add3.tex
-pdflatex --shell-escape dllist-add4.tex
+# pdflatex --shell-escape dllist-add4.tex
+# pdflatex --shell-escape o-notation.tex
+
+./mksvg.sh constant-factor.tex
+./mksvg.sh linear-function.tex
+./mksvg.sh quadratic-function.tex

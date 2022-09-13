@@ -1,0 +1,16 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+
+\begin{document}
+    \begin{tikzpicture}[samples=30]
+      \draw[->] (0,0)coordinate(O) -- (6,0);
+      \draw[->] (0,0) -- (0,8);
+
+      \draw[domain=0:5, smooth, variable=\x, blue] plot ({\x},{\x})node[right, black]{$f(x) = x$};
+      \draw[domain=0:3.5, smooth, variable=\x, red] plot ({\x},{2*\x})node[right, black]{$2 \cdot f(x)$};
+      \draw[domain=0:2.5, smooth, variable=\x, teal] plot ({\x},{3*\x})node[right, black]{$3 \cdot f(x)$};
+  \end{tikzpicture}
+\end{document}

@@ -470,7 +470,7 @@ public class DLList<T> implements List<T> {
 
 <a href="#figure:doubly-linked-list-add">Abbildung 9</a> zeigt die Idee der Implementierung einer doppelt verketteten Liste.
 
-<figure id="sllist-add" markdown="1">
+<figure id="figure:doubly-linked-list-add" markdown="1">
 1\. Fall, `i = 0` und `size = 0`
 
 ![](/assets/graphics/dllist-add1.svg){: height="75px" .centered}
@@ -508,3 +508,11 @@ Da man bei einer doppelt verketteten Liste effizient vorne und hinten hinzufüge
 Neben diesen Interfaces stellt Java noch eine generische Klasse `Stack` zur Verfügung, welche die Methoden `push` und `pop` zur Verfügung stellt.
 In der Beschreibung dieser Klasse wird allerdings darauf hingewiesen, dass das Interface `Deque` eine umfangreichere Menge von Stack-Operationen zur Verfügung stellt.
 Da man bei einem Deque effizient vorne und hinten hinzufügen und entfernen kann, kann man diese Struktur sowohl als Stack als auch als Queue nutzen.
+
+<div class="nav">
+    <ul class="nav-row">
+        <li class="nav-item nav-left"><a hreaf="introduction.html">zurück</a></li>
+        <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
+        <li class="nav-item nav-right"><a href="complexity.html">weiter</a></li>
+    </ul>
+</div>

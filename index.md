@@ -18,13 +18,13 @@ custom_css: toc
 
 - 2.5. [Listen in Java](linear-data-structures.md#listen-in-java)
 
-### 3. [Komplexität](first-application.md)
+### 3. [Komplexität](complexity.md)
 
-- 3.1. [Konkrete Laufzeiten](first-application.md#html-kombinatoren)
+- 3.1. [Konkrete Laufzeiten](complexity.md#konkrete-laufzeiten)
 
-- 3.2. [Asymptotisches Wachstum](first-application.md#elm-architektur)
+- 3.2. [Asymptotisches Wachstum](complexity.md#asymptotisches-wachstum)
 
-- 3.3. [Größenordnungen](first-application.md#debugging)
+- 3.3. [Größenordnungen](complexity.md#größenordnungen)
 
 ### 4. [Algorithmische Methoden](data-types.md)
 
