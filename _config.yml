@@ -9,4 +9,3 @@ markdown: kramdown
 remote_theme: jekyll/minima
 header_pages:
   - index.md
-  - introduction.md
