@@ -20,3 +20,7 @@ h3 {
     clear: both;
     display: table;
 }
+
+ul {
+    list-style-type: none;
+}
