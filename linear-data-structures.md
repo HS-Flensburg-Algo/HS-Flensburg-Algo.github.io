@@ -27,11 +27,11 @@ for (int i = 0; i < array.length; i++) {
 ```
 
 Wir werden in dieser Vorlesung überall, wo es möglich ist, die lokale Typinferenz von Java verwenden.
-Das Konzept der Typinferenz wird in statisch getypten Programmiersprachen genutzt, um Programierer*innen davon zu befreien, Typen explizit anzugeben.
+Das Konzept der Typinferenz wird in statisch getypten Programmiersprachen genutzt, um Programmierende davon zu befreien, Typen explizit anzugeben.
 Ohne lokale Typinferenz müsste die erste Zeile des obigen Codes `int[] array = new int[3]` heißen.
 Hier müssen wir explizit angeben, welchen Typ die Variable `array` hat.
-Das Schlüsselwort `var` teilt dem Comiler mit, dass er selbst den Typ der Variable bestimmen soll.
-Es gibt statisch getypte Programmiersprachen, bei denen Programierer*innen gar keine Typen angeben müssen, da alle Typen inferiert werden können.
+Das Schlüsselwort `var` teilt dem Compiler mit, dass er selbst den Typ der Variable bestimmen soll.
+Es gibt statisch getypte Programmiersprachen, bei denen Programmierende gar keine Typen angeben müssen, da alle Typen inferiert werden können.
 In Java kann die Typinferenz aber nur in ganz bestimmten Fällen eingesetzt werden.
 Wir können `var` nur für lokale Variablen nutzen, die direkt initialisiert werden, denen also direkt ein Wert zugewiesen wird.
 
@@ -49,7 +49,7 @@ Bei vielen Anwendungen möchte man eine dynamische Anzahl an Elementen in einer 
 Wenn wir zum Beispiel einen Warenkorb in einem Web-Shop implementieren, wissen wir nicht, wie viele Gegenstände im Warenkorb gespeichert werden müssen.
 Um eine solche Anwendung mit Hilfe eines Arrays zu implementieren, kann man ein sehr großes Array anlegen, dessen Größe garantiert ausreicht, um alle Elemente abzulegen.
 Bei unserem Warenkorb-Beispiel gibt es dann aber eine Obergrenze.
-Das heißt Nutzer*innen können dann zum Beispiel nur `100` oder `1000` Gegenstände in den Warenkorb packen.
+Das heißt Nutzer\*innen können dann zum Beispiel nur `100` oder `1000` Gegenstände in den Warenkorb packen.
 Es gibt aber noch einen gravierenderen Nachteil.
 Wie wir zuvor gelernt haben, wird beim Anlegen eines solchen Arrays Speicher für das gesamte Array reserviert, auch wenn das Array gar nicht gefüllt wird.
 Der reservierte Speicher kann von einem Programm nicht mehr genutzt werden.
@@ -62,7 +62,7 @@ Die Logik für diese Implementierung möchte man aber nicht in der eigentlichen 
 Daher kapselt man diese Idee in einer Klasse.
 Das heißt, in unserer Anwendung nutzen wir die Klasse und in der Implementierung der Klasse wird die Verwaltung des Arrays implementiert.
 Es muss zum Beispiel gespeichert werden, wie viele Einträge noch in das Array passen und ein größeres Array angelegt werden, wenn der Platz nicht mehr ausreicht.
-Im Abschnitt [ArrayListen](#arraylisten) diskutieren wir, wie eine solche Implemnentierung umgesetzt werden kann.
+Im Abschnitt [ArrayListen](#arraylisten) diskutieren wir, wie eine solche Implementierung umgesetzt werden kann.
 
 Listen
 ------
