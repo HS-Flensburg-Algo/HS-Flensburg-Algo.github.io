@@ -71,7 +71,7 @@ Die Methode ist mit Hilfe der Methode `nodeAt` implementiert, wir müssen uns al
 
 ``` java
 private Node<T> nodeAt(int index) {
-    Node<T> current = this.head;
+    var current = this.head;
     for (int i = 0; i < index; i++) {
         current = current.next;
     }

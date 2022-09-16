@@ -263,7 +263,7 @@ Um die Methoden `get`, `add` und `remove` zu implementieren, implementieren wir 
 
 ``` java
 private Node<T> nodeAt(int index) {
-    Node<T> current = this.first;
+    var current = this.first;
     for (int i = 0; i < index; i++) {
         current = current.next;
     }
@@ -310,11 +310,11 @@ Diese Methode fügt ein Element am Ende einer Liste an.
 
 ``` java
 public void add(T e) {
-    Node<T> node = new Node<T>(e, null);
+    var node = new Node<T>(e, null);
     if (this.first == null) {
         this.first = node;
     } else {
-        Node<T> current = this.first;
+        var current = this.first;
         while (current.next != null) {
             current = current.next;
         }
@@ -367,7 +367,7 @@ Mit Hilfe der Referenz `last` können wir die Methode `add`, die am Ende der Ver
 
 ``` java
 public void add(T e) {
-    Node<T> node = new Node<T>(e, null);
+    var node = new Node<T>(e, null);
     if (this.last == null) {
         this.first = node;
     } else {
@@ -383,7 +383,7 @@ Die Methode `remove` kann wie folgt implementiert werden.
 
 ``` java
 public T remove() {
-    T value = this.first.value;
+    var value = this.first.value;
     if (this.first.next == null) {
         this.last = null;
     }
