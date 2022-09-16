@@ -1,24 +1,23 @@
 set -euxo pipefail
 
-# pdflatex --shell-escape example1.tex
-# pdflatex --shell-escape example2.tex
-# pdflatex --shell-escape example3.tex
-# pdflatex --shell-escape example4.tex
-# pdflatex --shell-escape step11.tex
-# pdflatex --shell-escape step12.tex
-# pdflatex --shell-escape step21.tex
-# pdflatex --shell-escape step22.tex
-# pdflatex --shell-escape step3.tex
-# pdflatex --shell-escape sllist.tex
-# pdflatex --shell-escape sllist-add1.tex
-# pdflatex --shell-escape sllist-add2.tex
-# pdflatex --shell-escape dllist.tex
-# pdflatex --shell-escape dllist-add1.tex
-# pdflatex --shell-escape dllist-add2.tex
-# pdflatex --shell-escape dllist-add3.tex
-# pdflatex --shell-escape dllist-add4.tex
-# pdflatex --shell-escape o-notation.tex
-
+./mksvg.sh example1.tex
+./mksvg.sh example2.tex
+./mksvg.sh example3.tex
+./mksvg.sh example4.tex
+./mksvg.sh step11.tex
+./mksvg.sh step12.tex
+./mksvg.sh step21.tex
+./mksvg.sh step22.tex
+./mksvg.sh step3.tex
+./mksvg.sh sllist.tex
+./mksvg.sh sllist-add1.tex
+./mksvg.sh sllist-add2.tex
+./mksvg.sh dllist.tex
+./mksvg.sh dllist-add1.tex
+./mksvg.sh dllist-add2.tex
+./mksvg.sh dllist-add3.tex
+./mksvg.sh dllist-add4.tex
+./mksvg.sh o-notation.tex
 ./mksvg.sh constant-factor.tex
 ./mksvg.sh linear-function.tex
 ./mksvg.sh quadratic-function.tex
