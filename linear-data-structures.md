@@ -274,7 +274,7 @@ private Node<T> nodeAt(int index) {
 Mit Hilfe dieser Methode können wir nun sehr einfach die Methoden `get` und `add` implementieren.
 <a href="#figure:sllist-add">Abbildung 5</a> zeigt abstrakt das Vorgehen bei einem Aufruf `add(i, x)`.
 
-<figure id="sllist-add" markdown="1">
+<figure id="figure:sllist-add" markdown="1">
 1\. Fall, `i = 0`
 
 ![](/assets/graphics/sllist-add1.svg){: .centered}
