@@ -18,7 +18,7 @@ custom_css: toc
 
 - 2.5. [Listen in Java](linear-data-structures.md#listen-in-java)
 
-### 3. [Komplexität](complexity.md)
+<!-- ### 3. [Komplexität](complexity.md)
 
 - 3.1. [Konkrete Laufzeiten](complexity.md#konkrete-laufzeiten)
 
@@ -26,15 +26,15 @@ custom_css: toc
 
 - 3.3. [Größenordnungen](complexity.md#größenordnungen)
 
-### 4. [Algorithmische Methoden](data-types.md)
+### 4. [Algorithmische Methoden](methods.md)
 
-- 4.1. [Rekursion](data-types.md#algebraische-datentypen)
+- 4.1. [Rekursion](methods.md#rekursion)
 
-- 4.2. [Einschub: Bestimmung der Laufzeit](data-types.md#pattern-matching)
+- 4.2. [Einschub: Bestimmung der Laufzeit](methods.md#einschub-bestimmung-der-laufzeit)
 
-- 4.3. [Divide and Conquer](data-types.md#rekursive-datentypen)
+- 4.3. [Divide and Conquer](methods.md#divide-and-conquer)
 
-- 4.4. [Backtracking](data-types.md#rekursive-datentypen)
+- 4.4. [Backtracking](methods.md#backtracking)
 
 ### 5. [Hashing](polymorphism.md)
 
@@ -48,4 +48,4 @@ custom_css: toc
 
 - 6.2. [Insertionsort](recursion.md#anonyme-funktionen)
 
-- 6.3. [Quicksort](recursion.md#gecurryte-funktionen)
+- 6.3. [Quicksort](recursion.md#gecurryte-funktionen) -->
