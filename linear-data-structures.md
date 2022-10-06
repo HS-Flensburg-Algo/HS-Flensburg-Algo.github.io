@@ -107,7 +107,7 @@ Beim Entfernen eines Elementes aus einer Liste mit *n* Elementen sind nur die In
 ![add(3,"x")](/assets/graphics/example2.svg){: height="80px" .centered}
 ![remove(0)](/assets/graphics/example3.svg){: height="80px" .centered}
 ![remove(1)](/assets/graphics/example4.svg){: height="80px" .centered}
-  <figcaption>Abbildung 2Veränderung einer Liste durch Einfügen und Entfernen</figcaption>
+  <figcaption>Abbildung 2: Veränderung einer Liste durch Einfügen und Entfernen</figcaption>
 </figure>
 
 Bei mehreren Methoden in der <a href="#figure:list-adt">Abbildung 1</a> wird der Typ `T` verwendet.
@@ -142,7 +142,7 @@ list.add(0, "a");
 list.add(1, "b");
 list.add(2, "c");
 
-String elem = list.remove(1);
+var elem = list.remove(1);
 ```
 
 In diesem Code-Schnipsel wird eine leere Liste erstellt und die Einträge `"a"`, `"b"` und `"c"` werden zur Liste hinzugefügt.
@@ -277,11 +277,11 @@ Mit Hilfe dieser Methode können wir nun sehr einfach die Methoden `get` und `ad
 <figure id="figure:sllist-add" markdown="1">
 1\. Fall, `i = 0`
 
-![](/assets/graphics/sllist-add1.svg){: .centered}
+![](/assets/graphics/sllist-add1.svg){: width="740px" .centered}
 
 2\. Fall, `i > 0`
 
-![](/assets/graphics/sllist-add2.svg){: height="450px" .centered}
+![](/assets/graphics/sllist-add2.svg){: height="440px" .centered}
   <figcaption>Abbildung 5: Einfügen eines Elementes durch einen Aufruf <code class="language-java">add(i, x)</code></figcaption>
 </figure>
 
@@ -473,19 +473,19 @@ public class DLList<T> implements List<T> {
 <figure id="figure:doubly-linked-list-add" markdown="1">
 1\. Fall, `i = 0` und `size = 0`
 
-![](/assets/graphics/dllist-add1.svg){: height="75px" .centered}
+![](/assets/graphics/dllist-add1.svg){: width="700px" .centered}
 
 2\. Fall, `i = 0` und `size > 0`
 
-![](/assets/graphics/dllist-add2.svg){: .centered}
+![](/assets/graphics/dllist-add2.svg){: width="740px" .centered}
 
 3\. Fall, `i > 0` und `i = size`
 
-![](/assets/graphics/dllist-add3.svg){: .centered}
+![](/assets/graphics/dllist-add3.svg){: width="740px" .centered}
 
 4\. Fall, `i > 0` und `i < size`
 
-![](/assets/graphics/dllist-add4.svg){: height="400px" .centered}
+![](/assets/graphics/dllist-add4.svg){: height="380px" .centered}
   <figcaption>Abbildung 9: Einfügen eines Elementes in einer doppelt verketteten Liste durch einen Aufruf <code class="language-java">add(i, x)</code></figcaption>
 </figure>
 
@@ -513,6 +513,6 @@ Da man bei einem Deque effizient vorne und hinten hinzufügen und entfernen kann
     <ul class="nav-row">
         <li class="nav-item nav-left"><a hreaf="introduction.html">zurück</a></li>
         <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"><a href="complexity.html">weiter</a></li>
+        <li class="nav-item nav-right"><a href="complexity.html"></a></li>
     </ul>
 </div>
