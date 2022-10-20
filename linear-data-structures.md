@@ -339,7 +339,7 @@ Das heißt, eine Queue funktioniert — wie der Name schon sagt — genau wie ei
 
 | Signatur&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |Beschreibung                                                                               |
 | :------------------ | :--------------------------------------------------------------------------------- |
-| `boolean isEmpty()` | Liefert genau dann `true`, wenn die Liste keine Elemente enthält.                  |
+| `boolean isEmpty()` | Liefert genau dann `true`, wenn die Queue keine Elemente enthält.                  |
 | `void add(T e)`     | Fügt das Element `e` am Ende der `Queue` an.                                       |
 | `T remove()`        | Entfernt das erste Element der `Queue` und liefert dieses Element zurück.          |
 
@@ -407,7 +407,7 @@ Wir können diesen einfach mit Hilfe einer einfachen Verkettung implementieren u
 
 | Signatur&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |Beschreibung                                                                                   |
 | :------------------ | :--------------------------------------------------------------------------------- |
-| `boolean isEmpty()` | Liefert genau dann `true`, wenn die Liste keine Elemente enthält.                  |
+| `boolean isEmpty()` | Liefert genau dann `true`, wenn der Stack keine Elemente enthält.                  |
 | `void push(T e)`    | Packt das Element `e` auf den Stapel.                                              |
 | `T pop()`           | Nimmt das oberste Element vom Stapel und liefert dieses Element zurück.            |
 
