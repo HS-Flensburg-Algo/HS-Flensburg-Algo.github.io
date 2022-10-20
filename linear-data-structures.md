@@ -348,7 +348,7 @@ Das heißt, eine Queue funktioniert — wie der Name schon sagt — genau wie ei
 
 Wir verwenden an dieser Stelle die Namen der Methoden, die Java verwendet.
 Die Methode `add` ist in der Literatur eher unter dem Namen `enqueue` und die Methode `remove` eher unter dem Namen `dequeue` bekannt.
-Im Folgenden implementieren wir die Methoden des abstrakten Datentyps Queue mit Hilfe einer einfach verketteten Liste.
+Im Folgenden implementieren wir die Methoden des abstrakten Datentyps Queue mit Hilfe einer einfachen Verkettung.
 Wir implementieren die folgende Klasse.
 
 ``` java
@@ -393,7 +393,7 @@ public T remove() {
 ```
 
 Neben der Datenstruktur Queue gibt es noch eine Struktur namens Stack.
-Ein **Stack* (Stapel)** ist eine Container-Datenstruktur, die nach dem **LIFO-Prinzip (last in, first out)** funktioniert.
+Ein **Stack (Stapel)** ist eine Container-Datenstruktur, die nach dem **LIFO-Prinzip (last in, first out)** funktioniert.
 Dieses Prinzip besagt, dass man als nächstes Element vom Stapel, das Element erhält, das zuletzt zum Stapel hinzugefügt wurde.
 Das heißt, ein Stack funktioniert — wie der Name schon sagt — genau wie ein Ablagestapel.
 Der Stack ist eine sehr wichtige Datenstruktur.
