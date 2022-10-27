@@ -18,7 +18,7 @@ Bei der Suche eines Elementes in einer Liste bietet sich zum Beispiel die Länge
 Man muss für jedes Problem aber einzeln bestimmen, welchen Begriff von Größe man verwendet.
 
 In den meisten Fällen betrachtet man die *worst case*-Laufzeit eines Algorithmus.
-Das heißt, man betrachtet wie viele Schritte die Ausführung im schlechtesten Fall — also bei der ungünstigsten Eingabe — benötigt.
+Das heißt, man betrachtet, wie viele Schritte die Ausführung im schlechtesten Fall — also bei der ungünstigsten Eingabe — benötigt.
 Dabei ist aber zu beachten, dass die Größe der Eingabe nicht verändert werden kann.
 Das heißt, man betrachtet unter allen Eingaben einer festen Größe die Eingabe mit der ungünstigsten Struktur.
 Es ist sinnvoll, den schlechtesten Fall zu betrachten, da man dann mit Sicherheit weiß, dass die Ausführung des Algorithmus zu einem bestimmten Zeitpunkt beendet sein wird, und zwar unabhängig von der konkreten Eingabe.
@@ -71,7 +71,7 @@ Die Methode ist mit Hilfe der Methode `nodeAt` implementiert, wir müssen uns al
 
 ``` java
 private Node<T> nodeAt(int index) {
-    var current = this.head;
+    var current = this.first;
     for (int i = 0; i < index; i++) {
         current = current.next;
     }
@@ -85,7 +85,7 @@ Der *worst case* der Methode `get` tritt ein, wenn die Methode mit dem letzten I
 
 Wir können bei einer solchen Methode jetzt einfach analysieren, wie viele primitive Operationen durchgeführt werden.
 Wir schauen uns dazu einmal die Methode `nodeAt` genauer an.
-Jeder Aufruf der Methode initialisiert die Variable `current` und weist ihr das Attribut `this.head` zu.
+Jeder Aufruf der Methode initialisiert die Variable `current` und weist ihr das Attribut `this.first` zu.
 Außerdem initialisiert jeder Aufruf die Variable `i`.
 Wie viele Operationen durch die Schleife durchgeführt werden, hängt von der Größe des Index ab.
 Wir wollen uns die *worst case*-Laufzeit anschauen, daher hat der Index den Wert *n* − 1.
@@ -314,3 +314,11 @@ Wenn wir uns an die Implementierung einer `ArrayList` erinnern, musste das Array
 Beim Vergrößern des Arrays müssen alle Elemente, die bereits in der Liste waren, kopiert werden.
 Daher ist das Vergrößern des Arrays in $$\mathcal{O}(n)$$, wobei *n* die Größe des Arrays ist.
 Diese Kopieraktion muss aber nur durchgeführt werden, wenn wir bereits eine ganze Reihe von Elementen eingefügt haben. Genauer gesagt, müssen wir erst nach dem Einfügen von *n* Elementen einmal *n* Elemente kopieren.
+
+<div class="nav">
+    <ul class="nav-row">
+        <li class="nav-item nav-left"><a href="linear-data-structures.html">zurück</a></li>
+        <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
+        <li class="nav-item nav-right"></li>
+    </ul>
+</div>
