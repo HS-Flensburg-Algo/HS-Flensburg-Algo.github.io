@@ -513,6 +513,6 @@ Da man bei einem Deque effizient vorne und hinten hinzufügen und entfernen kann
     <ul class="nav-row">
         <li class="nav-item nav-left"><a hreaf="introduction.html">zurück</a></li>
         <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"><a href="complexity.html"></a></li>
+        <li class="nav-item nav-right"><a href="complexity.html">Komplexität</a></li>
     </ul>
 </div>

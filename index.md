@@ -18,7 +18,7 @@ custom_css: toc
 
 - 2.5. [Listen in Java](linear-data-structures.md#listen-in-java)
 
-<!-- ### 3. [Komplexität](complexity.md)
+### 3. [Komplexität](complexity.md)
 
 - 3.1. [Konkrete Laufzeiten](complexity.md#konkrete-laufzeiten)
 
@@ -26,7 +26,7 @@ custom_css: toc
 
 - 3.3. [Größenordnungen](complexity.md#größenordnungen)
 
-### 4. [Algorithmische Methoden](methods.md)
+<!-- ### 4. [Algorithmische Methoden](methods.md)
 
 - 4.1. [Rekursion](methods.md#rekursion)
 
