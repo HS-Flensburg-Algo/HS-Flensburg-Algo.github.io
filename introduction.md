@@ -40,7 +40,7 @@ Diese Klassifikation dient vor allem, um die Effizienz von verschiedenen Algorit
 
 <div class="nav">
     <ul class="nav-row">
-        <li class="nav-item nav-left"></li>
+        <li class="nav-item nav-left"><a href="basics.html">zurück</a></li>
         <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
         <li class="nav-item nav-right"><a href="linear-data-structures.html">weiter</a></li>
     </ul>

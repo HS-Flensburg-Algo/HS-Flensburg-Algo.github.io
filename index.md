@@ -4,6 +4,8 @@ title: Inhaltsverzeichnis
 custom_css: toc
 ---
 
+### 0. [Grundlagen](basics.md)
+
 ### 1. [Einleitung](introduction.md)
 
 ### 2. [Lineare Datenstrukturen](linear-data-structures.md)
