@@ -164,7 +164,7 @@ In diesen Beweisen nutzen wir die folgenden Eigenschaften von $$\le$$ auf reelen
 $$\begin{align}
 % k \> 0 \wedge m \< n & \Rightarrow k \cdot m \< k \cdot n \label{eq1}\\\\
 % m \< n   & \Rightarrow k + m \< k + n \label{eq2}\\\\
-& \forall k, m, n \in \mathbb{R}: & k \ge 0 \wedge m \le n & \Rightarrow k \cdot m \le k \cdot n \tag{1}\label{eq:eq3}\\
+& \forall k, m, n \in \mathbb{R}: & 0 \le k \wedge m \le n & \Rightarrow k \cdot m \le k \cdot n \tag{1}\label{eq:eq3}\\
 & \forall k, m, n \in \mathbb{R}: & m \le n                & \Rightarrow k + m \le k + n \tag{2}\label{eq:eq4}
 \end{align}$$
 
@@ -181,7 +181,7 @@ Dann gilt
 
 $$\begin{align*}
 l(n) & = n && \text{$1$ ist neutrales Element bezüglich $\cdot$}\\
-     & = n \cdot 1 && \text{Regel (\ref{eq:eq3}), $n \ge 0 \wedge 1 \le n$}\\
+     & = n \cdot 1 && \text{Regel (\ref{eq:eq3}) ($k := n$, $m := 1$, $n := n$) $0 \le n \wedge 1 \le n$}\\
      & \le n \cdot n && \text{$1$ ist neutrales Element bezüglich $\cdot$}\\
      & = 1 \cdot n^2 && \text{$c = 1$}\\
      & = c \cdot n^2\\
