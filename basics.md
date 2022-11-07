@@ -22,6 +22,15 @@ Die Methode `equals` ist in der Klasse `Object` definiert und steht somit für a
 Die Standardimplementierung dieser Methode verwendet den Operator `==`.
 Daher sollte die Methode `equals` überschrieben werden, wenn eine neue Klasse angelegt wird, da ansonsten nur dieselben Objekte als gleich gelten.
 
+## final
+
+`final` ist in Java ein Modifikator, der Einfluss auf die Änderungsmöglichkeiten eines Elements hat.
+Als `final` deklarierte Variablen (lokale als auch Instanz-) sind nach der Initialisierung nicht mehr änderbar.
+Weitere Elemente, die diesen Modifikator erhalten können, sind:
+- finale Klassen: können nicht abgeleitet/erweitert werden (`extends`)
+- finale Methoden: können in abgeleiteten Klassen nicht überschrieben werden
+- finale Methodenparameter: analog zu Variablen, nach der Übergabe an Methode nicht mehr veränderbar
+
 <div class="nav">
     <ul class="nav-row">
         <li class="nav-item nav-left"></li>
