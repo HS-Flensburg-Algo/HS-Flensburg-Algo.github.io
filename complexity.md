@@ -319,6 +319,6 @@ Diese Kopieraktion muss aber nur durchgeführt werden, wenn wir bereits eine gan
     <ul class="nav-row">
         <li class="nav-item nav-left"><a href="linear-data-structures.html">zurück</a></li>
         <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"></li>
+        <li class="nav-item nav-right"><a href="methods.html">weiter</a></li>
     </ul>
 </div>

@@ -28,13 +28,13 @@ custom_css: toc
 
 - 3.3. [Größenordnungen](complexity.md#größenordnungen)
 
-<!-- ### 4. [Algorithmische Methoden](methods.md)
+### 4. [Algorithmische Methoden](methods.md)
 
 - 4.1. [Rekursion](methods.md#rekursion)
 
 - 4.2. [Einschub: Bestimmung der Laufzeit](methods.md#einschub-bestimmung-der-laufzeit)
 
-- 4.3. [Divide and Conquer](methods.md#divide-and-conquer)
+<!-- - 4.3. [Divide and Conquer](methods.md#divide-and-conquer)
 
 - 4.4. [Backtracking](methods.md#backtracking)
 
