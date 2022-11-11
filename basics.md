@@ -22,14 +22,33 @@ Die Methode `equals` ist in der Klasse `Object` definiert und steht somit für a
 Die Standardimplementierung dieser Methode verwendet den Operator `==`.
 Daher sollte die Methode `equals` überschrieben werden, wenn eine neue Klasse angelegt wird, da ansonsten nur dieselben Objekte als gleich gelten.
 
-## final
+## Modifikator `final`
 
 `final` ist in Java ein Modifikator, der Einfluss auf die Änderungsmöglichkeiten eines Elements hat.
 Als `final` deklarierte Variablen (lokale als auch Instanz-) sind nach der Initialisierung nicht mehr änderbar.
-Weitere Elemente, die diesen Modifikator erhalten können, sind:
-- finale Klassen: können nicht abgeleitet/erweitert werden (`extends`)
-- finale Methoden: können in abgeleiteten Klassen nicht überschrieben werden
-- finale Methodenparameter: analog zu Variablen, nach der Übergabe an Methode nicht mehr veränderbar
+Das folgende Programm liefert zum Beispiel einen Fehler.
+
+```java
+final int[] array1 = {1, 2, 3, 4};
+int[] array2 = {1, 2, 3, 4};
+array1 = array2;
+```
+
+Dabei ist wichtig, dass sich das `final` wirklich nur auf die Variable bezieht aber nicht auf den Inhalt der Variable.
+Das heißt, wenn wir eine Struktur in einer Variable mit `final`-Modifikator speichern, können wir die Struktur weiterhin verändern.
+Das folgende Programm liefert zum Beispiel keinen Fehler.
+
+```java
+final int[] array1 = {1, 2, 3, 4};
+array[1] = 12;
+```
+
+Wir können den Modifikator nicht nur Variablen nutzen, sondern auch für die folgenden Konstrukte.
+
+- **finale Klassen:** können nicht abgeleitet/erweitert werden (`extends`)
+- **finale Methoden:** können in abgeleiteten Klassen nicht überschrieben werden
+- **finale Methodenparameter:** können innerhalb der Methode nicht geschrieben, sondern nur gelesen werden.
+  Hier gilt ebenfalls, dass eine Struktur, die im Parameter gespeichert ist, aber weiterhin verändert werden kann.
 
 <div class="nav">
     <ul class="nav-row">
