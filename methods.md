@@ -12,13 +12,13 @@ Rekursion
 Bei der Verwendung von Rekursion zerlegt man ein Problem in ein kleineres Problem, welches man wiederum mit der gleichen Methode löst.
 Ein klassisches Beispiel für die Verwendung von Rekursion ist die Definition der Fakultät.
 
-$$\begin{aligned}
+$$\begin{align}
 & !\colon \mathbb{N} \to \mathbb{N}\\\\
 & n! = \begin{cases}
   1 & \mbox{falls}~n = 0\\\\
   n (n - 1)! & \mbox{sonst}
 \end{cases}
-\end{aligned}$$
+\end{align}$$
 
 Wir können diese mathematische Definition direkt in ein Java-Programm überführen.
 
@@ -62,6 +62,40 @@ private static int sumRec(int start) {
     }
 }
 ```
+
+Die Methoden `fac` und `sumRec` implementieren recht einfache Rekursionsmuster.
+In beiden Methoden gibt es zum Beispiel nur einen rekursiven Aufruf.
+Um zu illustrieren, dass es bei rekursiven Methoden auf mehrere rekursive Aufrufe geben kann, betrachten wird die Fibonacci-Sequenz.
+Die Sequenz der Fibonacci-Zahlen kann durch die folgende Funktion definiert werden.
+
+$$\begin{align}
+& F\colon \mathbb{N} \to \mathbb{N}\\\\
+& F(n) = \begin{cases}
+  0 & \mbox{falls}~n = 0\\\\
+  1 & \mbox{falls}~n = 1\\\\
+  F(n-1) + F(n-2) & \mbox{sonst}
+\end{cases}
+\end{align}$$
+
+Wir können diese Funktion ebenfalls rekursiv in Java implementieren.
+
+``` java
+static int fib(int n) {
+    if (n <= 0) {
+        return 0;
+    } else if (n == 1) {
+        return 1;
+    } else {
+        return fib(n - 1) + fib(n - 2);
+    }
+}
+```
+
+Im Gegensatz zu den Methoden `fac` und `sumRec` wird die Methode `fib` zweimal rekursiv aufgerufen.
+
+
+Einschub: Bestimmung von Laufzeiten
+-----------------------------------
 
 Wir wollen uns an dieser Stelle auch einmal Gedanken über die Laufzeit der Methode `fac` machen. Um die Laufzeit einer Methode zu beschreiben, nutzt man ebenfalls häufig Rekursion. 
 Genauer gesagt gibt man eine sogenannte Rekurrenz an, eine rekursive mathematische Funktion, welche die Laufzeit der Methode beschreibt. Dieses Verfahren wollen wir einmal an Hand der Methode `fac` illustrieren.
@@ -109,9 +143,6 @@ $$\begin{align}
 <figcaption>Abbildung 1: Regeln zur Umformung von Gleichungen</figcaption>
 </figure>
 
-Einschub: Bestimmung der Laufzeit
----------------------------------
-
 Wir wollen an dieser Stelle einen kurzen Einschub machen und die Technik, die wir gerade angewendet haben, noch an einem weiteren Beispiel illustrieren.
 Wir können diese Technik nicht nur bei rekursiven Methoden anwenden, sondern auch bei Methoden, die Schleifen nutzen.
 Um die Verwendung zu illustrieren, betrachten wir die Implementierung der folgenden Methode, die alle Einträge einer einfach verketteten Liste in ein Array kopiert.
@@ -152,26 +183,32 @@ Die Variable *c*<sub>1</sub> steht für die Schritte, die vor und nach der Ausf�
 Wir wissen nicht genau, wie viele Schritte es sind, es handelt sich aber um eine konstante Anzahl.
 Die Variable *c*<sub>2</sub> steht für die konstante Anzahl an Schritten, die in jedem Durchlauf der Schleife durchgeführt werden.
 
-Mit Hilfe der Laufzeit für die Methode `nodeAt` können wir nun die
-Laufzeit der Methode `get` bestimmen.
+Mit Hilfe der Laufzeit für die Methode `nodeAt` können wir nun die Laufzeit der Methode `get` bestimmen.
 
 $$T_{\texttt{get}}(i) = T_{\texttt{nodeAt}}(i) + c_3 = c_1i + c_2 + c_3$$
 
 Mit Hilfe dieser Vorarbeiten können wir nun die Laufzeit der Methode `toArray` bestimmen.
 Das Argument der Funktion $$T_{\texttt{toArray}}$$ ist in diesem Fall die Länge der Liste.
+Die Initialisierung eines Arrays hat eine lineare Laufzeit in der Größe des Arrays.
+Wir nutzen dafür im folgenden die Funktion.
+
+$$T_{\texttt{new_Integer[]}}(n) = c_4 n$$
+
+Das heißt, ein Array der Größe $$n$$ zu erzeugen, benötigt $$c_4 n$$ Schritte.
+Wir nutzen diese Vorarbeiten nun, um die Laufzeit der Methode `toArray` zu bestimmen.
 
 $$\begin{align}
-T_{\texttt{toArray}}(n) &= \sum_{i = 0}^{n - 1} (c_4 + T_{\texttt{get}}(i)) + c_5 \tag{Regel (\ref{eqn:associativity})}\\\\
-& = \sum_{i = 0}^{n - 1} c_4 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_5 \tag{Regel (\ref{eqn:constant})}\\\\
-& = n c_4 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) \tag{Definition $T_{\texttt{get}}$} + c_5\\\\
-& = n c_4 + \sum_{i = 0}^{n - 1} (c_1 i + c_2 + c_3) \tag{Regel (\ref{eqn:associativity})} + c_5\\\\
-& = n c_4 + \sum_{i = 0}^{n - 1} i c_1 + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_5 \tag{Regel (\ref{eqn:constant})}\\\\
-& = n c_4 + \sum_{i = 0}^{n - 1} i c_1 + (c_2 + c_3)n + c_5\tag{Regel (\ref{eqn:distributivity})}\\\\
-& = n c_4 + c_1 \sum_{i = 0}^{n - 1} i + (c_2 + c_3)n + c_5\tag{Regel (\ref{eqn:gauß})}\\\\
-& = n c_4 + c_1 \frac{n(n - 1)}{2} + (c_1 + c_3)n + c_5\\\\
-& = n c_4 + c_1 \left(\frac{1}{2} n^2 - \frac{1}{2} n\right) + (c_2 + c_3)n + c_5\\\\
-& = n c_4 + c_1 \frac{1}{2} n^2 - c_1 \frac{1}{2} n + (c_2 + c_3)n + c_5\\\\
-& = \frac{1}{2} c_1 n^2 + \left(- \frac{1}{2} c_1 + c_2 + c_3 + c_4\right) n + c_5
+T_{\texttt{toArray}}(n) &= T_{\texttt{new_Integer[]}}(n) + \sum_{i = 0}^{n - 1} (c_5 + T_{\texttt{get}}(i)) + c_6\tag{Definition $T_{\texttt{new_Integer[]}}$}\\\\
+& = c_4 n + \sum_{i = 0}^{n - 1} c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6\tag{Regel (\ref{eqn:constant})}\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6\tag{Definition $T_{\texttt{get}}$} \\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} (c_1 i + c_2 + c_3) + c_6\tag{Regel (\ref{eqn:associativity})}\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} i c_1 + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_6\tag{Regel (\ref{eqn:constant})}\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} i c_1 + (c_2 + c_3)n + c_6\tag{Regel (\ref{eqn:distributivity})}\\\\
+& = c_4 n + n c_5 + c_1 \sum_{i = 0}^{n - 1} i + (c_2 + c_3)n + c_6\tag{Regel (\ref{eqn:gauß})}\\\\
+& = c_4 n + n c_5 + c_1 \frac{n(n - 1)}{2} + (c_1 + c_3)n + c_6\\\\
+& = c_4 n + n c_5 + c_1 \left(\frac{1}{2} n^2 - \frac{1}{2} n\right) + (c_2 + c_3)n + c_6\\\\
+& = c_4 n + n c_5 + c_1 \frac{1}{2} n^2 - c_1 \frac{1}{2} n + (c_2 + c_3)n + c_6\\\\
+& = \frac{1}{2} c_1 n^2 + \left(- \frac{1}{2} c_1 + c_2 + c_3 + c_4 + c_5\right) n + c_6
 \end{align}$$
 
 Analog zu den Beweisen aus dem Kapitel [Komplexität](complexity.md) können wir mit dieser Information zeigen, dass $$T_{\texttt{toArray}} \le_{as} q$$ gilt, wobei $$q : \mathbb{N} \rightarrow \mathbb{R}$$, $$q(x) = x^2$$.
@@ -300,28 +337,6 @@ Um die Methode der dynamischen Programmierung zu motivieren, die wir uns
 im Folgenden anschauen, wollen wir uns noch ein weiteres einfaches
 Beispiel für einen rekursiven Algorithmus anschauen. Die folgende
 Funktion berechnet zu einem *n* ∈ ℕ die sogenannte Fibonacci-Zahl.
-
-$$\begin{aligned}
-& F\colon \ensuremath{\mathbb{N}} \to \ensuremath{\mathbb{N}}\\\\
-& F(n) = \begin{cases}
-  0 & \mbox{falls}\~n = 0\\\\
-  1 & \mbox{falls}\~n = 1\\\\
-  F(n-1) + F(n-2) & \mbox{sonst}
-\end{cases}
-\end{aligned}$$
-Wir können diese Funktion ebenfalls rekursiv in Java implementieren.
-
-``` java
-static int fib(int n) {
-    if (n <= 0) {
-        return 0;
-    } else if (n == 1) {
-        return 1;
-    } else {
-        return fib(n - 1) + fib(n - 2);
-    }
-}
-```
 
 Wir wollen uns einmal anschauen, welche Aufrufe der Methode `fib` für
 den Aufruf `fib(5)` durchgeführt werden.
