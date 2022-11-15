@@ -32,11 +32,18 @@ custom_css: toc
 
 - 4.1. [Rekursion](methods.md#rekursion)
 
-- 4.2. [Einschub: Bestimmung der Laufzeit](methods.md#einschub-bestimmung-der-laufzeit)
+- 4.2. [Einschub: Bestimmung von Laufzeiten](methods.md#einschub-bestimmung-von-laufzeiten)
 
-<!-- - 4.3. [Divide and Conquer](methods.md#divide-and-conquer)
+- 4.3. [Divide and Conquer](methods.md#divide-and-conquer)
 
-- 4.4. [Backtracking](methods.md#backtracking)
+<!-- - 4.4. [Dynamische Programmierung](methods.md#dynamische-programmierung)  -->
+
+<!--
+- 4.5. [Einschub: Beweis der Laufzeit per Induktion](methods.md#einschub-beweis-der-laufzeit-per-induktion)
+ 
+- 4.6. [Greedy-Methode]()
+
+- 4.7. [Backtracking](methods.md#backtracking)
 
 ### 5. [Hashing](polymorphism.md)
 

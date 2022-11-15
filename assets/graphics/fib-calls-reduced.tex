@@ -1,0 +1,24 @@
+\documentclass[tikz,convert={outfile=\jobname.svg}]{standalone}
+
+\usepackage{minted}
+\usepackage{tikz}
+
+\begin{document}
+\small
+\begin{tikzpicture}[->,>=stealth,level/.style={sibling distance=8cm/#1, level distance=1.5cm}]
+\node {\texttt{fibDyn(5)}}
+    child{ node {\texttt{fibDyn(4)}}
+            child{ node {\texttt{fibDyn(3)}}
+                    child{ node {\texttt{fibDyn(2)}}
+                            child{ node {\texttt{fibDyn(1)}} }
+                            child{ node {\texttt{fibDyn(0)}} }
+                    }
+            child{ node {\texttt{fibDyn(1)}} }
+            }
+            child{ node {\texttt{memo[2]}}
+            }
+    }
+    child{ node {\texttt{memo[3]}}
+    };
+\end{tikzpicture}
+\end{document}
