@@ -94,8 +94,8 @@ static int fib(int n) {
 Im Gegensatz zu den Methoden `fac` und `sumRec` wird die Methode `fib` zweimal rekursiv aufgerufen.
 
 
-Einschub: Bestimmung von Laufzeiten
------------------------------------
+Einschub: Rekurrenzen
+---------------------
 
 Wir wollen uns an dieser Stelle auch einmal Gedanken über die Laufzeit der Methode `fac` machen. Um die Laufzeit einer Methode zu beschreiben, nutzt man ebenfalls häufig Rekursion. 
 Genauer gesagt gibt man eine sogenannte Rekurrenz an, eine rekursive mathematische Funktion, welche die Laufzeit der Methode beschreibt. Dieses Verfahren wollen wir einmal an Hand der Methode `fac` illustrieren.
@@ -122,13 +122,70 @@ $$
 Um dann zu bestimmen, welche Laufzeit eine Methode hat, müssen wir für die Rekurrenz eine geschlossene Form finden, das heißt, eine mathematische Funktion, die die gleiche Funktion beschreibt, aber keine Rekursion mehr verwendet.
 Die Funktion $$T_{\texttt{fac}}$$ wird durch die folgende geschlossene Form beschrieben.
 
-$$T_{\texttt{fac}}(n) = \sum_{i = 1}^n c_2 + c_1 = c_2 n + c_1$$
+$$T_{\texttt{fac}}(n) = c_2 n + c_1$$
 
-Um Summen wie die obige zu vereinfachen, gibt es eine Reihe von Regeln.
-In diesem Fall verwenden wir zum Beispiel Regel $$(\ref{eqn:constant})$$ und Regel $$(\ref{eqn:shift})$$ an, um unsere Formel zu vereinfachen.
-Klassischerweise beweist man mit Hilfe einer Induktion, dass die geschlossene Form die gleichen Ergebnisse liefert wie die Rekurrenz.
-Auf diesen Schritt verzichten wir an dieser Stell aber.
+Wenn wir eine solche geschlossene Form gefunden haben, können wir mithilfe einer Induktion beweisen, dass die beiden Varianten die gleichen Werte berechnen.
+
+Die klassische Induktion hat die folgende Form.
+
+$$
+\left( \operatorname{A}(0) \wedge \forall n \in \mathbb{N} \colon \operatorname{A}(n)\Rightarrow \operatorname{A}(n+1) \right) \Rightarrow \forall n \in \mathbb{N} \colon \operatorname{A}(n)
+$$
+
+Dabei ist $$\operatorname{A}$$ die Aussage, die wir beweisen wollen.
+Die logische Formel $$\operatorname{A}(0)$$ bedeutet, dass die Aussage, die wir beweisen wollen, für den Wert $$0$$ gilt.
+Das heißt, insgesamt wenden wir die Induktion an, indem wir zeigen, dass die Aussage für $$0$$ gilt.
+Außerdem müssen wir zeigen, dass wir für jedes $$n \in \mathbb{N}$$ aus der Gültigkeit von $$\operatorname{A}(n)$$ die Gültigkeit von $$\operatorname{A}(n+1)$$ zeigen können.
+Wenn wir diese beiden Tatsachen gezeigt haben, erhalten wir
+
+$$\forall n \in \mathbb{N} \colon \operatorname{A}(n),$$
+
+also dass die Aussage für alle natürlichen Zahlen gilt.
+
+Wir wollen mithilfe der klassischen Induktion jetzt die oben angegebene geschlossene Form der Laufzeit von `fac` beweisen.
+
+**Beh.:** $$\forall n \in \mathbb{N}: T_{\texttt{fac}}(n) = c_2 n + c_1$$.
+
+**Bew.:**
+
+Wir beweisen die Aussage per Induktion.
+
+Induktionsstart:
+
+Es gilt
+
+$$
+T_{\texttt{fac}}(0) = c_1 = c_2 \cdot 0 + c_1
+$$
+
+Induktionsschritt:
+
+Sei $$n \in \mathbb{N}$$ und es gelte $$T_{\texttt{fac}}(n) = c_2 n + c_1$$.
+Dann gilt
+
+$$
+\begin{align*}
+T_{\texttt{fac}}(n + 1) & = c_2 + T_{\texttt{fac}}(n)\\\\
+                        & = c_2 + n c_ 2 + c_1\\\\
+                        & = (n + 1) c_2 + c_1
+\end{align*}
+$$
+
+Dieser Schritt zeigt die Behauptung.
+
 Mit Hilfe des [vorherigen Kapitels](complexity.md) wissen wir, dass die Funktion $$T_{\texttt{fac}}$$ in $$\mathcal{O}(n)$$ ist. Das heißt, die Laufzeit der Methode `fac` ist linear.
+
+
+Einschub: Bestimmung von Laufzeiten
+-----------------------------------
+
+Nachdem wir gesehen haben, wie wir die Laufzeiten von rekursiven Methoden etwas formaler bestimmen können, wollen wir uns Methoden anschauen, die klassisch mit einer Schleife implementiert sind.
+Wir führen auch bei Methoden, die mit einer Schleifen implementiert sind, Konstanten ein, um davon zu abstrahieren, wie viele konstante Schritte ein Stück Code genau ausführt.
+Die Laufzeit einer rekursiven Methode haben wir durch eine rekursive Funktion modelliert.
+Die Laufzeit einer einfachen Zählschleife werden wir durch eine mathematische Summe modellieren.
+Dadurch erhalten wir als Laufzeit für eine Methode mit Schleife eine Funktion, die mehrere mathematische Summen nutzt.
+Wir müssen diese Funktion dann in den meisten Fällen noch in die Form eines Polynoms bringen, um zu bestimmen, in welcher Größenordnung die Laufzeit einer Methode ist.
+Um Summen zu vereinfachen verwenden wir eine Reihe von Regeln, die in [Abbildung 1](#figure:rules) zu sehen sind.
 
 <figure id="figure:rules">
 
@@ -143,9 +200,7 @@ $$\begin{align}
 <figcaption>Abbildung 1: Regeln zur Umformung von Gleichungen</figcaption>
 </figure>
 
-Wir wollen an dieser Stelle einen kurzen Einschub machen und die Technik, die wir gerade angewendet haben, noch an einem weiteren Beispiel illustrieren.
-Wir können diese Technik nicht nur bei rekursiven Methoden anwenden, sondern auch bei Methoden, die Schleifen nutzen.
-Um die Verwendung zu illustrieren, betrachten wir die Implementierung der folgenden Methode, die alle Einträge einer einfach verketteten Liste in ein Array kopiert.
+Um die Verwendung dieser Regeln zu illustrieren, betrachten wir die Implementierung der folgenden Methode, die alle Einträge einer einfach verketteten Liste in ein Array kopiert.
 
 ``` java
 static Integer[] toArray(SLList<Integer> list) {
@@ -407,7 +462,7 @@ T(n) & = 1 + T(\lfloor n / 2 \rfloor) \Arrow{\autoref{eq4}, Induktionshypothese}
      & = 1 + c \cdot (\log_2 n - \log_2 2)\\
      & = 1 + c \cdot (\log_2 n - 1)\\
      & = 1 - c + c \cdot \log_2 n \Arrow{\autoref{eq2}, $1 - c < 0$}\\
-     & < 0 + c \cdot \log_2 n\\
+     & < 0 + c \cd ot \log_2 n\\
      & = c \cdot \log_2 n
 \end{align*}
 $$ -->

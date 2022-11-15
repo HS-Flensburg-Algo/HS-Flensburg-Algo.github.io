@@ -32,9 +32,11 @@ custom_css: toc
 
 - 4.1. [Rekursion](methods.md#rekursion)
 
-- 4.2. [Einschub: Bestimmung von Laufzeiten](methods.md#einschub-bestimmung-von-laufzeiten)
+- 4.2. [Einschub: Rekurrenzen](methods.md#einschub-rekurrenzen)
 
-- 4.3. [Divide and Conquer](methods.md#divide-and-conquer)
+- 4.3. [Einschub: Bestimmung von Laufzeiten](methods.md#einschub-bestimmung-von-laufzeiten)
+
+- 4.4. [Divide and Conquer](methods.md#divide-and-conquer)
 
 <!-- - 4.4. [Dynamische Programmierung](methods.md#dynamische-programmierung)  -->
 
