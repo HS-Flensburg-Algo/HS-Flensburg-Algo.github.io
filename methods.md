@@ -253,13 +253,13 @@ Das heißt, ein Array der Größe $$n$$ zu erzeugen, benötigt $$c_4 n$$ Schritt
 Wir nutzen diese Vorarbeiten nun, um die Laufzeit der Methode `toArray` zu bestimmen.
 
 $$\begin{align}
-T_{\texttt{toArray}}(n) &= T_{\texttt{new_Integer[]}}(n) + \sum_{i = 0}^{n - 1} (c_5 + T_{\texttt{get}}(i)) + c_6\tag{Definition $T_{\texttt{new_Integer[]}}$}\\\\
-& = c_4 n + \sum_{i = 0}^{n - 1} c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6\tag{Regel (\ref{eqn:constant})}\\\\
-& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6\tag{Definition $T_{\texttt{get}}$} \\\\
-& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} (c_1 i + c_2 + c_3) + c_6\tag{Regel (\ref{eqn:associativity})}\\\\
-& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} i c_1 + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_6\tag{Regel (\ref{eqn:constant})}\\\\
-& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} i c_1 + (c_2 + c_3)n + c_6\tag{Regel (\ref{eqn:distributivity})}\\\\
-& = c_4 n + n c_5 + c_1 \sum_{i = 0}^{n - 1} i + (c_2 + c_3)n + c_6\tag{Regel (\ref{eqn:gauß})}\\\\
+T_{\texttt{toArray}}(n) &= T_{\texttt{new_Integer[]}}(n) + \sum_{i = 0}^{n - 1} (c_5 + T_{\texttt{get}}(i)) + c_6 & (\text{Definition $T_{\texttt{new_Integer[]}}$})\\\\
+& = c_4 n + \sum_{i = 0}^{n - 1} c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6 & (\text{Regel (\ref{eqn:constant})})\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6 & (\text{Definition $T_{\texttt{get}}$})\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} (c_1 i + c_2 + c_3) + c_6 & (\text{Regel (\ref{eqn:associativity})})\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} i c_1 + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_6 & (\text{Regel (\ref{eqn:constant})})\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} i c_1 + (c_2 + c_3)n + c_6 & (\text{Regel (\ref{eqn:distributivity})})\\\\
+& = c_4 n + n c_5 + c_1 \sum_{i = 0}^{n - 1} i + (c_2 + c_3)n + c_6 & (\text{Regel (\ref{eqn:gauß})})\\\\
 & = c_4 n + n c_5 + c_1 \frac{n(n - 1)}{2} + (c_1 + c_3)n + c_6\\\\
 & = c_4 n + n c_5 + c_1 \left(\frac{1}{2} n^2 - \frac{1}{2} n\right) + (c_2 + c_3)n + c_6\\\\
 & = c_4 n + n c_5 + c_1 \frac{1}{2} n^2 - c_1 \frac{1}{2} n + (c_2 + c_3)n + c_6\\\\
@@ -369,62 +369,68 @@ Conquer)*.
 Diese Algorithmen haben meistens einen logarithmischen Faktor in ihrer Laufzeit.
 
 
-<!-- Einschub: Beweis der Laufzeit per Induktion
--------------------------------------------
+<!-- Einschub: Beweis mittels starker Induktion
+------------------------------------------
 
-Wir wollen die Laufzeit der binären Suche nutzen, um zu illustrieren, wie man Induktion verwendet, um zu beweisen, dass eine Rekurrenz höchstens so schnell wächst wie eine gegebene geschlossene Form.
-Wir beweisen diese Aussage mithilfe von Induktion.
-Dazu wollen wir zuerst das Prinzip der Induktion wiederholen.
-
-Die klassische Induktion hat die folgende Form.
-
-$$
-\operatorname{A}(0) \wedge \forall n \in \mathbb{N} \colon \operatorname{A}(n)\Rightarrow \operatorname{A}(n+1) \Rightarrow \forall n \in \mathbb{N} \colon \operatorname{A}(n)
-$$
-
-Dabei ist $$\operatorname{A}$$ die Aussage, die wir beweisen wollen.
-Die logische Formel $$\operatorname{A}(0)$$ bedeutet, dass die Aussage, die wir beweisen wollen, für den Wert $$0$$ gilt.
-Das heißt, insgesamt wenden wir die Induktion an, indem wir zeigen, dass die Aussage für $$0$$ gilt.
-Außerdem müssen wir zeigen, dass wir für jedes $$n \in \mathbb{N}$$ aus der Gültigkeit von $$\operatorname{A}(n)$$ die Gültigkeit von $$\operatorname{A}(n+1)$$ zeigen können.
-Wenn wir diese beiden Tatsachen gezeigt haben, erhalten wir
-
-$$\forall n \in \mathbb{N} \colon \operatorname{A}(n),$$
-
-also dass die Aussage für alle natürlichen Zahlen gilt.
-
-Für unseren Beweis reicht diese Form der Induktion nicht aus.
+Wir haben bei der Implementierung der Fakultät gesehen, dass wir mithilfe einer Induktion die Laufzeit einer rekursiven Methode beweisen können.
+Wir wollen nun eine Induktion nutzen, um für die Laufzeit der binären Suche zu zeigen, dass sie höchstens logarithmisch wächst.
+Für unseren Beweis reicht die klassische Form der Induktion nicht aus.
 Die Rekurrenz $$T_{\texttt{binarySearch}}$$ ruft sich selbst rekursiv nicht nur mit einem $$n-1$$ auf, sondern mit $$\frac{n - 1}{2}$$ und $$\frac{n}{2}$$.
 Wenn wir die Induktionsvoraussetzung nicht nur für $$n - 1$$ benötigen, sondern noch für andere Werte, kann man eine Form der Induktion nutzen, die manchmal auch als starke Induktion bezeichnet wird.
-Diese Form der Induktion wird durch die folgende Aussage beschrieben.
+Bei der starken Induktion unterscheidet sich der Induktionsschritt.
+
+Bei der klassischen Induktion kann der Induktionsschritt durch die folgende Aussage beschrieben werden.
 
 $$
-\operatorname{A}(0) \wedge \forall n \in \mathbb{N}: (\forall m \in \mathbb{N}: \colon \operatorname{A}(m)) \Rightarrow \operatorname{A}(n) \Rightarrow \forall n \in \mathbb{N} \colon \operatorname{A}(n)
+\forall n \in \mathbb{N} \colon \operatorname{A}(n)\Rightarrow \operatorname{A}(n+1) 
 $$
 
-Dabei ist $$\operatorname{A}$$ die Aussage, die wir beweisen wollen.
-Für $$n_0$$ wird häufig $$0$$ als Startwert gewählt.
-Die logische Formel $$\operatorname{A}(n_0)$$ bedeutet, dass die Aussage, die wir beweisen wollen, für den Wert $$n_0$$ gilt.
-Das heißt, insgesamt wenden wir die Induktion an, indem wir zeigen, dass die Aussage für $$n_0$$ gilt.
-Außerdem müssen wir zeigen, dass A(n)
+Bei der starken Induktion kann der Induktionsschritt dagegen durch die folgende Aussage beschrieben werden.
 
-Wir wollen zeigen, dass $$T_{\texttt{binarySearch}}(n) \in \mathcal{O}(\log_2 n)$$ gilt.
+$$
+\forall n \in \mathbb{N} \colon (\forall m \in \mathbb{N} \colon m < n \Rightarrow \operatorname{A}(m)) \Rightarrow \operatorname{A}(n)
+$$
+
+Das heißt, um den Induktionsschritt zu zeigen, haben wir in diesem Fall nicht nur zur Verfügung, dass die Aussage $$\operatorname{A}$$ für den jeweiligen Vorgänger gilt, sondern, dass die Aussage für alle Vorgänger gilt.
+
+Mithilfe der starken Induktion wollen wir nun zeigen, dass $$T_{\texttt{binarySearch}}(n) \in \mathcal{O}(\log_2 n)$$ gilt.
 Dazu müssen wir zeigen, dass ein $$c \in \mathbb{R}$$ und ein $$n_0 \in \mathbb{N}$$ existieren, so dass $$T_{\texttt{binarySearch}}(n) \le c \cdot \log_2 n$$ für alle $$n \in \mathbb{N}$$ mit $$n \ge n_0$$ gilt.
 Wir nennen die Funktion $$T_{\texttt{binarySearch}}$$ im Folgenden $$T$$.
+
+**Beh.:** $$T_{\texttt{binarySearch}}(n) \in \mathcal{O}(\log_2 n)$$
+
+**Bew.:**
 
 Setze $$c = 2$$.
 Setze $$n_0 = 2$$.
 Sei $$n \in \mathbb{N}$$ mit $$n \ge n_0$$.
-Wir zeigen die Aussage per Induktion.
+Wir zeigen die folgende Aussage per Induktion.
 
+$$
+\forall n \in \mathbb{N} \colon n \ge 2 \Rightarrow T(n) \le \log_2 n
+$$
 
+Induktionsstart:
 
-Bei einer klassischen Induktion zeigen wir im Induktionsschritt, dass, wenn wir annehmen, dass die Aussage für ein $$n$$ gilt, wir dann 
+Für $$n = 0$$ ist die Aussage $$n \ge 2$$ falsch und somit gilt $$n \ge 2 \Rightarrow T(n) \le \log_2 n$$.
 
+Induktionsschritt:
 
-An dieser Stelle legen wir keinen Wert auf eine formal korrekte Induktion, sondern nutzen den Ansatz eher als Werkzeug, um Größenordnungen für Laufzeiten zu verifizieren.
-Bei Ungleichungen nutzen wir nur die Regeln aus \autoref{figure:inequalities} und geben bei jeder Ungleichung an, welche der Regeln wir verwendet haben.
+Sei $$n \in \mathbb{N}$$ und es gelte $$\forall m \in \mathbb{N} \colon m < n \Rightarrow m \ge 2 \Rightarrow T(m) \le \log_2 m$$.
+Dann gilt
 
-Induktionsstart: $$n = 2$$
+$$
+\begin{align*}
+T(n) & = 1 + T(\lfloor n / 2 \rfloor) \Arrow{\autoref{eq4}, Induktionshypothese}\\
+     & \le 1 + c \cdot \log_2 \lfloor n / 2 \rfloor \Arrow{\autoref{eq4}, \autoref{eq3},\\$m \le n \Rightarrow \log_2 m \le \log_2 n$}\\[5ex]
+     & \le 1 + c \cdot \log_2 (n / 2) \Arrow{$\log_2 (\frac{n}{m}) = \log_2 n - \log_2 m$}\\
+     & = 1 + c \cdot (\log_2 n - \log_2 2)\\
+     & = 1 + c \cdot (\log_2 n - 1)\\
+     & = 1 - c + c \cdot \log_2 n \Arrow{\autoref{eq2}, $1 - c < 0$}\\
+     & < 0 + c \cd ot \log_2 n\\
+     & = c \cdot \log_2 n
+\end{align*}
+$$ 
 
 $$
 \begin{align*}
@@ -451,21 +457,7 @@ T(n) & = T(3)\\
      & = c \cdot \log_2 n
 \end{align*}
 $$
-
-Induktionsschritt:
-
-$$
-\begin{align*}
-T(n) & = 1 + T(\lfloor n / 2 \rfloor) \Arrow{\autoref{eq4}, Induktionshypothese}\\
-     & \le 1 + c \cdot \log_2 \lfloor n / 2 \rfloor \Arrow{\autoref{eq4}, \autoref{eq3},\\$m \le n \Rightarrow \log_2 m \le \log_2 n$}\\[5ex]
-     & \le 1 + c \cdot \log_2 (n / 2) \Arrow{$\log_2 (\frac{n}{m}) = \log_2 n - \log_2 m$}\\
-     & = 1 + c \cdot (\log_2 n - \log_2 2)\\
-     & = 1 + c \cdot (\log_2 n - 1)\\
-     & = 1 - c + c \cdot \log_2 n \Arrow{\autoref{eq2}, $1 - c < 0$}\\
-     & < 0 + c \cd ot \log_2 n\\
-     & = c \cdot \log_2 n
-\end{align*}
-$$ -->
+-->
 
 <!-- Dynamische Programmierung
 -------------------------
