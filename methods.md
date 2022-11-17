@@ -254,11 +254,12 @@ Wir nutzen diese Vorarbeiten nun, um die Laufzeit der Methode `toArray` zu besti
 
 $$\begin{align}
 T_{\texttt{toArray}}(n) &= T_{\texttt{new_Integer[]}}(n) + \sum_{i = 0}^{n - 1} (c_5 + T_{\texttt{get}}(i)) + c_6 & (\text{Definition $T_{\texttt{new_Integer[]}}$})\\\\
+&= c_4 n + \sum_{i = 0}^{n - 1} (c_5 + T_{\texttt{get}}(i)) + c_6 & (\text{Regel (\ref{eqn:associativity}})\\\\
 & = c_4 n + \sum_{i = 0}^{n - 1} c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6 & (\text{Regel (\ref{eqn:constant})})\\\\
 & = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6 & (\text{Definition $T_{\texttt{get}}$})\\\\
 & = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} (c_1 i + c_2 + c_3) + c_6 & (\text{Regel (\ref{eqn:associativity})})\\\\
-& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} i c_1 + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_6 & (\text{Regel (\ref{eqn:constant})})\\\\
-& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} i c_1 + (c_2 + c_3)n + c_6 & (\text{Regel (\ref{eqn:distributivity})})\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} c_1 i + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_6 & (\text{Regel (\ref{eqn:constant})})\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} c_1 i + (c_2 + c_3)n + c_6 & (\text{Regel (\ref{eqn:distributivity})})\\\\
 & = c_4 n + n c_5 + c_1 \sum_{i = 0}^{n - 1} i + (c_2 + c_3)n + c_6 & (\text{Regel (\ref{eqn:gauß})})\\\\
 & = c_4 n + n c_5 + c_1 \frac{n(n - 1)}{2} + (c_1 + c_3)n + c_6\\\\
 & = c_4 n + n c_5 + c_1 \left(\frac{1}{2} n^2 - \frac{1}{2} n\right) + (c_2 + c_3)n + c_6\\\\
