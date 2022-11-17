@@ -234,9 +234,9 @@ In diesem Fall übergeben wir als Argument den Index, den wir suchen.
 
 $$T_{\texttt{nodeAt}}(i) = \sum_{j = 0}^{i - 1} c_1 + c_2 \overset{\text{Regel}~(\ref{eqn:constant})}= c_1i + c_2$$
 
-Die Variable *c*<sub>1</sub> steht für die Schritte, die vor und nach der Ausführung der Schleife durchgeführt werden müssen.
+Die Variable *c*<sub>2</sub> steht für die Schritte, die vor und nach der Ausführung der Schleife durchgeführt werden müssen.
 Wir wissen nicht genau, wie viele Schritte es sind, es handelt sich aber um eine konstante Anzahl.
-Die Variable *c*<sub>2</sub> steht für die konstante Anzahl an Schritten, die in jedem Durchlauf der Schleife durchgeführt werden.
+Die Variable *c*<sub>1</sub> steht für die konstante Anzahl an Schritten, die in jedem Durchlauf der Schleife durchgeführt werden.
 
 Mit Hilfe der Laufzeit für die Methode `nodeAt` können wir nun die Laufzeit der Methode `get` bestimmen.
 
