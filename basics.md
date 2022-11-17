@@ -7,6 +7,43 @@ Hier werden Grundlagen erläutert, die für die Vorlesung benötigt werden.
 Dabei werden vor allem Inhalte aus den Programmierveranstaltungen noch einmal wiederholt bzw. etwas vertieft.
 
 
+## Sichtbarkeit von Variablen
+
+Der englische Begriff _Scope_ beschreibt den Bereich, in dem eine Variable sichtbar ist.
+Sichtbar bedeutet, dass wir in diesem Bereich die Variable lesen und schreiben können.
+In Java sind Variablen zuerst einmal nur in den Anweisungen hinter ihrer Deklaration sichtbar.
+
+```java
+public static void main(String[] args) {
+    <hier kann x nicht verwendet werden>
+    int x;
+    <hier kann x verwendet werden>
+}
+```
+
+Außerdem ist eine Variable immer nur in dem Block sichtbar, der sie umschließt.
+Ein Block wird dabei durch `{` und `}` definiert.
+Das heißt, im Beispiel oben ist die Variable `x` nur unterhalb ihrer Deklaration und in der Methode `main` sichtbar.
+
+Wenn wir zum Beispiel durch eine `if`-Anweisung einen neuen Block erzeugen, ist die Variable auch nur in diesem Block sichtbar.
+
+```java
+public static void main(String[] args) {
+    <hier kann x nicht verwendet werden>
+    if (args.length < 1)
+        <hier kann x nicht verwendet werden>
+    } else { 
+        <hier kann x nicht verwendet werden>
+        int x;
+        <hier kann x verwendet werden>
+    }
+    <hier kann x nicht verwendet werden>
+}
+```
+
+Im obigen Beispiel sieht man, dass die Variable `x` nur in dem Block verwendet werden kann, der sie umgibt.
+
+
 ## Primitive Typen und Objekttypen
 
 In Java unterscheidet man zwei unterschiedliche Arten von Typen.
