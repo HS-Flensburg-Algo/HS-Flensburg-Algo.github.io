@@ -129,7 +129,11 @@ Wenn wir eine solche geschlossene Form gefunden haben, können wir mithilfe eine
 Die klassische Induktion hat die folgende Form.
 
 $$
-\left( \operatorname{A}(0) \wedge \forall n \in \mathbb{N} \colon \operatorname{A}(n)\Rightarrow \operatorname{A}(n+1) \right) \Rightarrow \forall n \in \mathbb{N} \colon \operatorname{A}(n)
+\begin{align}
+& \operatorname{A}(0) \wedge \forall n \in \mathbb{N} \colon \operatorname{A}(n)\Rightarrow \operatorname{A}(n+1)\\
+& \Rightarrow\\
+& \forall n \in \mathbb{N} \colon \operatorname{A}(n)
+\end{align}
 $$
 
 Dabei ist $$\operatorname{A}$$ die Aussage, die wir beweisen wollen.
@@ -393,11 +397,25 @@ $$
 $$
 
 Das heißt, um den Induktionsschritt zu zeigen, haben wir in diesem Fall nicht nur zur Verfügung, dass die Aussage $$\operatorname{A}$$ für den jeweiligen Vorgänger gilt, sondern, dass die Aussage für alle Vorgänger gilt.
-Außerdem nutzen wir eine Variante der Induktion, bei der man nicht mit dem Startwert `0` startet, sondern mit einer frei gewählten natürlichen Zahl.
+Durch diese Formulierung erübrigt sich der Induktionsanfang.
+Wenn wir den Induktionsschritt zum Beispiel für $$n = 0$$ betrachten, erhalten wir die folgende Formel.
+
+$$
+(\forall m \in \mathbb{N} \colon m < 0 \Rightarrow \operatorname{A}(m)) \Rightarrow \operatorname{A}(0)
+$$
+
+Es gibt keine natürlichen Zahlen, die kleiner als $$0$$ sind, daher müssen wir für den Fall $$n = 0$$ die $$\operatorname{A}(0)$$ ohne Voraussetzung zeigen.
+Das heißt, in der Formel für den Induktionsschritt versteckt sich auch ein Induktionsanfang.
+
+Wir nutzen im Folgenden außerdem eine Variante der Induktion, bei der man nicht mit dem Startwert `0` startet, sondern mit einer frei gewählten natürlichen Zahl.
 Diese Form der Induktion kann durch die folgende Formel beschrieben werden.
 
 $$
-\operatorname{A}(n_0) \wedge \left( \forall n \in \mathbb{N} \colon n \ge n_0 \wedge (\forall m \in \mathbb{N} \colon m < n \Rightarrow \operatorname{A}(m)) \Rightarrow \operatorname{A}(n) \right) \Rightarrow \forall n \in \mathbb{N} \colon n \ge n_0 \Rightarrow \operatorname{A}(n)
+\begin{align}
+& \forall n \in \mathbb{N} \colon n \ge n_0 \wedge (\forall m \in \mathbb{N} \colon m \ge n_0 \wedge m < n \Rightarrow \operatorname{A}(m)) \Rightarrow \operatorname{A}(n)\\
+& \Rightarrow\\
+& \forall n \in \mathbb{N} \colon n \ge n_0 \Rightarrow \operatorname{A}(n)
+\end{align}
 $$
 
 Mithilfe der starken Induktion wollen wir nun zeigen, dass $$T_{\texttt{binarySearch}}(n) \in \mathcal{O}(\log_2 n)$$ gilt.
@@ -413,33 +431,44 @@ $$\begin{align}
   <figcaption>Abbildung 2: Weitere Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
 </figure>
 
-**Beh.:** $$\forall n \in \mathbb{N} \colon n \ge 2 \Rightarrow T_{\texttt{binarySearch}}(n) \le c_2 (\log_2 n + 1) + c_1$$
+**Beh.:** $$\forall n \in \mathbb{N} \colon n \ge 1 \Rightarrow T_{\texttt{binarySearch}}(n) \le c_2 (\log_2 n + 1) + c_1$$
 
 **Bew.:**
 
 Zur Lesbarkeit nennen wir die Funktion $$T_{\texttt{binarySearch}}$$ im Folgenden $$T$$.
 
-Wir zeigen die Aussage per Induktion mit $$n_0 = 2$$.
-
-Induktionsanfang:
-
-$$
-\begin{align*}
-T(2) & = c_2 + T(1)\\
-     & = c_2 + c_2 + T(0)\\
-     & = c_2 + c_2 + c_1\\
-     & = c_2 \cdot 2 + c_1\\
-     & = c_2 (1 + 1) + c_1\\
-     & = c_2 (\log_2 2 + 1) + c_1
-\end{align*}
-$$
+Wir zeigen die Aussage per starker Induktion mit $$n_0 = 1$$.
 
 Induktionsschritt:
 
-Sei $$n \in \mathbb{N}$$ mit $$n \ge 2$$ und es gelte $$\forall m \in \mathbb{N} \colon m < n \Rightarrow T(m) \le c_2 \log_2 m + c_2 + c_1$$.
+Sei $$n \in \mathbb{N}$$ mit $$n \ge 1$$ und es gelte $$\forall m \in \mathbb{N} \colon m \ge n_0 \wedge m < n \Rightarrow T(m) \le c_2 \log_2 m + c_2 + c_1$$.
 Dann gilt
 
-1\. Fall: $$n$$ ist ungerade
+1\. Fall: $$n = 1$$
+
+$$
+\begin{align*}
+T(1) & = c_2 + T(0)\\
+     & = c_2 + c_1\\
+     & = c_2 (0 + 1) + c_1\\
+     & = c_2 (\log_2 1 + 1) + c_1
+\end{align*}
+$$
+
+2\. Fall: $$n > 1$$ und $$n$$ ist gerade
+
+$$
+\begin{align*}
+T(n) & = c_2 + T\left(\frac{n}{2}\right) & \text{Regel (2): Induktionshypothese}\\
+     & \le c_2 + c_2 (\log_2 \left(\frac{n}{2}\right) + 1) + c_1 & \text{$\log_2 \left(\frac{n}{m}\right) = \log_2 n - \log_2 m$}\\
+     & = c_2 + c_2 (\log_2 n - \log_2 2 + 1) + c_1\\
+     & = c_2 + c_2 (\log_2 n - 1 + 1) + c_1\\
+     & = c_2 + c_2 \log_2 n + c_1\\
+     & = c_2 (\log_2 n + 1) + c_1
+\end{align*}
+$$
+
+3\. Fall: $$n > 1$$ und $$n$$ ist ungerade
 
 $$
 \begin{align*}
@@ -450,19 +479,6 @@ T(n) & = c_2 + T\left(\frac{n - 1}{2}\right) & \text{Regel (2): Induktionshypoth
      & = c_2 + c_2 \log_2 (n - 1) + c_1\\
      & = c_2 + c_2 \log_2 (n - 1) + c_1 & \text{Regel (3): $n - 1 \le n$, Regel (1): $0 \le c_2$, Regel (2)}\\
      & \le c_2 + c_2 \log_2 n + c_1\\
-     & = c_2 (\log_2 n + 1) + c_1
-\end{align*}
-$$
-
-2\. Fall: $$n$$ ist gerade
-
-$$
-\begin{align*}
-T(n) & = c_2 + T\left(\frac{n}{2}\right) & \text{Regel (2): Induktionshypothese}\\
-     & \le c_2 + c_2 (\log_2 \left(\frac{n}{2}\right) + 1) + c_1 & \text{$\log_2 \left(\frac{n}{m}\right) = \log_2 n - \log_2 m$}\\
-     & = c_2 + c_2 (\log_2 n - \log_2 2 + 1) + c_1\\
-     & = c_2 + c_2 (\log_2 n - 1 + 1) + c_1\\
-     & = c_2 + c_2 \log_2 n + c_1\\
      & = c_2 (\log_2 n + 1) + c_1
 \end{align*}
 $$
@@ -534,6 +550,7 @@ Es gibt aber auch Ansätze, bei denen das Füllen der Datenstruktur und das Ausl
 Zur Implementierung der Fibonacci-Funktion können wir zum Beispiel ein Array mit Zahlen füllen und anschließend im gefüllten Array den entsprechenden Wert nachschlagen.
 
 <!--
+
 Um noch einmal den Ansatz der dynamischen Programmierung zu motivieren, wollen wir uns Gedanken über die Laufzeiten der beiden Implementierungen machen.
 Zuerst geben wir eine Rekurrenz für die Laufzeit der Methode `fib` an.
 Um das Problem etwas zu vereinfachen, gehen wir davon aus, dass der Aufwand für die Fälle `n == 0` und `n == 1` identisch ist.
@@ -551,7 +568,7 @@ T_{\texttt{fib}} & (n)= \begin{cases}
 \end{align}
 $$
 
-**Beh.:** $$T_{\texttt{fib}}(n) \le c + c \cdot 2^{n - 1}$$
+**Beh.:** $$T_{\texttt{fib}}(n) \le c \cdot 2^{n - 1}$$
 
 **Bew.:**
 
@@ -573,9 +590,8 @@ Induktionsschritt:
 $$
 \begin{align}
 T(1) & = c\\
-     & \le c + c\\
-     & = c + c \cdot 1\\
-     & = c + c \cdot 2^{0}
+     & = c \cdot 1\\
+     & = c \cdot 2^{0}
 \end{align}
 $$
 
@@ -585,7 +601,7 @@ $$
 \begin{align}
 T(n) & = c + T(n - 1) + T(n - 2)\\
      & \le c + c \cdot 2^{n - 1} + T(n - 2)\\
-     & \le c + c \cdot 2^{n - 1} + c \cdot 2^{n - 2}\\
+     & \le c + c \cdot 2^{n - 1} + c \cdot (2^{n - 2} - 1)\\
      & \le c + c \cdot 2^{n - 1} + c \cdot 2^{n - 2} + c \cdot 2^{n - 2}\\
      & = c + c \cdot 2^{n - 1} + c \cdot (2^{n - 2} + 2^{n - 2})\\
      & = c + c \cdot 2^{n - 1} + c \cdot 2 \cdot 2^{n - 2}\\
@@ -596,9 +612,9 @@ $$
 
 Um ein grobes Gefühl für die Laufzeit dieser Methode zu erhalten, erstellen wir wieder eine Wertetabelle.
 
-| $$n$$    | $$T_{\texttt{fib}}(n)$$  | $$\log_2 n + 1$$
+| $$n$$    | $$T_{\texttt{fib}}(n)$$  | $$2^{n-1}$$
 |----------|-------------------------:|-----------------:|
-| 0        | $$c$$                    | --               |
+| 0        | $$c$$                    | $$\frac{1}{2}$$  |
 | 1        | $$c$$                    | 1                |
 | 2        | $$c + c + c = 3c$$       | 2                |
 | 3        | $$c + 3c + c = 5c$$      | 2,58             |
