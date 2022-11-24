@@ -265,7 +265,7 @@ T_{\texttt{toArray}}(n) &= T_{\texttt{new_Integer[]}}(n) + \sum_{i = 0}^{n - 1} 
 & = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} c_1 i + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_6 & \text{Regel (\ref{eqn:constant})}\\\\
 & = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} c_1 i + (c_2 + c_3)n + c_6 & \text{Regel (\ref{eqn:distributivity})}\\\\
 & = c_4 n + n c_5 + c_1 \sum_{i = 0}^{n - 1} i + (c_2 + c_3)n + c_6 & \text{Regel (\ref{eqn:gauß})}\\\\
-& = c_4 n + n c_5 + c_1 \frac{n(n - 1)}{2} + (c_1 + c_3)n + c_6\\\\
+& = c_4 n + n c_5 + c_1 \frac{n(n - 1)}{2} + (c_2 + c_3)n + c_6\\\\
 & = c_4 n + n c_5 + c_1 \left(\frac{1}{2} n^2 - \frac{1}{2} n\right) + (c_2 + c_3)n + c_6\\\\
 & = c_4 n + n c_5 + c_1 \frac{1}{2} n^2 - c_1 \frac{1}{2} n + (c_2 + c_3)n + c_6\\\\
 & = \frac{1}{2} c_1 n^2 + \left(- \frac{1}{2} c_1 + c_2 + c_3 + c_4 + c_5\right) n + c_6
@@ -550,7 +550,6 @@ Es gibt aber auch Ansätze, bei denen das Füllen der Datenstruktur und das Ausl
 Zur Implementierung der Fibonacci-Funktion können wir zum Beispiel ein Array mit Zahlen füllen und anschließend im gefüllten Array den entsprechenden Wert nachschlagen.
 
 <!--
-
 Um noch einmal den Ansatz der dynamischen Programmierung zu motivieren, wollen wir uns Gedanken über die Laufzeiten der beiden Implementierungen machen.
 Zuerst geben wir eine Rekurrenz für die Laufzeit der Methode `fib` an.
 Um das Problem etwas zu vereinfachen, gehen wir davon aus, dass der Aufwand für die Fälle `n == 0` und `n == 1` identisch ist.
@@ -571,6 +570,11 @@ $$
 **Beh.:** $$T_{\texttt{fib}}(n) \le c \cdot 2^{n - 1}$$
 
 **Bew.:**
+
+Induktionsschritt:
+
+Sei 
+
 
 Induktionsanfang:
 
