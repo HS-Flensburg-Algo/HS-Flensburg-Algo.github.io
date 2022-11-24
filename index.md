@@ -6,6 +6,14 @@ custom_css: toc
 
 ### 0. [Grundlagen](basics.md)
 
+<!-- - 0.1. [Sichtbarkeit von Variablen](basics.md#sichtbarkeit-von-variablen)
+
+- 0.2. [Primitive Typen und Objekttypen](basics.md#primitive-typen-und-objekttypen)
+
+- 0.3. [Gleichheit](basics.md#gleichheit)
+
+- 0.4. [Modifikator `final`](basics.md#modifikator-final) -->
+
 ### 1. [Einleitung](introduction.md)
 
 ### 2. [Lineare Datenstrukturen](linear-data-structures.md)
@@ -38,7 +46,9 @@ custom_css: toc
 
 - 4.4. [Divide and Conquer](methods.md#divide-and-conquer)
 
-<!-- - 4.4. [Dynamische Programmierung](methods.md#dynamische-programmierung)  -->
+- 4.5. [Einschub: Beweis mittels starker Induktion](methods.md#einschub-beweis-mittels-starker-induktion)
+
+- 4.6. [Dynamische Programmierung](methods.md#dynamische-programmierung)
 
 <!--
 - 4.5. [Einschub: Beweis der Laufzeit per Induktion](methods.md#einschub-beweis-der-laufzeit-per-induktion)

@@ -205,7 +205,7 @@ Um die Verwendung dieser Regeln zu illustrieren, betrachten wir die Implementier
 ``` java
 static Integer[] toArray(SLList<Integer> list) {
     var array = new Integer[list.size()];
-    for (int i = 0; i < array.length; i++) {
+    for (int i = 0; i < list.size(); i++) {
         array[i] = list.get(i);
     }
     return array;
@@ -253,14 +253,14 @@ Das heißt, ein Array der Größe $$n$$ zu erzeugen, benötigt $$c_4 n$$ Schritt
 Wir nutzen diese Vorarbeiten nun, um die Laufzeit der Methode `toArray` zu bestimmen.
 
 $$\begin{align}
-T_{\texttt{toArray}}(n) &= T_{\texttt{new_Integer[]}}(n) + \sum_{i = 0}^{n - 1} (c_5 + T_{\texttt{get}}(i)) + c_6 & (\text{Definition $T_{\texttt{new_Integer[]}}$})\\\\
-&= c_4 n + \sum_{i = 0}^{n - 1} (c_5 + T_{\texttt{get}}(i)) + c_6 & (\text{Regel (\ref{eqn:associativity}})\\\\
-& = c_4 n + \sum_{i = 0}^{n - 1} c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6 & (\text{Regel (\ref{eqn:constant})})\\\\
-& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6 & (\text{Definition $T_{\texttt{get}}$})\\\\
-& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} (c_1 i + c_2 + c_3) + c_6 & (\text{Regel (\ref{eqn:associativity})})\\\\
-& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} c_1 i + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_6 & (\text{Regel (\ref{eqn:constant})})\\\\
-& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} c_1 i + (c_2 + c_3)n + c_6 & (\text{Regel (\ref{eqn:distributivity})})\\\\
-& = c_4 n + n c_5 + c_1 \sum_{i = 0}^{n - 1} i + (c_2 + c_3)n + c_6 & (\text{Regel (\ref{eqn:gauß})})\\\\
+T_{\texttt{toArray}}(n) &= T_{\texttt{new_Integer[]}}(n) + \sum_{i = 0}^{n - 1} (c_5 + T_{\texttt{get}}(i)) + c_6 & \text{Definition $T_{\texttt{new_Integer[]}}$}\\\\
+&= c_4 n + \sum_{i = 0}^{n - 1} (c_5 + T_{\texttt{get}}(i)) + c_6 & \text{Regel (\ref{eqn:associativity}}\\\\
+& = c_4 n + \sum_{i = 0}^{n - 1} c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6 & \text{Regel (\ref{eqn:constant})}\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_6 & \text{Definition $T_{\texttt{get}}$}\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} (c_1 i + c_2 + c_3) + c_6 & \text{Regel (\ref{eqn:associativity})}\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} c_1 i + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_6 & \text{Regel (\ref{eqn:constant})}\\\\
+& = c_4 n + n c_5 + \sum_{i = 0}^{n - 1} c_1 i + (c_2 + c_3)n + c_6 & \text{Regel (\ref{eqn:distributivity})}\\\\
+& = c_4 n + n c_5 + c_1 \sum_{i = 0}^{n - 1} i + (c_2 + c_3)n + c_6 & \text{Regel (\ref{eqn:gauß})}\\\\
 & = c_4 n + n c_5 + c_1 \frac{n(n - 1)}{2} + (c_1 + c_3)n + c_6\\\\
 & = c_4 n + n c_5 + c_1 \left(\frac{1}{2} n^2 - \frac{1}{2} n\right) + (c_2 + c_3)n + c_6\\\\
 & = c_4 n + n c_5 + c_1 \frac{1}{2} n^2 - c_1 \frac{1}{2} n + (c_2 + c_3)n + c_6\\\\
@@ -370,7 +370,7 @@ Conquer)*.
 Diese Algorithmen haben meistens einen logarithmischen Faktor in ihrer Laufzeit.
 
 
-<!-- Einschub: Beweis mittels starker Induktion
+Einschub: Beweis mittels starker Induktion
 ------------------------------------------
 
 Wir haben bei der Implementierung der Fakultät gesehen, dass wir mithilfe einer Induktion die Laufzeit einer rekursiven Methode beweisen können.
@@ -393,74 +393,78 @@ $$
 $$
 
 Das heißt, um den Induktionsschritt zu zeigen, haben wir in diesem Fall nicht nur zur Verfügung, dass die Aussage $$\operatorname{A}$$ für den jeweiligen Vorgänger gilt, sondern, dass die Aussage für alle Vorgänger gilt.
+Außerdem nutzen wir eine Variante der Induktion, bei der man nicht mit dem Startwert `0` startet, sondern mit einer frei gewählten natürlichen Zahl.
+Diese Form der Induktion kann durch die folgende Formel beschrieben werden.
+
+$$
+\operatorname{A}(n_0) \wedge \left( \forall n \in \mathbb{N} \colon n \ge n_0 \wedge (\forall m \in \mathbb{N} \colon m < n \Rightarrow \operatorname{A}(m)) \Rightarrow \operatorname{A}(n) \right) \Rightarrow \forall n \in \mathbb{N} \colon n \ge n_0 \Rightarrow \operatorname{A}(n)
+$$
 
 Mithilfe der starken Induktion wollen wir nun zeigen, dass $$T_{\texttt{binarySearch}}(n) \in \mathcal{O}(\log_2 n)$$ gilt.
 Dazu müssen wir zeigen, dass ein $$c \in \mathbb{R}$$ und ein $$n_0 \in \mathbb{N}$$ existieren, so dass $$T_{\texttt{binarySearch}}(n) \le c \cdot \log_2 n$$ für alle $$n \in \mathbb{N}$$ mit $$n \ge n_0$$ gilt.
-Wir nennen die Funktion $$T_{\texttt{binarySearch}}$$ im Folgenden $$T$$.
+Wir zeigen zunächst eine Hilfsaussage.
+Wir verwenden im folgenden Beweis wieder die Regeln für $$\le$$ aus dem Kapitel <a href="complexity.html#figure:le-rules">Komplexität</a>.
+Wir nutzen außerdem die folgende Regel
 
-**Beh.:** $$T_{\texttt{binarySearch}}(n) \in \mathcal{O}(\log_2 n)$$
+<figure id="figure:le-rules" markdown="1">
+$$\begin{align}
+& \forall m, n \in \mathbb{R}: & m \le n & \Rightarrow \log_2 m \le \log_2 n \tag{3}\label{eq:eq3}
+\end{align}$$
+  <figcaption>Abbildung 2: Weitere Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
+</figure>
+
+**Beh.:** $$\forall n \in \mathbb{N} \colon n \ge 2 \Rightarrow T_{\texttt{binarySearch}}(n) \le c_2 \log_2 n + c_2 + c_1$$
 
 **Bew.:**
 
-Setze $$c = 2$$.
-Setze $$n_0 = 2$$.
-Sei $$n \in \mathbb{N}$$ mit $$n \ge n_0$$.
-Wir zeigen die folgende Aussage per Induktion.
+Zur Lesbarkeit nennen wir die Funktion $$T_{\texttt{binarySearch}}$$ im Folgenden $$T$$.
+
+Wir zeigen die Aussage per Induktion mit $$n_0 = 2$$.
 
 $$
-\forall n \in \mathbb{N} \colon n \ge 2 \Rightarrow T(n) \le \log_2 n
+\begin{align*}
+T(2) = c_2 + T(1) = c_2 + c_2 + T(0) = 2 c_2 + c_1 = c_2 \cdot 2 + c_1 = c_2 \log_2 2 + c_2 + c_1
+\end{align*}
 $$
-
-Induktionsstart:
-
-Für $$n = 0$$ ist die Aussage $$n \ge 2$$ falsch und somit gilt $$n \ge 2 \Rightarrow T(n) \le \log_2 n$$.
 
 Induktionsschritt:
 
-Sei $$n \in \mathbb{N}$$ und es gelte $$\forall m \in \mathbb{N} \colon m < n \Rightarrow m \ge 2 \Rightarrow T(m) \le \log_2 m$$.
+Sei $$n \in \mathbb{N}$$ mit $$n \ge 2$$ und es gelte $$\forall m \in \mathbb{N} \colon m < n \Rightarrow T(m) \le c_2 \log_2 m + c_2 + c_1$$.
 Dann gilt
 
-$$
-\begin{align*}
-T(n) & = 1 + T(\lfloor n / 2 \rfloor) \Arrow{\autoref{eq4}, Induktionshypothese}\\
-     & \le 1 + c \cdot \log_2 \lfloor n / 2 \rfloor \Arrow{\autoref{eq4}, \autoref{eq3},\\$m \le n \Rightarrow \log_2 m \le \log_2 n$}\\[5ex]
-     & \le 1 + c \cdot \log_2 (n / 2) \Arrow{$\log_2 (\frac{n}{m}) = \log_2 n - \log_2 m$}\\
-     & = 1 + c \cdot (\log_2 n - \log_2 2)\\
-     & = 1 + c \cdot (\log_2 n - 1)\\
-     & = 1 - c + c \cdot \log_2 n \Arrow{\autoref{eq2}, $1 - c < 0$}\\
-     & < 0 + c \cd ot \log_2 n\\
-     & = c \cdot \log_2 n
-\end{align*}
-$$ 
+1\. Fall: $$n$$ ist ungerade
 
 $$
 \begin{align*}
-T(n) & = T(2)\\
-     & = 1 + T(1)\\
-     & = 1 + 1\\
-     & = 2 \cdot 1\\
-     & = c \cdot 1\\
-     & = c \cdot \log_2 2\\
-     & = c \cdot \log_2 n
+T(n) & = c_2 + T\left(\frac{n - 1}{2}\right) & \text{Regel (2): Induktionshypothese}\\
+     & \le c_2 + c_2 (\log_2 \left( \frac{n - 1}{2} \right) + 1) + c_1 & \text{$\log_2 \left(\frac{n}{m}\right) = \log_2 n - \log_2 m$}\\
+     & = c_2 + c_2 (\log_2 (n - 1) - \log_2 2 + 1) + c_1\\
+     & = c_2 + c_2 (\log_2 (n - 1) - 1 + 1) + c_1\\
+     & = c_2 + c_2 \log_2 (n - 1) + c_1 & \text{Regel (3): $n - 1 \le n$, Regel (1): $0 \le c_2$, Regel (2)}\\
+     & = c_2 + c_2 \log_2 n + c_1\\
+     & = c_2 \log_2 n + c_2 + c_1
 \end{align*}
 $$
 
-$$n = 3$$
+2\. Fall: $$n$$ ist gerade
 
 $$
 \begin{align*}
-T(n) & = T(3)\\
-     & = 1 + T(1)\\
-     & = 1 + 1\\
-     & = 2 \cdot 1 \Arrow{\autoref{eq1}, $2 > 0$, $1 < \log_2 3$}\\
-     & < 2 \cdot \log_2 3\\
-     & = c \cdot \log_2 3\\
-     & = c \cdot \log_2 n
+T(n) & = c_2 + T\left(\frac{n}{2}\right) & \text{Regel (2): Induktionshypothese}\\
+     & \le c_2 + c_2 (\log_2 \left(\frac{n}{2}\right) + 1) + c_1 & \text{$\log_2 \left(\frac{n}{m}\right) = \log_2 n - \log_2 m$}\\
+     & = c_2 + c_2 (\log_2 n - \log_2 2) + c_1\\
+     & = c_2 + c_2 (\log_2 n - 1 - 1) + c_1\\
+     & = c_2 + c_2 \log_2 n + c_1\\
+     & = c_2 \log_2 n + c_2 + c_1
 \end{align*}
 $$
--->
 
-<!-- Dynamische Programmierung
+Damit ist die Behauptung gezeigt.
+
+Wir erhalten mit der zuvor gezeigten Aussage, dass $$T_{\texttt{binarySearch}} \in \mathcal{O}(\log_2 n)$$ gilt.
+
+
+Dynamische Programmierung
 -------------------------
 
 Um die Methode der dynamischen Programmierung zu motivieren, die wir uns im Folgenden anschauen, wollen wir uns die Implementierung der Methode `fib` noch mal etwas genauer anschauen.
@@ -470,10 +474,10 @@ Wir wollen uns einmal anschauen, welche Aufrufe der Methode `fib` für den Aufru
 
 ![](/assets/graphics/fib-calls.svg){: width="100%" .centered}
 
-<figcaption>Abbildung 2: Die Aufrufstruktur für <code class="language-plaintext highlighter-rouge">fib(5)</code></figcaption>
+<figcaption>Abbildung 3: Die Aufrufstruktur für <code class="language-plaintext highlighter-rouge">fib(5)</code></figcaption>
 </figure>
 
-<a href="#figure:fib-calls">Abbildung 2</a> zeigt, dass viele Aufrufe der Methode `fib` mehrfach durchgeführt werden.
+<a href="#figure:fib-calls">Abbildung 3</a> zeigt, dass viele Aufrufe der Methode `fib` mehrfach durchgeführt werden.
 Mit Hilfe der dynamischen Programmierung können wir die mehrfache Berechnung dieser Werte vermeiden.
 
 Bei der dynamischen Programmierung werden die Ergebnisse einer Methode in einer Datenstruktur gespeichert.
@@ -501,16 +505,16 @@ static int fibDyn(Integer[] memo, int n) {
 }
 ```
 
-Die folgende Abbildung zeigt die Aufrufstruktur mit Hilfe der dynamischen Programmierung. Um zu verstehen, wie die Aufrufe im Array `memo` nachgeschlagen werden, müssen wir wissen, dass Java die Argumente einer Methode von links nach rechts auswertet.
+Um zu verstehen, wie die Aufrufe im Array `memo` nachgeschlagen werden, müssen wir wissen, dass Java die Argumente einer Methode von links nach rechts auswertet.
+Das heißt, beim Aufruf `fibDyn(memo, n - 1) + fibDyn(memo, n - 2)` wird der Aufruf `fibDyn(memo, n - 1)` ausgeführt bevor der Aufruf `fibDyn(memo, n - 2)` ausgeführt wird.
+Die folgende Abbildung zeigt die Aufrufstruktur mit Hilfe der dynamischen Programmierung. 
 
 <figure id="figure:fib-calls" markdown="1">
 
 ![](/assets/graphics/fib-calls-reduced.svg){: width="100%" .centered}
 
-<figcaption>Abbildung 3: Die Aufrufstruktur für <code class="language-plaintext highlighter-rouge">fibDyn(5)</code></figcaption>
+<figcaption>Abbildung 4: Die Aufrufstruktur für <code class="language-plaintext highlighter-rouge">fibDyn(5)</code></figcaption>
 </figure>
-
-Das heißt, beim Aufruf `fibDyn(memo, n - 1) + fibDyn(memo, n - 2)` wird der Aufruf `fibDyn(memo, n - 1)` ausgeführt bevor der Aufruf `fibDyn(memo, n - 2)` ausgeführt wird.
 
 Da wir die ersten beiden Einträge des Arrays gar nicht verwenden, können wir den Speicherverbrauch der Implementierung noch optimieren, indem wir ein Array der Größe `Math.max(0, n - 1)` anlegen und jeweils `memo[n - 2]` nutzen.
 Wir müssen die Funktion `Math.max` nutzen, da Java einen Laufzeitfehler wirft, wenn wir versuchen, ein Array mit einer negativen Größe zu erzeugen.
@@ -519,8 +523,106 @@ Diese Implementierung spart zwei Arrayeinträge, hat aber den Nachteil, dass sie
 Die Idee der dynamischen Programmierung kann auf verschiedene Arten angewendet werden.
 Wir beschäftigen uns hier nur damit, wie man dynamische Programmierung anwenden kann und dabei die grundlegende Struktur der Originalimplementierung möglichst erhält.
 Es gibt aber auch Ansätze, bei denen das Füllen der Datenstruktur und das Auslesen stärker getrennt werden.
-Zur Implementierung der Fibonacci-Funktion können wir zum Beispiel ein Array mit Zahlen füllen und anschließend im gefüllten Array den entsprechenden Wert nachschlagen. -->
+Zur Implementierung der Fibonacci-Funktion können wir zum Beispiel ein Array mit Zahlen füllen und anschließend im gefüllten Array den entsprechenden Wert nachschlagen.
 
+<!--
+Um noch einmal den Ansatz der dynamischen Programmierung zu motivieren, wollen wir uns Gedanken über die Laufzeiten der beiden Implementierungen machen.
+Zuerst geben wir eine Rekurrenz für die Laufzeit der Methode `fib` an.
+Um das Problem etwas zu vereinfachen, gehen wir davon aus, dass der Aufwand für die Fälle `n == 0` und `n == 1` identisch ist.
+
+Beh.: 
+
+Bew.:
+
+Induktionsanfang:
+
+Induktionsstart: $n = 0$
+Dann gilt
+
+$$
+\begin{align}
+T(0) & = c\\
+     & = c \cdot 1\\
+     & = c \cdot 2^0
+\end{align}
+$$
+
+Induktionsstart: $n = 1$
+Dann gilt
+
+\begin{DispWithArrows*}
+T(n) & = T(1)\\
+     & = 0\\
+     & < 2\\
+     & = 2^1\\
+     & = 1 \cdot 2^1\\
+     & = c \cdot 2^1\\
+     & = c \cdot 2^n
+\end{DispWithArrows*}
+$$
+
+Induktionsschritt: $n \ge 2$
+
+$$
+\begin{align}
+T(n) & = c + T(n - 1) + T(n - 2)\\\\
+     & \le c + c \cdot 2^{n - 1} + T(n - 2)\\\\
+     & \le c + c \cdot 2^{n - 1} + c \cdot 2^{n - 2}\\\\
+     & = c + c (2^{n - 1} + 2^{n - 2})\\\\
+     & = c + c (2 \cdot 2^{n - 2} + 2^{n - 2})\\\\
+     & = c \cdot 2 \cdot 2^{n - 1}
+     & = c \cdot 2^n
+\end{align}
+$$
+
+
+$$
+\begin{align}
+T_{\texttt{fib}} & : \mathbb{N} \rightarrow \mathbb{R}\\
+T_{\texttt{fib}} & (n)= \begin{cases}
+  c                       & \text{falls}~n = 0\\\\
+  c                       & \text{falls}~n = 1\\\\
+  c + T_{\texttt{fib}}(n - 1) + T_{\texttt{fib}}(n - 2) & \text{sonst}
+\end{cases}
+\end{align}
+$$
+
+Um die Laufzeit dieser Methode ganz grob abzuschätzen nutzen wir einen Trick.
+
+$$
+T_{\texttt{fib}}(n - 1) = c_2 + T_{\texttt{fib}}(n - 2) + T_{\texttt{fib}}(n - 3)
+$$
+
+$$
+T_{\texttt{fib}}(n - 2) = \frac{1}{c_2} T_{\texttt{fib}}(n - 1) - \frac{1}{c_2} T_{\texttt{fib}}(n - 3)
+$$
+
+
+
+$$
+\begin{align}
+T_{\texttt{fib}}(n) & = c_2 + T_{\texttt{fib}}(n - 1) + T_{\texttt{fib}}(n - 2)\\
+& = c_2 + T_{\texttt{fib}}(n - 1) + \frac{1}{c_2} T_{\texttt{fib}}(n - 1) - \frac{1}{c_2} T_{\texttt{fib}}(n - 3)\\
+& \ge c_2 + T_{\texttt{fib}}(n - 1) + \frac{1}{c_2} T_{\texttt{fib}}(n - 1)
+\end{align}
+$$
+
+
+Um ein grobes Gefühl für die Laufzeit dieser Methode zu erhalten, erstellen wir wieder eine Wertetabelle.
+
+| $$n$$    | $$T_{\texttt{fib}}(n)$$  | $$\log_2 n + 1$$
+|----------|-------------------------:|-----------------:|
+| 0        | $$c$$                    | --               |
+| 1        | $$c$$                    | 1                |
+| 2        | $$c + c + c = 3c$$       | 2                |
+| 3        | $$c + 3c + c = 5c$$      | 2,58             |
+| 4        | $$c + 5c + 3c = 9c$$     | 3                |
+| 5        | $$c + 9c + 5c = 15c$$    | 3,32             |
+| 6        | $$c + 15c + 9c = 25c$$   | 3,58             |
+| 7        | $$c + 25c + 15c = 41c$$  | 3,80             |
+| 8        | $$c + 41c + 25c = 67c$$  | 4                |
+| 9        | $$4 c_2 + c_1$$                  | 4,16             |
+-->
 
 <!-- Backtracking
 ------------

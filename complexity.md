@@ -161,12 +161,16 @@ Das heißt, der Wert, den wir für *c* wählen kann weder von *n*<sub>0</sub> ab
 Um zu zeigen, dass eine konkrete Funktion asymptotisch kleiner gleich einer anderen konkreten Funktion ist, müssen wir einen Beweis führen.
 In diesen Beweisen nutzen wir die folgenden Eigenschaften von $$\le$$ auf reelen Zahlen.
 
+<figure id="figure:le-rules" markdown="1">
 $$\begin{align}
 % k \> 0 \wedge m \< n & \Rightarrow k \cdot m \< k \cdot n \label{eq1}\\\\
 % m \< n   & \Rightarrow k + m \< k + n \label{eq2}\\\\
 & \forall k, m, n \in \mathbb{R}: & 0 \le k \wedge m \le n & \Rightarrow k \cdot m \le k \cdot n \tag{1}\label{eq:eq3}\\
 & \forall k, m, n \in \mathbb{R}: & m \le n                & \Rightarrow k + m \le k + n \tag{2}\label{eq:eq4}
 \end{align}$$
+  <figcaption>Abbildung 3: Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
+</figure>
+
 
 #### Beispiel 1 (Lineares und quadratisches Wachstum (Beweis))
 
@@ -181,7 +185,7 @@ Dann gilt
 
 $$\begin{align*}
 l(n) & = n && \text{$1$ ist neutrales Element bezüglich $\cdot$}\\
-     & = n \cdot 1 && \text{Regel (\ref{eq:eq3}) ($k := n$, $m := 1$, $n := n$) $0 \le n \wedge 1 \le n$}\\
+     & = n \cdot 1 && \text{Regel (\ref{eq:eq3}) ($k := n$, $m := 1$, $n := n$): $0 \le n \wedge 1 \le n$}\\
      & \le n \cdot n && \text{$1$ ist neutrales Element bezüglich $\cdot$}\\
      & = 1 \cdot n^2 && \text{$c = 1$}\\
      & = c \cdot n^2\\
@@ -195,11 +199,11 @@ Dies zeigt, dass $$l \le_{as} q$$ gilt.
 ![](/assets/graphics/linear-function.svg){: width="365px"}
 ![](/assets/graphics/quadratic-function.svg){: width="365px"}
 </div>
-<figcaption>Abbildung 3: Lineares und quadratisches Wachstum</figcaption>
+<figcaption>Abbildung 4: Lineares und quadratisches Wachstum</figcaption>
 </figure>
 
-<a href="#figure:linear-quadratic">Abbildung 3</a> illustriert diese Aussage. Wir sehen, dass die Funktion *q* ab der Stelle *n*<sub>0</sub> = 1 immer oberhalb von *l* liegt.
-<a href="#figure:linear-quadratic">Abbildung 3</a> illustriert außerdem an den Beispielen von *c* = 2 und *c* = 3, dass $$q \not \le_{as} l$$, da die Funktion *q*(*x*) die Funktion *c* ⋅ *l*(*x*) für jedes *c*
+<a href="#figure:linear-quadratic">Abbildung 4</a> illustriert diese Aussage. Wir sehen, dass die Funktion *q* ab der Stelle *n*<sub>0</sub> = 1 immer oberhalb von *l* liegt.
+<a href="#figure:linear-quadratic">Abbildung 4</a> illustriert außerdem an den Beispielen von *c* = 2 und *c* = 3, dass $$q \not \le_{as} l$$, da die Funktion *q*(*x*) die Funktion *c* ⋅ *l*(*x*) für jedes *c*
 immer irgendwann “überholt”.
 Wir werden hier nicht formal beweisen, dass eine Funktion nicht asymptotisch kleiner gleich einer anderen Funktion ist.
 Wir werden stattdessen nur für bestimmte Klassen von Funktionen lernen, dass sie nicht asymptotisch kleiner gleich einer anderen Klasse von Funktionen sind.
@@ -215,7 +219,7 @@ Außerdem gilt 100<sup>4</sup> = 100.000.000, aber 2<sup>100</sup> = 1.2
 Insbesondere gilt für jede Funktion der Form *f*(*x*) = *x*<sup>*p*</sup>, wobei *p* eine natürliche Zahl ist, dass *e*(*x*) = 2<sup>*x*</sup> schneller wächst als das Polynom.
 Anders ausgedrückt gilt für jedes Polynom $$p$$ die Aussage $$p \le_{as} e$$ und $$e \not \le_{as} p$$.
 
-<a href="#figure:runtimes">Abbildung 4</a> illustriert die verschiedenen Wachstumsfunktionen noch einmal, indem angenommen wird, dass ein Schritt 1 μs Zeit in Anspruch nimmt.
+<a href="#figure:runtimes">Abbildung 5</a> illustriert die verschiedenen Wachstumsfunktionen noch einmal, indem angenommen wird, dass ein Schritt 1 μs Zeit in Anspruch nimmt.
 Auf diese Weise kann man für die verschiedenen Wachstumsfunktionen berechnen, wie der Algorithmus jeweils zur Ausführung benötigt.
 
 <figure id="figure:runtimes" markdown="1">
@@ -232,7 +236,7 @@ Auf diese Weise kann man für die verschiedenen Wachstumsfunktionen berechnen, w
 | 2<sup>x</sup>       | 1 ms         | 1 s          | 17,8 min     | 12,7 d       |
 | x!                  | 3,6 s        | 77.164 y     | 8 ⋅ 10<sup>18</sup> y       |
 
-<figcaption>Abbildung 4: Laufzeiten für verschiedene Wachstumsfunktionen (1 Schritt = 1 μs)</figcaption>
+<figcaption>Abbildung 5: Laufzeiten für verschiedene Wachstumsfunktionen (1 Schritt = 1 μs)</figcaption>
 </figure>
 
 #### Beispiel 2 (ArrayList)
