@@ -370,8 +370,6 @@ Conquer)*.
 Diese Algorithmen haben meistens einen logarithmischen Faktor in ihrer Laufzeit.
 
 
-<!--
-
 Einschub: Beweis mittels starker Induktion
 ------------------------------------------
 
@@ -415,7 +413,7 @@ $$\begin{align}
   <figcaption>Abbildung 2: Weitere Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
 </figure>
 
-**Beh.:** $$\forall n \in \mathbb{N} \colon n \ge 2 \Rightarrow T_{\texttt{binarySearch}}(n) \le c_2 \log_2 n + c_2 + c_1$$
+**Beh.:** $$\forall n \in \mathbb{N} \colon n \ge 2 \Rightarrow T_{\texttt{binarySearch}}(n) \le c_2 (\log_2 n + 1) + c_1$$
 
 **Bew.:**
 
@@ -427,7 +425,12 @@ Induktionsanfang:
 
 $$
 \begin{align*}
-T(2) = c_2 + T(1) = c_2 + c_2 + T(0) = 2 c_2 + c_1 = c_2 \cdot 2 + c_1 = c_2 \log_2 2 + c_2 + c_1
+T(2) & = c_2 + T(1)\\
+     & = c_2 + c_2 + T(0)\\
+     & = c_2 + c_2 + c_1\\
+     & = c_2 \cdot 2 + c_1\\
+     & = c_2 (1 + 1) + c_1\\
+     & = c_2 (\log_2 2 + 1) + c_1
 \end{align*}
 $$
 
@@ -444,9 +447,10 @@ T(n) & = c_2 + T\left(\frac{n - 1}{2}\right) & \text{Regel (2): Induktionshypoth
      & \le c_2 + c_2 (\log_2 \left( \frac{n - 1}{2} \right) + 1) + c_1 & \text{$\log_2 \left(\frac{n}{m}\right) = \log_2 n - \log_2 m$}\\
      & = c_2 + c_2 (\log_2 (n - 1) - \log_2 2 + 1) + c_1\\
      & = c_2 + c_2 (\log_2 (n - 1) - 1 + 1) + c_1\\
+     & = c_2 + c_2 \log_2 (n - 1) + c_1\\
      & = c_2 + c_2 \log_2 (n - 1) + c_1 & \text{Regel (3): $n - 1 \le n$, Regel (1): $0 \le c_2$, Regel (2)}\\
      & \le c_2 + c_2 \log_2 n + c_1\\
-     & = c_2 \log_2 n + c_2 + c_1
+     & = c_2 (\log_2 n + 1) + c_1
 \end{align*}
 $$
 
@@ -456,17 +460,17 @@ $$
 \begin{align*}
 T(n) & = c_2 + T\left(\frac{n}{2}\right) & \text{Regel (2): Induktionshypothese}\\
      & \le c_2 + c_2 (\log_2 \left(\frac{n}{2}\right) + 1) + c_1 & \text{$\log_2 \left(\frac{n}{m}\right) = \log_2 n - \log_2 m$}\\
-     & = c_2 + c_2 (\log_2 n - \log_2 2) + c_1\\
-     & = c_2 + c_2 (\log_2 n - 1 - 1) + c_1\\
+     & = c_2 + c_2 (\log_2 n - \log_2 2 + 1) + c_1\\
+     & = c_2 + c_2 (\log_2 n - 1 + 1) + c_1\\
      & = c_2 + c_2 \log_2 n + c_1\\
-     & = c_2 \log_2 n + c_2 + c_1
+     & = c_2 (\log_2 n + 1) + c_1
 \end{align*}
 $$
 
 Damit ist die Behauptung gezeigt.
 
 Wir erhalten mit der zuvor gezeigten Aussage, dass $$T_{\texttt{binarySearch}} \in \mathcal{O}(\log n)$$ gilt.
--->
+
 
 Dynamische Programmierung
 -------------------------
