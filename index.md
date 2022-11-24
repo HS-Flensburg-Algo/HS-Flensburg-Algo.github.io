@@ -46,9 +46,11 @@ custom_css: toc
 
 - 4.4. [Divide and Conquer](methods.md#divide-and-conquer)
 
+<!--
 - 4.5. [Einschub: Beweis mittels starker Induktion](methods.md#einschub-beweis-mittels-starker-induktion)
+-->
 
-- 4.6. [Dynamische Programmierung](methods.md#dynamische-programmierung)
+- 4.5. [Dynamische Programmierung](methods.md#dynamische-programmierung)
 
 <!--
 - 4.5. [Einschub: Beweis der Laufzeit per Induktion](methods.md#einschub-beweis-der-laufzeit-per-induktion)

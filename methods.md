@@ -370,6 +370,8 @@ Conquer)*.
 Diese Algorithmen haben meistens einen logarithmischen Faktor in ihrer Laufzeit.
 
 
+<!--
+
 Einschub: Beweis mittels starker Induktion
 ------------------------------------------
 
@@ -421,6 +423,8 @@ Zur Lesbarkeit nennen wir die Funktion $$T_{\texttt{binarySearch}}$$ im Folgende
 
 Wir zeigen die Aussage per Induktion mit $$n_0 = 2$$.
 
+Induktionsanfang:
+
 $$
 \begin{align*}
 T(2) = c_2 + T(1) = c_2 + c_2 + T(0) = 2 c_2 + c_1 = c_2 \cdot 2 + c_1 = c_2 \log_2 2 + c_2 + c_1
@@ -441,7 +445,7 @@ T(n) & = c_2 + T\left(\frac{n - 1}{2}\right) & \text{Regel (2): Induktionshypoth
      & = c_2 + c_2 (\log_2 (n - 1) - \log_2 2 + 1) + c_1\\
      & = c_2 + c_2 (\log_2 (n - 1) - 1 + 1) + c_1\\
      & = c_2 + c_2 \log_2 (n - 1) + c_1 & \text{Regel (3): $n - 1 \le n$, Regel (1): $0 \le c_2$, Regel (2)}\\
-     & = c_2 + c_2 \log_2 n + c_1\\
+     & \le c_2 + c_2 \log_2 n + c_1\\
      & = c_2 \log_2 n + c_2 + c_1
 \end{align*}
 $$
@@ -461,8 +465,8 @@ $$
 
 Damit ist die Behauptung gezeigt.
 
-Wir erhalten mit der zuvor gezeigten Aussage, dass $$T_{\texttt{binarySearch}} \in \mathcal{O}(\log_2 n)$$ gilt.
-
+Wir erhalten mit der zuvor gezeigten Aussage, dass $$T_{\texttt{binarySearch}} \in \mathcal{O}(\log n)$$ gilt.
+-->
 
 Dynamische Programmierung
 -------------------------
@@ -530,51 +534,7 @@ Um noch einmal den Ansatz der dynamischen Programmierung zu motivieren, wollen w
 Zuerst geben wir eine Rekurrenz für die Laufzeit der Methode `fib` an.
 Um das Problem etwas zu vereinfachen, gehen wir davon aus, dass der Aufwand für die Fälle `n == 0` und `n == 1` identisch ist.
 
-Beh.: 
-
-Bew.:
-
-Induktionsanfang:
-
-Induktionsstart: $n = 0$
-Dann gilt
-
-$$
-\begin{align}
-T(0) & = c\\
-     & = c \cdot 1\\
-     & = c \cdot 2^0
-\end{align}
-$$
-
-Induktionsstart: $n = 1$
-Dann gilt
-
-\begin{DispWithArrows*}
-T(n) & = T(1)\\
-     & = 0\\
-     & < 2\\
-     & = 2^1\\
-     & = 1 \cdot 2^1\\
-     & = c \cdot 2^1\\
-     & = c \cdot 2^n
-\end{DispWithArrows*}
-$$
-
-Induktionsschritt: $n \ge 2$
-
-$$
-\begin{align}
-T(n) & = c + T(n - 1) + T(n - 2)\\\\
-     & \le c + c \cdot 2^{n - 1} + T(n - 2)\\\\
-     & \le c + c \cdot 2^{n - 1} + c \cdot 2^{n - 2}\\\\
-     & = c + c (2^{n - 1} + 2^{n - 2})\\\\
-     & = c + c (2 \cdot 2^{n - 2} + 2^{n - 2})\\\\
-     & = c \cdot 2 \cdot 2^{n - 1}
-     & = c \cdot 2^n
-\end{align}
-$$
-
+Wir brauchen hier wieder eine starke Induktion.
 
 $$
 \begin{align}
@@ -587,26 +547,48 @@ T_{\texttt{fib}} & (n)= \begin{cases}
 \end{align}
 $$
 
-Um die Laufzeit dieser Methode ganz grob abzuschätzen nutzen wir einen Trick.
+**Beh.:** $$T_{\texttt{fib}}(n) \le c + c \cdot 2^{n - 1}$$
 
-$$
-T_{\texttt{fib}}(n - 1) = c_2 + T_{\texttt{fib}}(n - 2) + T_{\texttt{fib}}(n - 3)
-$$
+**Bew.:**
 
-$$
-T_{\texttt{fib}}(n - 2) = \frac{1}{c_2} T_{\texttt{fib}}(n - 1) - \frac{1}{c_2} T_{\texttt{fib}}(n - 3)
-$$
-
-
+Induktionsanfang:
 
 $$
 \begin{align}
-T_{\texttt{fib}}(n) & = c_2 + T_{\texttt{fib}}(n - 1) + T_{\texttt{fib}}(n - 2)\\
-& = c_2 + T_{\texttt{fib}}(n - 1) + \frac{1}{c_2} T_{\texttt{fib}}(n - 1) - \frac{1}{c_2} T_{\texttt{fib}}(n - 3)\\
-& \ge c_2 + T_{\texttt{fib}}(n - 1) + \frac{1}{c_2} T_{\texttt{fib}}(n - 1)
+T(0) & = c\\
+     & \le c + c \cdot \frac{1}{2}\\
+     & = c + c \cdot 2^{-1}
 \end{align}
 $$
 
+
+Induktionsschritt:
+
+1. Fall $$n = 1$$
+
+$$
+\begin{align}
+T(1) & = c\\
+     & \le c + c\\
+     & = c + c \cdot 1\\
+     & = c + c \cdot 2^{0}
+\end{align}
+$$
+
+2. Fall $$n > 1$$
+
+$$
+\begin{align}
+T(n) & = c + T(n - 1) + T(n - 2)\\
+     & \le c + c \cdot 2^{n - 1} + T(n - 2)\\
+     & \le c + c \cdot 2^{n - 1} + c \cdot 2^{n - 2}\\
+     & \le c + c \cdot 2^{n - 1} + c \cdot 2^{n - 2} + c \cdot 2^{n - 2}\\
+     & = c + c \cdot 2^{n - 1} + c \cdot (2^{n - 2} + 2^{n - 2})\\
+     & = c + c \cdot 2^{n - 1} + c \cdot 2 \cdot 2^{n - 2}\\
+     & = c + c \cdot 2^{n - 1} + c \cdot 2^{n - 1}\\
+     & = c + c \cdot 2^n
+\end{align}
+$$
 
 Um ein grobes Gefühl für die Laufzeit dieser Methode zu erhalten, erstellen wir wieder eine Wertetabelle.
 
