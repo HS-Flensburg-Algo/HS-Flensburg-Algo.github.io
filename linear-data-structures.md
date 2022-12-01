@@ -399,6 +399,7 @@ Das heißt, ein Stack funktioniert — wie der Name schon sagt — genau wie ein
 Der Stack ist eine sehr wichtige Datenstruktur.
 Zum Beispiel wird bei der Ausführung eines Methodenaufrufs in einer Programmiersprache ein Stack verwendet.
 Dieser Stack wird genutzt, um Informationen an die aufgerufene Methode zu übergeben und nach Abarbeitung einer Methode zu wissen, welcher Teil eines Programms nach der Rückkehr aus einem Methodenaufruf ausgeführt werden soll.
+Wir werden bei der Diskussion von Rekursion sehen, warum man zur Ausführung einer Methode einen Stack verwendet.
 
 <a href="#figure:stack-adt">Abbildung 7</a> zeigt den abstrakten Datentyp Stack.
 Wir können diesen einfach mit Hilfe einer einfachen Verkettung implementieren und benötigen dabei nur die Referenz auf das erste Element.
