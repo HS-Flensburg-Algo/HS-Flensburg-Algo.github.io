@@ -1,0 +1,26 @@
+\documentclass[tikz,convert={outfile=\jobname.svg}]{standalone}
+
+\usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+
+\begin{document}
+\begin{tikzpicture}[yscale=1, xscale=1, samples=30]
+    \draw[->] (0,0)coordinate(O) -- (8,0) node[anchor=north] {$n$};
+    \draw[->] (0,0) -- (0,8);
+
+    % Ticks on the x axis
+    \foreach \tick in {1, 2, ..., 7} {
+      \draw (\tick, -2.5pt) -- (\tick, 2.5pt) node[below=8pt] {\tick};
+    }
+    % Ticks on the y axis
+    \foreach \tick in {1, 2, ..., 7} {
+      \draw (-2.5pt, \tick) -- (2.5pt, \tick) node[left=8pt] {\tick};
+    }
+    \draw[domain=0:2.5, smooth, variable=\x, blue, name path=f1] plot ({\x},{\x^2})node[right, black]{$q(n) = n^2$}; %
+    \draw[domain=1:1.75, smooth, variable=\x, red, name path=f4] plot ({\x},{2*\x^2+7*\x-10})node[right, black]{$p(n) = 2 \cdot n^2 + 7
+      \cdot n - 10$};
+    \fill[red, name intersections={of=f1 and f4}] (intersection-1) ellipse (0.075 and 0.075);
+  \draw[dashed] (intersection-1) -- (intersection-1|-O);
+\end{tikzpicture}
+\end{document}

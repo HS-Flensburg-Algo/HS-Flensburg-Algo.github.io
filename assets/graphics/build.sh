@@ -22,4 +22,6 @@ set -euxo pipefail
 # ./mksvg.sh linear-function.tex
 # ./mksvg.sh quadratic-function.tex
 # ./mksvg.sh fib-calls.tex
-./mksvg.sh fib-calls-reduced.tex
+# ./mksvg.sh fib-calls-reduced.tex
+# ./mksvg.sh omega.tex
+./mksvg.sh fibDyn-subproblems.tex

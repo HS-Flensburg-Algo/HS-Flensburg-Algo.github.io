@@ -50,6 +50,10 @@ custom_css: toc
 
 - 4.6. [Dynamische Programmierung](methods.md#dynamische-programmierung)
 
+- 4.7. [Einschub: Größenordnungen](methods.md#einschub-größenordnungen)
+
+- 4.8. [Laufzeit mit dynamischer Programmierung](methods.md#laufzeit-mit-dynamischer-programmierung)
+
 <!--
 - 4.5. [Einschub: Beweis der Laufzeit per Induktion](methods.md#einschub-beweis-der-laufzeit-per-induktion)
  

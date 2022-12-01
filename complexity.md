@@ -178,6 +178,10 @@ Wir betrachten die Funktionen $$l : \mathbb{N} \rightarrow \mathbb{R}, l
 $$q : \mathbb{N} \rightarrow \mathbb{R}, q(x) = x^2$$. Wir wollen beweisen, dass
 $$l \le_{as} q$$ gilt.
 
+**Beh.:** Es gilt $$l \le_{as} q$$
+
+**Bew.:**
+
 Setze *c* = 1.
 Setze *n*<sub>0</sub> = 1.
 Sei *n* ∈ ℕ mit *n* ≥ *n*<sub>0</sub>.
