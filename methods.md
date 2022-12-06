@@ -734,23 +734,19 @@ Eine Kante verbindet dabei zwei Knoten.
 </figure>
 -->
 
-<!-- Backtracking
+Backtracking
 ------------
 
-Wir wollen als nächstes eine algorithmische Methode anschauen, die ein
-Problem löst, indem sie alle Möglichkeiten ausprobiert. Diese Methode
-wird als *Backtracking* bezeichnet. Das Backtracking durchsucht einen
-Raum von Lösungen systematisch. Dabei kann man sich das Vorgehen als
-Baumstrukutur illustrieren. Häufig durchsucht man beim *Backtracking*
-den Raum aller Lösungen nicht komplett sondern nutzt zusätzliche
-Informationen über das Problem, um effizienter eine Lösung zu finden.
+Wir wollen als nächstes eine algorithmische Methode anschauen, die ein Problem löst, indem sie alle Möglichkeiten ausprobiert.
+Diese Methode wird als *Backtracking* bezeichnet.
+Das Backtracking durchsucht einen Raum von Lösungen systematisch.
+Dabei kann man sich das Vorgehen als Baumstrukutur illustrieren.
+Häufig durchsucht man beim *Backtracking* den Raum aller Lösungen nicht komplett sondern nutzt zusätzliche Informationen über das Problem, um effizienter eine Lösung zu finden.
 
-Als Beispiel für eine Anwendung von *Backtracking* wollen wir das
-*subset sum*-Problem lösen. Bei diesem Problem ist eine Sequenz mit
-Zahlen und eine weitere Zahl gegeben. Wir wollen jetzt herausfinden, ob
-es eine Teilsequenz gibt, deren Summe genau der gegebenen Zahl
-entspricht. Wir schauen erst einmal die Implementierung der Methode an
-und diskutieren danach die einzelnen Komponenten.
+Als Beispiel für eine Anwendung von *Backtracking* wollen wir das *subset sum*-Problem lösen.
+Bei diesem Problem ist eine Sequenz mit Zahlen und eine weitere Zahl gegeben.
+Wir wollen jetzt herausfinden, ob es eine Teilsequenz gibt, deren Summe genau der gegebenen Zahl entspricht.
+Wir schauen erst einmal die Implementierung der Methode an und diskutieren danach die einzelnen Komponenten.
 
 ``` java
 public static boolean subsetsum(int[] array, int sum) {
@@ -770,19 +766,18 @@ private static boolean subsetsum(int[] array, int sum, int index) {
 ```
 
 Diese Methode probiert alle Möglichkeiten mit Hilfe von Rekursion aus.
-Dabei werden alle Möglichkeiten erzeugt, indem für jeden Eintrag des
-Arrays immer zwei Möglichkeiten ausprobiert werden. Einmal wird das
-Element zur Summe hinzugerechnet und einmal wird das Element nicht zur
-Summe hinzugerechnet. Falls der erste Aufruf, also
-`subsetsum(array, sum - array[index], index + 1)` als Ergebnis `false`
-liefert, wird auch noch die Alternative, nämlich
-`subsetsum(array, sum, index + 1)` ausprobiert.
+Dabei werden alle Möglichkeiten erzeugt, indem für jeden Eintrag des Arrays immer zwei Möglichkeiten ausprobiert werden.
+Einmal wird das Element zur Summe hinzugerechnet und einmal wird das Element nicht zur Summe hinzugerechnet.
+Falls der erste Aufruf, also `subsetsum(array, sum - array[index], index + 1)` als Ergebnis `false` liefert, wird auch noch die Alternative, nämlich `subsetsum(array, sum, index + 1)` ausprobiert.
 
-<a href="#figure:subsetsum-calls" data-reference-type="ref"
-data-reference="figure:subsetsum-calls">[figure:subsetsum-calls]</a>
-zeigt die Aufruf der Methode `subsetsum` mit dem Array `[2, 1, 5, 4]`.
-Die Argumente, die im Baum angegeben sind, sind die noch übrige Summe
-und der aktuelle Index. -->
+<figure id="figure:subsetsum-calls" markdown="1">
+
+![](/assets/graphics/subsetsum-calls.svg){: width="100%" .centered}
+
+<figcaption>Abbildung 4: Der Rekursionsbaum für <code class="language-plaintext highlighter-rouge">subsetsum(array, 7)</code>, wobei <code class="language-plaintext highlighter-rouge">int[] array = {2, 1, 5, 4}</code></figcaption>
+
+<a href="#figure:subsetsum-calls">Abbildung 4</a> zeigt den Rekursionsbaum der Methode `subsetsum` mit dem Array `{2, 1, 5, 4}` und der Summe `7`.
+Die Argumente, die in den Knoten angegeben sind, sind die noch übrige Summe und der aktuelle Index.
 
 <div class="nav">
     <ul class="nav-row">

@@ -24,4 +24,5 @@ set -euxo pipefail
 # ./mksvg.sh fib-calls.tex
 # ./mksvg.sh fib-calls-reduced.tex
 # ./mksvg.sh omega.tex
-./mksvg.sh fibDyn-subproblems.tex
+# ./mksvg.sh fibDyn-subproblems.tex
+./mksvg.sh subsetsum-calls.tex
