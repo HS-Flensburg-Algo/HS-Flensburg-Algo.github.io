@@ -218,11 +218,11 @@ Um auszudrücken, dass der Knoten Werte von verschiedenen Typen enthalten kann, 
 Wir implementieren einen Knoten einer Liste mit Hilfe der folgenden Klasse.
 
 ``` java
-public class Node<T> {
+class Node<T> {
     T value;
     Node<T> next;
 
-    public Node(T value, Node<T> next) {
+    Node(T value, Node<T> next) {
         this.value = value;
         this.next = next;
     }
@@ -437,12 +437,12 @@ Das heißt, zusätzlich zum Element und der Referenz auf das nächste `Node`-Obj
 Die folgende Klasse implementiert ein Knoten-Objekt für eine doppelte Verkettung.
 
 ``` java
-public class DLNode<T> {
+class DLNode<T> {
     DLNode<T> prev;
     T value;
     DLNode<T> next;
 
-    public DLNode(DLNode<T> prev, T value, DLNode<T> next) {
+    DLNode(DLNode<T> prev, T value, DLNode<T> next) {
         this.prev = prev;
         this.value = value;
         this.next = next;

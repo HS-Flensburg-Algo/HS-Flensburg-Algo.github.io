@@ -749,7 +749,7 @@ Wir wollen jetzt herausfinden, ob es eine Teilsequenz gibt, deren Summe genau de
 Wir schauen erst einmal die Implementierung der Methode an und diskutieren danach die einzelnen Komponenten.
 
 ``` java
-public static boolean subsetsum(int[] array, int sum) {
+static boolean subsetsum(int[] array, int sum) {
     return subsetsum(array, sum, 0);
 }
 
