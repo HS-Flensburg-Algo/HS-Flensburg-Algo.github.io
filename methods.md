@@ -23,7 +23,7 @@ $$\begin{align}
 Wir können diese mathematische Definition direkt in ein Java-Programm überführen.
 
 ``` java
-static int fac(int n) {
+public static int fac(int n) {
     if (n <= 0) {
         return 1;
     } else {
@@ -36,7 +36,7 @@ Wenn man eine Implementierung in Form einer Schleife in einer rekursive Methode 
 Wir betrachten die folgende artifizielle Methode, welche die Zahlen von `1` bis `100` aufsummiert.
 
 ```java
-static int sum() {
+public static int sum() {
     var result = 0;
     for (int i = 1; i <= 100; i++) {
         result += i;
@@ -50,7 +50,7 @@ Dieses Argument wird genutzt, um zu speichern, an welcher Stelle sich die Rekurs
 Die folgende rekursive Implementierung nutzt das Argument `start`, um den Zähler der Schleife zu modellieren.
 
 ```java
-static int sumRec() {
+public static int sumRec() {
     return sumRec(1);
 }
 
@@ -80,7 +80,7 @@ $$\begin{align}
 Wir können diese Funktion ebenfalls rekursiv in Java implementieren.
 
 ``` java
-static int fib(int n) {
+public static int fib(int n) {
     if (n <= 0) {
         return 0;
     } else if (n == 1) {
@@ -207,7 +207,7 @@ $$\begin{align}
 Um die Verwendung dieser Regeln zu illustrieren, betrachten wir die Implementierung der folgenden Methode, die alle Einträge einer einfach verketteten Liste in ein Array kopiert.
 
 ``` java
-static Integer[] toArray(SLList<Integer> list) {
+public static Integer[] toArray(SLList<Integer> list) {
     var array = new Integer[list.size()];
     for (int i = 0; i < list.size(); i++) {
         array[i] = list.get(i);
@@ -295,7 +295,7 @@ In der neu bestimmten Hälfte des Arrays suchen wir wiederum mit Hilfe einer bin
 Auf diese Weise können wir bei jedem Schritt im schlechtesten Fall die Hälfte der Elemente ignorieren.
 
 ``` java
-static boolean binarySearch(int[] array, int value) {
+public static boolean binarySearch(int[] array, int value) {
     boolean found = false;
     int start = 0;
     int end = array.length - 1;
@@ -521,12 +521,12 @@ Wir können diese Methode nutzen, um die Berechnung einer Fibonacci-Zahl effizie
 Um uns die Mehrfachberechnungen zu sparen, merken wir uns einfach die bereits berechneten Werte in einem Array.
 
 ``` java
-static int fibDyn(int n) {
+public static int fibDyn(int n) {
     var memo = new Integer[n + 1];
     return fibDyn(memo, n);
 }
 
-static int fibDyn(Integer[] memo, int n) {
+private static int fibDyn(Integer[] memo, int n) {
     if (n == 0) {
         return 0;
     } else if (n == 1) {
@@ -749,7 +749,7 @@ Wir wollen jetzt herausfinden, ob es eine Teilsequenz gibt, deren Summe genau de
 Wir schauen erst einmal die Implementierung der Methode an und diskutieren danach die einzelnen Komponenten.
 
 ``` java
-static boolean subsetsum(int[] array, int sum) {
+public static boolean subsetsum(int[] array, int sum) {
     return subsetsum(array, sum, 0);
 }
 
