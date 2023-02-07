@@ -120,7 +120,7 @@ In der Programmiersprache Java können wir die Signatur eines ADT zum Beispiel m
 Wir werden später aber auch noch Beispiele sehen, bei denen wir kein Interface für einen ADT definieren, da wir nur eine einzige Implementierung des ADT angeben und daher nicht die zusätzliche Abstraktion durch ein Interface benötigen.
 
 ``` java
-interface List<T> {
+public interface List<T> {
     boolean isEmpty();
 
     int size();
