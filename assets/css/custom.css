@@ -39,3 +39,24 @@ figure img {
     margin-left: auto;
     margin-right: auto;
 }
+
+pre {
+    padding: 0;
+    border-style: none;
+}
+
+table.rouge-table {
+    margin-bottom: 0;
+}
+
+table td.rouge-gutter {
+    border-style: none;
+}
+
+table td.rouge-code {
+    border-style: none;
+}
+
+table td.rouge-gutter {
+    width: 1em;
+}
