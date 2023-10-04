@@ -6,7 +6,7 @@ title: "Lineare Datenstrukturen"
 Wir starten diese Vorlesung mit einer einfachen Klasse von Datenstrukturen, die in der Praxis aber sehr häufig genutzt werden.
 Diese Datenstrukturen können genutzt werden, um mehrere Werte zu einem einzigen zusammenzufassen.
 Man spricht dabei von linearen Datenstrukturen, da die einzelnen Werte in einer linearen Reihenfolge angeordnet werden.
-Genauer gesagt, kann man in einer linearen Datenstruktur jeden Eintrag, der in der Struktur gespeichert wurde, mit Hilfe einer natürlichen Zahl adressieren.
+Genauer gesagt, kann man in einer linearen Datenstruktur jeden Eintrag, der in der Struktur gespeichert wurde, mithilfe einer natürlichen Zahl adressieren.
 
 Arrays
 ------
@@ -47,7 +47,7 @@ Um zu berechnen, an welcher Stelle im Speicher unser Wert vom Typ `type` liegt, 
 
 Bei vielen Anwendungen möchte man eine dynamische Anzahl an Elementen in einer Datenstruktur speichern. Das heißt, erst nach dem Sammeln der Elemente in einer Datenstruktur ist klar, wie viele Elemente in der Datenstruktur abgelegt werden sollen.
 Wenn wir zum Beispiel einen Warenkorb in einem Web-Shop implementieren, wissen wir nicht, wie viele Gegenstände im Warenkorb gespeichert werden müssen.
-Um eine solche Anwendung mit Hilfe eines Arrays zu implementieren, kann man ein sehr großes Array anlegen, dessen Größe garantiert ausreicht, um alle Elemente abzulegen.
+Um eine solche Anwendung mithilfe eines Arrays zu implementieren, kann man ein sehr großes Array anlegen, dessen Größe garantiert ausreicht, um alle Elemente abzulegen.
 Bei unserem Warenkorb-Beispiel gibt es dann aber eine Obergrenze.
 Das heißt Nutzer\*innen können dann zum Beispiel nur `100` oder `1000` Gegenstände in den Warenkorb packen.
 Es gibt aber noch einen gravierenderen Nachteil.
@@ -85,13 +85,13 @@ Das heißt, eine Liste stellt normalerweise mindestens die Methoden in der Abbil
 
 <figure id="figure:list-adt" markdown="1">
 
-| Signatur&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |Beschreibung                                                                                               |
+| Signatur&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |Beschreibung                                                                                               |
 | :---------------------------- | :--------------------------------------------------------------------------------------------------------- |
 | `boolean isEmpty()`           | Liefert genau dann `true`, wenn die Liste keine Elemente enthält.                                          |
 | `int size()`                  | Liefert die Anzahl der Elemente in der Liste.                                                              |
-| `T get(int index)`            | Liefert das Element an der angegebenen Stelle der Liste.                                                   |
-| `void add(int index, T e)`    | Fügt das Element `e` am angegebenen Index in die Liste ein.                                                |
-| `T remove(int index)`         | Entfernt das Element am angegebenen Index aus der Liste und liefert dieses Element zurück.                 |
+| `T get(int index)`            | Liefert das Element an Index `index` der Liste.                                                   |
+| `void add(int index, T elem)` | Fügt das Element `elem` am Index `index` in die Liste ein.                                                |
+| `T remove(int index)`         | Entfernt das Element am Index `index` aus der Liste und liefert dieses Element zurück.                 |
 
 <figcaption>Abbildung 1: Der abstrakte Datentyp Liste</figcaption>
 </figure>
@@ -116,7 +116,7 @@ Das heißt, wenn wir eine Liste mit Elementen vom Typ `Integer` betrachten, so s
 Wir werden später sehen, wie man diese Art von Platzhalter in Java modelliert.
 
 Programmiersprachen stellen unterschiedliche Konzepte zur Verfügung, um einen abstrakten Datentyp zu implementieren.
-In der Programmiersprache Java können wir die Signatur eines ADT zum Beispiel mit Hilfe eines Interface umsetzen.
+In der Programmiersprache Java können wir die Signatur eines ADT zum Beispiel mithilfe eines Interface umsetzen.
 Wir werden später aber auch noch Beispiele sehen, bei denen wir kein Interface für einen ADT definieren, da wir nur eine einzige Implementierung des ADT angeben und daher nicht die zusätzliche Abstraktion durch ein Interface benötigen.
 
 ``` java
@@ -127,7 +127,7 @@ interface List<T> {
 
     T get(int index);
 
-    void add(int index, T e);
+    void add(int index, T elem);
 
     T remove(int index);
 }
@@ -162,9 +162,9 @@ Das heißt, wenn wir eine Klasse vom Typ `List<String>` haben, dann liefert die 
 
 ### Arraylisten
 
-Wir können die Methoden in <a href="#figure:list-adt">Abbildung 1</a> mit Hilfe eines Arrays implementieren.
+Wir können die Methoden in <a href="#figure:list-adt">Abbildung 1</a> mithilfe eines Arrays implementieren.
 Das heißt, wir können eine Klasse implementieren, die intern ein Array verwendet, um die Elemente einer Liste zu verwalten.
-Da ein Array eine feste Anzahl von Elementen aufnimmt, eine Liste aber eine dynamische Anzahl, kann es beim Einfügen mit Hilfe der Methode `add` dazu kommen, dass der Platz im Array nicht mehr ausreicht, um das neue Element aufzunehmen.
+Da ein Array eine feste Anzahl von Elementen aufnimmt, eine Liste aber eine dynamische Anzahl, kann es beim Einfügen mithilfe der Methode `add` dazu kommen, dass der Platz im Array nicht mehr ausreicht, um das neue Element aufzunehmen.
 In diesem Fall legen wir einfach ein größeres Array an und kopieren alle Elemente aus dem bisherigen Array in das neue, größere Array.
 
 <figure id="figure:steps" markdown="1">
@@ -176,29 +176,26 @@ In diesem Fall legen wir einfach ein größeres Array an und kopieren alle Eleme
 **2. Schritt**
 
 ![](/assets/graphics/step21.svg){: height="80px"}
-![](/assets/graphics/step22.svg){: height="80px"}
+<!-- ![](/assets/graphics/step22.svg){: height="80px"} -->
 
 **3. Schritt**
 
 ![](/assets/graphics/step3.svg){: height="80px"}
-  <figcaption>Abbildung 3: Die drei Schritte einer Methode <code class="language-java">add(i, x)</code> in der Implementierung einer Liste mit Hilfe eines Arrays</figcaption>
+  <figcaption>Abbildung 3: Die drei Schritte einer Methode <code class="language-java">add(i, x)</code> in der Implementierung einer Liste mithilfe eines Arrays</figcaption>
 </figure>
 
-<a href="#figure:steps">Abbildung 3</a> illustriert die drei Schritte, die in der Methode `add` einer Listenimplementierung mit Hilfe eines Arrays durchführt werden.
+<a href="#figure:steps">Abbildung 3</a> illustriert die drei Schritte, die in der Methode `add` einer Listenimplementierung mithilfe eines Arrays durchführt werden.
 Im ersten Schritt wird überprüft, ob noch freie Plätze im Array vorhanden sind.
 Falls dies nicht der Fall ist, muss das Array vergrößert werden.
 In beiden Fällen fahren wir mit dem eventuellen Verschieben von Elementen fort.
-Im zweiten Schritt wird überprüft, ob die Elemente im Array verschoben werden müssen.
-Wenn wir in der Mitte der Liste einfügen möchten, müssen die folgenden Elemente nach hinten verschoben werden.
-Wenn wir am Ende einfügen möchten, müssen keine Elemente verschoben werden.
-In beiden Fällen fahren wir mit dem eigentlichen Einfügen des Elementes fort.
-Nach dem Durchführen des ersten und zweiten Schrittes hat das Array ausreichend Platz und die Position, an der das Element eingefügt werden soll, ist ebenfalls frei.
+Im zweiten Schritt werden die Einträge im Array so verschoben, dass anschließend Platz für das neu einzufügende Element ist.
+Nach dem Durchführen des ersten und zweiten Schrittes hat das Array ausreichend Platz und die Position, an der das Element eingefügt werden soll, ist frei.
 Daher können wir das Element einfach an die freie Stelle schreiben.
 
 ### Einfach verkettete Listen
 
-Statt die Methoden einer Liste mit Hilfe eines Arrays zu implementieren, können wir diese Methoden auch mit Hilfe von Objekten implementieren.
-Wir betrachten zuerst die Implementierung einer Liste mit Hilfe einer **einfachen Verkettung**.
+Statt die Methoden einer Liste mithilfe eines Arrays zu implementieren, können wir diese Methoden auch mithilfe von Objekten implementieren.
+Wir betrachten zuerst die Implementierung einer Liste mithilfe einer **einfachen Verkettung**.
 Man nennt eine solche Liste eine einfach verkettete Liste.
 Eine Liste besteht dabei aus einer Menge von Knoten.
 Jeder Knoten einer einfach verketteten Liste besteht aus zwei Informationen, dem Element und einer Referenz auf den nächsten Knoten.
@@ -214,26 +211,42 @@ Der Typ des Elementes hängt dabei davon ab, welche Art von Elementen wir in ein
 Für eine Liste, die Elemente vom Typ `Integer` enthält, muss der entsprechende Knoten auch Elemente vom Typ `Integer` enthalten.
 Für eine Liste, die Elemente vom Typ `String` enthält, muss der entsprechende Knoten auch Elemente vom Typ `String` enthalten.
 
-Um auszudrücken, dass der Knoten Werte von verschiedenen Typen enthalten kann, verwenden wir eine generische Klasse.
-Wir implementieren einen Knoten einer Liste mit Hilfe der folgenden Klasse.
+Um auszudrücken, dass der Knoten Werte von verschiedenen Typen enthalten kann, verwenden wir eine **generische Klasse**.
+Wir implementieren einen Knoten einer Liste mithilfe der folgenden Klasse.
 
 ``` java
-public class Node<T> {
-    T value;
-    Node<T> next;
+final class Node<T> {
+    private final T value;
+    private Node<T> next;
 
-    public Node(T value, Node<T> next) {
+    Node(T value, Node<T> next) {
         this.value = value;
+        this.next = next;
+    }
+
+    T value() {
+        return this.value;
+    }
+
+    Node<T> next() {
+        return this.next;
+    }
+
+    void setNext(Node<T> next) {
         this.next = next;
     }
 }
 ```
 
 Die Klasse `Node<T>` ist eine sogenannte generische Klasse.
-Das `T` in der Definition der Klasse `Node` bezeichnet mal als Typparameter.
+Das `T` in der Definition der Klasse `Node` bezeichnet mal als **Typparameter**.
 Bei der konkreten Verwendung der Klasse müssen wir für den Typparameter `T` einen Typ angeben.
-Das heißt, ein Knoten vom Typ `Node<Integer>` enthält einen Wert vom Typ `Integer`, während ein Knoten vom Typ `Node<String>` einen Wert vom Typ `String` enthält.
+Das heißt, bei einem Knoten vom Typ `Node<Integer>` hat das Attribut `value` den Typ `Integer`, während bei einem Knoten vom Typ `Node<String>` das Attribut `value` den Typ `String` hat.
 Das heißt, wenn wir eine generische Klasse verwenden, müssen wir einen konkreten Typ für den Typparameter angeben und dann werden alle Vorkommen des Typparameters in der Klasse durch den konkreten Typ ersetzt.
+Das heißt auch, dass bei einem Knoten vom Typ `Node<Integer>` das Attribut `next` den Typ `Node<Integer>` hat, da alle Vorkommen des Typparameters `T` durch den Typ `Integer` ersetzt werden.
+Bei Typparametern gelten ähnlich wie bei normalen Variablen Sichtbarkeitsregeln.
+Zum Beispiel, ist der Typparameter `T`, der in der Definition der Klasse `Node` eingeführt wird, in der gesamten Klasse sichtbar.
+Es ist nicht nur möglich, Typparameter bei der Definition einer Klasse einzuführen, sondern auch bei der Definition einer Methode.
 
 Eine einfach verkettete Liste ist ein Objekt vom Typ `SLList`.
 Die Klasse hält eine Referenz auf den ersten Knoten, also auf ein Objekt vom Typ `Node`.
@@ -265,13 +278,13 @@ Um die Methoden `get`, `add` und `remove` zu implementieren, implementieren wir 
 private Node<T> nodeAt(int index) {
     var current = this.first;
     for (int i = 0; i < index; i++) {
-        current = current.next;
+        current = current.next();
     }
     return current;
 }
 ```
 
-Mit Hilfe dieser Methode können wir nun sehr einfach die Methoden `get` und `add` implementieren.
+mithilfe dieser Methode können wir nun sehr einfach die Methoden `get` und `add` implementieren.
 <a href="#figure:sllist-add">Abbildung 5</a> zeigt abstrakt das Vorgehen bei einem Aufruf `add(i, x)`.
 
 <figure id="figure:sllist-add" markdown="1">
@@ -285,19 +298,27 @@ Mit Hilfe dieser Methode können wir nun sehr einfach die Methoden `get` und `ad
   <figcaption>Abbildung 5: Einfügen eines Elementes durch einen Aufruf <code class="language-java">add(i, x)</code></figcaption>
 </figure>
 
+Die Methode `get` ruft einfach die Methode `nodeAt` auf und selektiert aus dem erhaltenen Knoten den Wert.
+
 ``` java
 public T get(int index) {
-    return nodeAt(index).value;
+    return nodeAt(index).value();
 }
 ```
 
+Die Implementierung der Methode `add` ist eine Umsetzung von <a href="#figure:sllist-add">Abbildung 5</a>.
+Wir haben bei der Implementierung einer Methode immer mehrere Möglichkeiten, zum Beispiel könnten wir in der Methode `add` mehr Hilfsvariablen einführen.
+Zum Beispiel könnten wir den neu erzeugten Knoten in Zeile 6 erst einmal in einer Variable speichern, bevor wir den Knoten an die Methode `setNext` übergeben.
+Im Kontext dieser Vorlesung werden wir versuchen, in vielen Fällen auf solche Hilfsvariablen zu verzichten.
+Auf diese Weise soll ein tieferes Verständnis dafür vermittelt werden, wie man in einer Programmiersprache Aufrufe schachteln kann.
+
 ``` java
-public void add(int index, T e) {
+public void add(int index, T elem) {
     if (index <= 0) {
-        this.first = new Node<T>(e, this.first);
+        this.first = new Node<T>(elem, this.first);
     } else {
         Node<T> pred = nodeAt(index - 1);
-        pred.next = new Node<T>(e, pred.next);
+        pred.setNext(new Node<T>(elem, pred.next()));
     }
 }
 ```
@@ -305,20 +326,20 @@ public void add(int index, T e) {
 Queues und Stacks
 -----------------
 
-Als nächstes wollen wir uns anschauen, wie wir eine Methode `add(T e)` zu unserer Implementierung einer einfach verketteten Liste hinzufügen können.
+Als nächstes wollen wir uns anschauen, wie wir eine Methode `add(T)`[^1] zu unserer Implementierung einer einfach verketteten Liste hinzufügen können.
 Diese Methode fügt ein Element am Ende einer Liste an.
 
 ``` java
-public void add(T e) {
-    var node = new Node<T>(e, null);
+public void add(T elem) {
+    var node = new Node<T>(elem, null);
     if (this.first == null) {
         this.first = node;
     } else {
         var current = this.first;
-        while (current.next != null) {
-            current = current.next;
+        while (current.next() != null) {
+            current = current.next();
         }
-        current.next = node;
+        current.setNext(node);
     }
 }
 ```
@@ -326,8 +347,9 @@ public void add(T e) {
 Um am Ende der Liste ein Element anzufügen, müssen wir die gesamte Liste durchlaufen.
 Das Durchlaufen der Liste kostet unter Umständen viel Zeit und kann relativ einfach verhindert werden.
 Wir können uns einfach neben der Referenz auf den Kopf der Liste noch eine Referenz auf das Ende der Liste merken.
+Für ein gutes Verständnis der Implementierung von Datenstrukturen ist es unerlässlich, zu verstehen, wann eine Programmiersprache eine Berechnung ausführt.
 
-In diesem Zusammenhang wollen wir uns noch einen weiteren abstrakten Datentyp anschauen.
+Im Zusammenhang der Methode `add(T)` wollen wir uns noch einen weiteren abstrakten Datentyp anschauen.
 <a href="#figure:queue-adt">Abbildung 6</a> zeigt den abstrakten Datentyp Queue.
 Die Queue ist dabei parametrisiert über dem Typ `T` der Elemente der Queue.
 Eine **Queue (Warteschlange)** ist eine Container-Datenstruktur, die, ähnlich einem Array oder einer Liste, mehrere Werte zusammenfasst.
@@ -340,7 +362,7 @@ Das heißt, eine Queue funktioniert — wie der Name schon sagt — genau wie ei
 | Signatur&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |Beschreibung                                                                               |
 | :------------------ | :--------------------------------------------------------------------------------- |
 | `boolean isEmpty()` | Liefert genau dann `true`, wenn die Queue keine Elemente enthält.                  |
-| `void add(T e)`     | Fügt das Element `e` am Ende der `Queue` an.                                       |
+| `void add(T elem)`     | Fügt das Element `elem` am Ende der `Queue` an.                                       |
 | `T remove()`        | Entfernt das erste Element der `Queue` und liefert dieses Element zurück.          |
 
 <figcaption>Abbildung 6: Der abstrakte Datentyp Queue</figcaption>
@@ -348,7 +370,7 @@ Das heißt, eine Queue funktioniert — wie der Name schon sagt — genau wie ei
 
 Wir verwenden an dieser Stelle die Namen der Methoden, die Java verwendet.
 Die Methode `add` ist in der Literatur eher unter dem Namen `enqueue` und die Methode `remove` eher unter dem Namen `dequeue` bekannt.
-Im Folgenden implementieren wir die Methoden des abstrakten Datentyps Queue mit Hilfe einer einfachen Verkettung.
+Im Folgenden implementieren wir die Methoden des abstrakten Datentyps Queue mithilfe einer einfachen Verkettung.
 Wir implementieren die folgende Klasse.
 
 ``` java
@@ -363,15 +385,15 @@ public class Queue<T> {
 }
 ```
 
-Mit Hilfe der Referenz `last` können wir die Methode `add`, die am Ende der Verkettung anfügt, wie folgt implementieren.
+mithilfe der Referenz `last` können wir die Methode `add`, die am Ende der Verkettung anfügt, wie folgt implementieren.
 
 ``` java
-public void add(T e) {
-    var node = new Node<T>(e, null);
+public void add(T elem) {
+    var node = new Node<T>(elem, null);
     if (this.last == null) {
         this.first = node;
     } else {
-        this.last.next = node;
+        this.last.setNext(node);
     }
     this.last = node;
 }
@@ -383,11 +405,11 @@ Die Methode `remove` kann wie folgt implementiert werden.
 
 ``` java
 public T remove() {
-    var value = this.first.value;
-    if (this.first.next == null) {
+    var value = this.first.value();
+    if (this.first.next() == null) {
         this.last = null;
     }
-    this.first = this.first.next;
+    this.first = this.first.next();
     return value;
 }
 ```
@@ -402,15 +424,15 @@ Dieser Stack wird genutzt, um Informationen an die aufgerufene Methode zu überg
 Wir werden bei der Diskussion von Rekursion sehen, warum man zur Ausführung einer Methode einen Stack verwendet.
 
 <a href="#figure:stack-adt">Abbildung 7</a> zeigt den abstrakten Datentyp Stack.
-Wir können diesen einfach mit Hilfe einer einfachen Verkettung implementieren und benötigen dabei nur die Referenz auf das erste Element.
+Wir können diesen einfach mithilfe einer einfachen Verkettung implementieren und benötigen dabei nur die Referenz auf das erste Element.
 
 <figure id="figure:stack-adt" markdown="1">
 
 | Signatur&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |Beschreibung                                                                                   |
 | :------------------ | :--------------------------------------------------------------------------------- |
 | `boolean isEmpty()` | Liefert genau dann `true`, wenn der Stack keine Elemente enthält.                  |
-| `void push(T e)`    | Packt das Element `e` auf den Stapel.                                              |
-| `T pop()`           | Nimmt das oberste Element vom Stapel und liefert dieses Element zurück.            |
+| `void push(T elem)`    | Packt das Element `elem` auf den Stapel.                 |
+| `T pop()`           | Nimmt das oberste Element vom Stapel und liefert dieses Element zurück.|
 
 <figcaption>Abbildung 7: Der abstrakte Datentyp Stack</figcaption>
 </figure>
@@ -437,14 +459,34 @@ Das heißt, zusätzlich zum Element und der Referenz auf das nächste `Node`-Obj
 Die folgende Klasse implementiert ein Knoten-Objekt für eine doppelte Verkettung.
 
 ``` java
-public class DLNode<T> {
-    DLNode<T> prev;
-    T value;
-    DLNode<T> next;
+final class DLNode<T> {
+    private final T value;
+    private DLNode<T> prev;
+    private DLNode<T> next;
 
-    public DLNode(DLNode<T> prev, T value, DLNode<T> next) {
-        this.prev = prev;
+    DLNode(DLNode<T> prev, T value, DLNode<T> next) {
         this.value = value;
+        this.prev = prev;
+        this.next = next;
+    }
+
+    T value() {
+        return this.value;
+    }
+
+    DLNode<T> prev() {
+        return this.prev;
+    }
+
+    void setPrev(DLNode<T> prev) {
+        this.prev = prev;
+    }
+
+    DLNode<T> next() {
+        return this.next;
+    }
+
+    void setNext(DLNode<T> next) {
         this.next = next;
     }
 }
@@ -497,8 +539,8 @@ Java stellt das Interface `List<T>` im Paket `java.util` zur Verfügung.
 Das Interface `List<T>` bietet eine ganze Reihe von Methoden, unter anderem alle Methoden des abstrakten Datentyps in <a href="#figure:list-adt">Abbildung 1</a>.
 Das von Java definierte Interface bietet aber noch wesentlich mehr Methoden.
 Java stellt in `java.util` außerdem Implementierungen `ArrayList<T>` und `LinkedList<T>` des Interfaces zur Verfügung.
-Die Klasse `ArrayList` implementiert das Interface `List`, wie der Name schon sagt, mit Hilfe eines Arrays.
-Die Klasse `LinkedList` implementiert das Interface `List` mit Hilfe einer doppelten Verkettung.
+Die Klasse `ArrayList` implementiert das Interface `List`, wie der Name schon sagt, mithilfe eines Arrays.
+Die Klasse `LinkedList` implementiert das Interface `List` mithilfe einer doppelten Verkettung.
 
 Neben dem Interface `List<T>` bietet Java auch ein Interface `Queue<T>`.
 Die Klasse `LinkedList` implementiert zum Beispiel das Interface `Queue`.
@@ -510,10 +552,12 @@ Neben diesen Interfaces stellt Java noch eine generische Klasse `Stack` zur Verf
 In der Beschreibung dieser Klasse wird allerdings darauf hingewiesen, dass das Interface `Deque` eine umfangreichere Menge von Stack-Operationen zur Verfügung stellt.
 Da man bei einem Deque effizient vorne und hinten hinzufügen und entfernen kann, kann man diese Struktur sowohl als Stack als auch als Queue nutzen.
 
+[^1]: Bei überladenen Methoden kann mithilfe des Namens nicht eindeutig eine Methode referenziert werden. Daher geben wir neben dem Namen der Methode noch die Typen der Argumente an. Diese beiden Informationen zusammen erlauben es, eine Methode in Java eindeutig zu identifizieren.
+
 <div class="nav">
     <ul class="nav-row">
         <li class="nav-item nav-left"><a href="introduction.html">zurück</a></li>
         <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"><a href="complexity.html">Komplexität</a></li>
+        <li class="nav-item nav-right"><a href="complexity.html">weiter</a></li>
     </ul>
 </div>

@@ -201,7 +201,7 @@ Diese Methode prüft, ob beide Argumente identisch sind. -->
 ## Lokale Typinferenz
 
 In der Vorlesung und für die Bearbeitung der Aufgaben wird ein Java-Feature genutzt, das **lokale Typinferenz** heißt.
-Wenn eine Programmiersprache eine Typinferenz implementiert, ist der Compiler der Sprache in der Lage, den Typ eines Ausdrucks oder eine Anweisung selbst zu berechnen.
+Wenn eine Programmiersprache eine Typinferenz implementiert, ist der Compiler der Sprache in der Lage, den Typ eines Ausdrucks oder einer Anweisung selbst zu berechnen.
 Das heißt, der Nutzer muss den Typ nicht mehr manuell angeben.
 In statischen Programmiersprachen wie Java müssen an sehr vielen Stellen Typen angegeben werden.
 Der folgende Java-Code erzeugt zum Beispiel eine Variable mit einer Liste.
@@ -225,10 +225,6 @@ Das heißt, das Beispiel von oben kann mit lokaler Typinferenz wie folgt geschri
 ```java
 var list = new ArrayList<String>();
 ```
-
-
-
-
 
 <div class="nav">
     <ul class="nav-row">

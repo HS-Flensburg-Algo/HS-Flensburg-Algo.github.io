@@ -60,9 +60,15 @@ custom_css: toc
 - 4.5. [Einschub: Beweis der Laufzeit per Induktion](methods.md#einschub-beweis-der-laufzeit-per-induktion)
  
 - 4.6. [Greedy-Methode]()
+-->
 
-- 4.7. [Backtracking](methods.md#backtracking)
+<!-- ### 5. [Graphen](graphs.md)
 
+- 5.1. [Grundidee](graphs.md#grundidee)
+
+- 5.2. [Formale Definition](graphs.md#formale-definition) -->
+
+<!--
 ### 5. [Hashing](polymorphism.md)
 
 - 5.1. [Mengen](polymorphism.md#polymorphe-datentypen)
