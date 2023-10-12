@@ -239,7 +239,7 @@ final class Node<T> {
 ```
 
 Die Klasse `Node<T>` ist eine sogenannte generische Klasse.
-Das `T` in der Definition der Klasse `Node` bezeichnet mal als **Typparameter**.
+Das `T` in der Definition der Klasse `Node` bezeichnet man als **Typparameter**.
 Bei der konkreten Verwendung der Klasse müssen wir für den Typparameter `T` einen Typ angeben.
 Das heißt, bei einem Knoten vom Typ `Node<Integer>` hat das Attribut `value` den Typ `Integer`, während bei einem Knoten vom Typ `Node<String>` das Attribut `value` den Typ `String` hat.
 Das heißt, wenn wir eine generische Klasse verwenden, müssen wir einen konkreten Typ für den Typparameter angeben und dann werden alle Vorkommen des Typparameters in der Klasse durch den konkreten Typ ersetzt.
@@ -284,7 +284,7 @@ private Node<T> nodeAt(int index) {
 }
 ```
 
-mithilfe dieser Methode können wir nun sehr einfach die Methoden `get` und `add` implementieren.
+Mithilfe dieser Methode können wir nun sehr einfach die Methoden `get` und `add` implementieren.
 <a href="#figure:sllist-add">Abbildung 5</a> zeigt abstrakt das Vorgehen bei einem Aufruf `add(i, x)`.
 
 <figure id="figure:sllist-add" markdown="1">
@@ -385,7 +385,7 @@ public class Queue<T> {
 }
 ```
 
-mithilfe der Referenz `last` können wir die Methode `add`, die am Ende der Verkettung anfügt, wie folgt implementieren.
+Mithilfe der Referenz `last` können wir die Methode `add`, die am Ende der Verkettung anfügt, wie folgt implementieren.
 
 ``` java
 public void add(T elem) {
@@ -498,7 +498,7 @@ Um diese Entscheidung treffen zu können, führen wir die Größe der Liste ein.
 Zu diesem Zweck erweitern wir die Klasse um ein Feld `size`, das die aktuelle Größe einer Liste vorhält.
 
 ``` java
-public class DLList<T> implements List<T> {
+public class DLList<T> {
     private DLNode<T> first;
     private DLNode<T> last;
     private int size;
@@ -545,7 +545,7 @@ Die Klasse `LinkedList` implementiert das Interface `List` mithilfe einer doppel
 Neben dem Interface `List<T>` bietet Java auch ein Interface `Queue<T>`.
 Die Klasse `LinkedList` implementiert zum Beispiel das Interface `Queue`.
 Daneben stellt Java auch noch ein Interface `Deque` zur Verfügung.
-Das Wort **Deque** ist eine Kurzform von **double ended queue**.
+Das Wort **Deque** ist eine Kurzform von **_double ended queue_**.
 Das heißt, bei einem Deque handelt es sich um eine Queue, bei der man an beiden Enden hinzufügen und entfernen kann.
 Da man bei einer doppelt verketteten Liste effizient vorne und hinten hinzufügen und entfernen kann, implementiert die Klasse `LinkedList` das Interface `Deque`.
 Neben diesen Interfaces stellt Java noch eine generische Klasse `Stack` zur Verfügung, welche die Methoden `push` und `pop` zur Verfügung stellt.
