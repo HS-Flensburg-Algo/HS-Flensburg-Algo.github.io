@@ -317,7 +317,7 @@ public void add(int index, T elem) {
     if (index <= 0) {
         this.first = new Node<T>(elem, this.first);
     } else {
-        Node<T> pred = nodeAt(index - 1);
+        var pred = nodeAt(index - 1);
         pred.setNext(new Node<T>(elem, pred.next()));
     }
 }
