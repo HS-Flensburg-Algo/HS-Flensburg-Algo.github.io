@@ -8,6 +8,7 @@ Zur Beschreibung des Aufwandes eines Algorithmus werden häufig zwei Kennzahlen 
 Wir werden uns hier vor allem mit der Laufzeit beschäftigen.
 Bei der Komplexität wird dabei eine abstrakte Einheit zur Beschreibung dieser Kennzahlen verwendet und nicht die tatsächlich verbrauchte Zeit oder der tatsächlich verbrauchte Speicher.
 So wird für die Laufzeit etwa angenommen, dass bestimmte Operationen, wie zum Beispiel das Vergleichen von zwei Zahlen oder die Berechnung einer arithmetischen Operation **eine Zeiteinheit/einen Schritt** in Anspruch nehmen.
+Man bezeichnet die Operationen, für die man eine feste Anzahl an Schritten annimmt, als primitive Operationen.
 Auf diese Weise verliert man natürlich Genauigkeit, da der Algorithmus je nach tatsächlichem Aufwand schneller oder langsamer ausgeführt wird, man erhält aber eine Vergleichbarkeit verschiedener Algorithmen unabhängig von ihrer konkreten Umsetzung in einer bestimmten Programmiersprache oder einer bestimmten Rechnerarchitektur.
 
 Die Komplexität eines Algorithmus wird dabei in der Größe der Eingabedaten ausgedrückt.
@@ -34,26 +35,35 @@ Die *best case*-Laufzeit hat die geringste Bedeutung, da man auf diese Weise wen
 Konkrete Laufzeiten
 -------------------
 
-Im Folgenden werden wir uns die Zeit-Komplexität einiger Methoden auf linearen Datenstrukturen anschauen.
+Im Folgenden werden wir uns die konkreten Laufzeiten einiger Methoden auf linearen Datenstrukturen anschauen.
+Konkrete Laufzeit bedeutet dabei, dass wir mathematische Funktionen angeben, die berechnen, wie viele Schritte eine Methode benötigt.
+Die konkreten Laufzeiten, die wir hier angeben, dienen nur zur Illustration.
+Wir werden im zweiten Schritt sehen, dass wir an den ganz genauen Anzahlen an Schritten, die eine Methode durchführt gar nicht interessiert sind.
 
 ### Arrays
 
-Wir haben bereits gesehen, dass der Zugriff auf ein Element eines Arrays mit Hilfe einer einfachen Rechnung umgesetzt werden kann.
-In der Komplexitätstheorie nimmt man an, dass jede arithmetische Operation einen Schritt benötigt.
-Wir betrachten die folgende Methode der Klasse `ArrayList`.
+Als Beispiel für eine konkrete Laufzeit wollen wir die folgende Implementierung der `get`-Methode einer `ArrayList` betrachten.
 
 ``` java
 public T get(int index) {
-    return (T) array[index];
+    @SuppressWarnings("unchecked")
+    var value = (T) array[index];
+    return value;
 }
 ```
 
 Wir beschreiben die Laufzeit dieser Methode als Funktion, deren Eingabe die Größe des Arrays ist.
-Der Zugriff auf das Element wird intern mit Hilfe einer Multiplikation und einer Addition umgesetzt.
+Wir haben bereits gesehen, dass der Zugriff auf ein Element eines Arrays mithilfe einer einfachen Rechnung umgesetzt werden kann.
+Bei der Bestimmung von Laufzeiten von Methoden geht man davon aus, dass der Zugriff auf ein Array einen Schritt benötigt.
+Außerdem wir der Variable `value` ein Wert zugewiesen, dafür zählen wir ebenfalls einen Schritt.
+Der generische Typ `T` ist in Java nur zur Compile-Zeit existent.
+Das heißt, zur Laufzeit verursacht der _Cast_ keinerlei Aufwand.
+
 Das heißt, die folgende Funktion beschreibt die Laufzeit dieser Methode.
 $$T_{\texttt{get}} : \mathbb{N} \rightarrow \mathbb{R}, T_{\texttt{get}}(x) = 2$$
 In diesem Beispiel kann noch erwähnt werden, dass sich bei der Methode `get` der `ArrayList` die *best case*- und *worst case*-Laufzeit nicht unterscheiden.
 Unabhängig davon, wie die Liste aussieht und welchen Index wir suchen, benötigt die Methode immer zwei Schritte.
+
 
 ### Einfach verkettete Listen
 
@@ -63,17 +73,17 @@ Dazu schauen wir uns noch einmal die Implementierung dieser Methode an.
 
 ``` java
 public T get(int index) {
-    return nodeAt(index).value;
+    return nodeAt(index).value();
 }
 ```
 
-Die Methode ist mit Hilfe der Methode `nodeAt` implementiert, wir müssen uns also anschauen, wie diese Methode implementiert ist.
+Die Methode ist mithilfe der Methode `nodeAt` implementiert, wir müssen uns also anschauen, wie diese Methode implementiert ist.
 
 ``` java
 private Node<T> nodeAt(int index) {
     var current = this.first;
     for (int i = 0; i < index; i++) {
-        current = current.next;
+        current = current.next();
     }
     return current;
 }
@@ -89,8 +99,9 @@ Jeder Aufruf der Methode initialisiert die Variable `current` und weist ihr das 
 Außerdem initialisiert jeder Aufruf die Variable `i`.
 Wie viele Operationen durch die Schleife durchgeführt werden, hängt von der Größe des Index ab.
 Wir wollen uns die *worst case*-Laufzeit anschauen, daher hat der Index den Wert *n* − 1.
-Dadurch macht die Schleife *n* − 1 Durchläufe. Bei jedem Schleifendurchlauf muss die Bedingung `i <= index` überprüft und der Zähler `i` erhöht werden.
-Außerdem wird bei jedem Schleifendurchlauf der Rumpf der Schleife ausgeführt, also `current = current.next`. Nach der Schleife muss unabhängig von der Anzahl der Durchläufe immer noch einmal der Vergleich `i < index` durchgeführt werden, der in diesem Fall aber fehlschlägt. Außerdem wird das `return` ausgeführt.
+Dadurch macht die Schleife *n* − 1 Durchläufe. Bei jedem Schleifendurchlauf muss die Bedingung `i < index` überprüft und der Zähler `i` erhöht werden.
+Außerdem wird bei jedem Schleifendurchlauf der Rumpf der Schleife ausgeführt, also `current = current.next()`.
+Nach der Schleife muss unabhängig von der Anzahl der Durchläufe immer noch einmal der Vergleich `i < index` durchgeführt werden, der in diesem Fall aber fehlschlägt. Außerdem wird das `return` ausgeführt.
 
 An dieser Stelle ist nicht relevant, wie viele Schritte die einzelnen Operationen, wie eine Zuweisung genau benötigen, es geht nur darum, dass es grundsätzlich möglich ist, die Schritte einfach zu zählen.
 Wir werden im Folgenden sehen, dass eine so genaue Analyse gar nicht notwendig ist.
@@ -108,7 +119,7 @@ Wenn die Eingabe sehr groß ist, ist der Unterschied zwischen diesen beiden Meth
 Bei einer Liste mit 10.000 Elementen benötigt `nodeAt` zum Beispiel 49.999 Schritte, während `get` 50.001 Schritte benötigt.
 Im Gegensatz dazu sind wir am Unterschied zwischen der Methode `get` auf einer einfach verketteten Liste und der Methode `get` auf einer `ArrayList` aber sehr wohl interessiert.
 So benötigt die Methode auf der einfach verketteten Liste bei einer Liste mit 10.000 Elementen 50.001 Schritte, die Methode auf einer `ArrayList` aber nur 2 Schritte.
-Das heißt, wir wollen bestimmte Arten von Unterschieden zwischen Funktionen vernachlässigen, während wir andere weiterhin unterscheiden möchten. Mit Hilfe von asymptotischen Laufzeiten wird die Klassifikation, die wir uns wünschen, vorgenommen.
+Das heißt, wir wollen bestimmte Arten von Unterschieden zwischen Funktionen vernachlässigen, während wir andere weiterhin unterscheiden möchten. Mithilfe von asymptotischen Laufzeiten wird die Klassifikation, die wir uns wünschen, vorgenommen.
 
 Asymptotisches Wachstum
 -----------------------
@@ -122,7 +133,7 @@ $$T_{\texttt{method1}}(x) = \begin{cases}
   3 x,  & \text{sonst}
 \end{cases}$$
 
-Wir wollen eine solche Funktion nicht von einer Funktion unterscheiden, die immer 3*x* Schritte benötigt.
+Wir wollen eine solche Funktion nicht von einer Funktion unterscheiden, die immer $$3 x$$ Schritte benötigt.
 Auf der anderen Seite wollen wir eine Funktion der Form
 
 $$T_{\texttt{method2}}(x) = \begin{cases}
@@ -130,28 +141,28 @@ $$T_{\texttt{method2}}(x) = \begin{cases}
   2,     & \text{sonst}
 \end{cases}$$
 
-nicht von einer Funktion unterscheiden, die immer 2 Schritte benötigt, sehr wohl aber von einer Funktion, die immer 3*x* Schritte benötigt.
+nicht von einer Funktion unterscheiden, die immer $$2$$ Schritte benötigt, sehr wohl aber von einer Funktion, die immer $$3 x$$ Schritte benötigt.
 Die folgende Definition erfüllt alle Anforderungen, die wir uns bisher erarbeitet haben.
 
 #### Definition 1 (Asymptotisch kleiner gleich)
 
-Wir definieren eine Relation $$<_{as}$$ mit der wir Funktionen vergleichen können.
-Für zwei Funktionen $$f, g : \mathbb{N} \rightarrow \mathbb{R}$$ definieren wir, dass *f* genau dann asymptotisch kleiner gleich *g* ist ($$f <_{as} g$$), wenn die folgende Bedingung erfüllt ist.
+Wir definieren eine Relation $$\le_{as}$$ mit der wir Funktionen vergleichen können.
+Für zwei Funktionen $$f, g : \mathbb{N} \rightarrow \mathbb{R}$$ definieren wir, dass $$f$$ genau dann asymptotisch kleiner gleich $$g$$ ist ($$f \le_{as} g$$), wenn die folgende Bedingung erfüllt ist.[^1]
 
-$$\exists c \in \mathbb{R}: c > 0 \wedge \exists n_0 \in \mathbb{N} : \forall n \in \mathbb{N}: n \geq n_0 \Rightarrow f(n) \leq c \cdot g(n)$$
+$$\exists c \in \mathbb{R}_{>0}: \exists n_0 \in \mathbb{N} : \forall n \in \mathbb{N}: n \geq n_0 \Rightarrow f(n) \leq c \cdot g(n)$$
 
-In Worten gesprochen ist eine Abbildung *f* asymptotisch kleiner gleich einer Abbildung *g*, falls es ein Argument *n*<sub>0</sub> gibt, ab dem das Ergebnis von *g* (multipliziert mit einem Faktor *c*) immer größer gleich dem Ergebnis von *f* ist.
-Den Faktor *c* müssen wir allerdings ganz zu Anfang wählen.
-Das heißt, der Wert, den wir für *c* wählen kann weder von *n*<sub>0</sub> abhängen, noch von dem *n*, das wir uns anschauen.
+In Worten gesprochen ist eine Abbildung $$f$$ asymptotisch kleiner gleich einer Abbildung $$g$$, falls es ein Argument $$n_0$$ gibt, ab dem das Ergebnis von $$g$$ (multipliziert mit einem Faktor $$c$$) immer größer gleich dem Ergebnis von $$f$$ ist.
+Den Faktor $$c$$ müssen wir allerdings ganz zu Anfang wählen.
+Das heißt, der Wert, den wir für $$c$$ wählen kann weder von $$n_0$$ abhängen, noch von dem $$n$$, das wir uns anschauen.
 
-<a href="#figure:o-notation">Abbildung 1</a> veranschaulicht, wann eine Funktion *f* asymptotisch kleiner gleich einer Funktion *g* ist.
+<a href="#figure:o-notation">Abbildung 1</a> veranschaulicht, wann eine Funktion $$f$$ asymptotisch kleiner gleich einer Funktion $$g$$ ist.
 
 <figure id="figure:o-notation" markdown="1">
   ![](/assets/graphics/o-notation.svg){: width="600px" .centered}
   <figcaption>Abbildung 1: Die Funktion <em>f</em> ist asymptotisch kleiner gleich der Funktion <em>g</em></figcaption>
 </figure>
 
-<a href="#figure:constant-factor">Abbildung 2</a> veranschaulicht den Einfluss des Faktors *c*, der auch als konstanter Faktor bezeichnet wird.
+<a href="#figure:constant-factor">Abbildung 2</a> veranschaulicht den Einfluss des Faktors $$c$$, der auch als konstanter Faktor bezeichnet wird.
 
 <figure id="figure:constant-factor" markdown="1">
   ![](/assets/graphics/constant-factor.svg){: width="400px" .centered}
@@ -178,13 +189,13 @@ Wir betrachten die Funktionen $$l : \mathbb{N} \rightarrow \mathbb{R}, l
 $$q : \mathbb{N} \rightarrow \mathbb{R}, q(x) = x^2$$. Wir wollen beweisen, dass
 $$l \le_{as} q$$ gilt.
 
-**Beh.:** Es gilt $$l \le_{as} q$$
+**Beh.:** Es gilt $$l \le_{as} q$$.
 
 **Bew.:**
 
-Setze *c* = 1.
-Setze *n*<sub>0</sub> = 1.
-Sei *n* ∈ ℕ mit *n* ≥ *n*<sub>0</sub>.
+Setze $$c = 1$$.
+Setze $$n_0 = 1$$.
+Sei $$n \in \mathbb{N}$$ mit $$n \ge n_0$$.
 Dann gilt
 
 $$\begin{align*}
@@ -206,24 +217,31 @@ Dies zeigt, dass $$l \le_{as} q$$ gilt.
 <figcaption>Abbildung 4: Lineares und quadratisches Wachstum</figcaption>
 </figure>
 
-<a href="#figure:linear-quadratic">Abbildung 4</a> illustriert diese Aussage. Wir sehen, dass die Funktion *q* ab der Stelle *n*<sub>0</sub> = 1 immer oberhalb von *l* liegt.
-<a href="#figure:linear-quadratic">Abbildung 4</a> illustriert außerdem an den Beispielen von *c* = 2 und *c* = 3, dass $$q \not \le_{as} l$$, da die Funktion *q*(*x*) die Funktion *c* ⋅ *l*(*x*) für jedes *c*
-immer irgendwann “überholt”.
+<a href="#figure:linear-quadratic">Abbildung 4</a> illustriert diese Aussage.
+Wir sehen, dass die Funktion $$q$$ ab der Stelle $$n_0 = 1$$ immer oberhalb von $$l$$ liegt.
+<a href="#figure:linear-quadratic">Abbildung 4</a> illustriert außerdem an den Beispielen von $$c = 2$$ und $$c = 3$$, dass $$q \not \le_{as} l$$, da die Funktion $$q(x)$$ die Funktion $$c \cdot l(x)$$ für jedes $$c$$ immer irgendwann "überholt".
 Wir werden hier nicht formal beweisen, dass eine Funktion nicht asymptotisch kleiner gleich einer anderen Funktion ist.
 Wir werden stattdessen nur für bestimmte Klassen von Funktionen lernen, dass sie nicht asymptotisch kleiner gleich einer anderen Klasse von Funktionen sind.
-Um zu beweisen, dass die Funktion _q_ nicht asymptotisch kleiner gleich der Funktion _l_ ist, müssten wir die logische Aussage in der Definition von $$\le_{as}$$ negieren und einen Beweis für diese negierte Formel führen.
+Um zu beweisen, dass die Funktion $$q$$ nicht asymptotisch kleiner gleich der Funktion $$l$$ ist, müssten wir die logische Aussage in der Definition von $$\le_{as}$$ negieren und einen Beweis für diese negierte Formel führen.
 
-<a href="#figure:growth">Abbildung 4</a> vermittelt einen Eindruck darüber, wie unterschiedliche Funktionen wachsen.
-Die Wachstumsfunktionen *f*(*x*) = 1, *f*(*x*) = *x*, *f*(*x*) = *x*<sup>2</sup>, *f*(*x*) = *x*<sup>3</sup>, *f*(*x*) = *x*<sup>4</sup> und *f*(*x*) = 2<sup>*x*</sup> werden als konstantes, lineares, quadratisches, kubisches, biquadratisches bzw. exponentielles Wachstum bezeichnet.
+<figure id="figure:growth">
+<div class="centered" style="width:100%;" markdown="1">
+![](/assets/graphics/growth.svg){: width="700px" .centered}
+</div>
+<figcaption>Abbildung 5: Verschiedenes Wachstum im Vergleich</figcaption>
+</figure>
+
+<a href="#figure:growth">Abbildung 5</a> vermittelt einen Eindruck darüber, wie unterschiedliche Funktionen wachsen.
+Die Wachstumsfunktionen $$f(x) = 1$$, $$f(x) = x$$, $$f(x) = x^2$$, $$f(x) = x^3$$, $$f(x) = x^4$$ und $$f(x) = 2^x$$ werden als konstantes, lineares, quadratisches, kubisches, biquadratisches bzw. exponentielles Wachstum bezeichnet.
 In der Praxis ist ein Wachstum über quadratischem tatsächlich kaum tolerierbar.
-Dagegen wird bei *f*(*x*) = *x*log *x* auch von quasilinearem Wachstum gesprochen, da der zusätzliche logarithmische Faktor kaum ins Gewicht fällt.
-<a href="#figure:growth">Abbildung 4</a> erweckt unter Umständen den Eindruck, dass *n*<sup>4</sup> schneller wächst als 2<sup>*n*</sup>.
+Dagegen wird bei $$f(x) = x \log(x)$$ auch von quasilinearem Wachstum gesprochen, da der zusätzliche logarithmische Faktor kaum ins Gewicht fällt.
+<a href="#figure:growth">Abbildung 5</a> erweckt unter Umständen den Eindruck, dass $$x^4$$ schneller wächst als $$2^x$$.
 Dies ist aber nicht der Fall, so gilt zum Beispiel 16<sup>4</sup> = 65.536 und 2<sup>16</sup> = 65.536, aber 17<sup>4</sup> = 83.521 und 2<sup>17</sup> = 131.072.
 Außerdem gilt 100<sup>4</sup> = 100.000.000, aber 2<sup>100</sup> = 1.267.650.600.228.229.401.496.703.205.376
-Insbesondere gilt für jede Funktion der Form *f*(*x*) = *x*<sup>*p*</sup>, wobei *p* eine natürliche Zahl ist, dass *e*(*x*) = 2<sup>*x*</sup> schneller wächst als das Polynom.
+Insbesondere gilt für jede Funktion der Form $$f(x) = x^p$$, wobei $$p$$ eine natürliche Zahl ist, dass $$e(x) = 2^x$$ schneller wächst als das Polynom.
 Anders ausgedrückt gilt für jedes Polynom $$p$$ die Aussage $$p \le_{as} e$$ und $$e \not \le_{as} p$$.
 
-<a href="#figure:runtimes">Abbildung 5</a> illustriert die verschiedenen Wachstumsfunktionen noch einmal, indem angenommen wird, dass ein Schritt 1 μs Zeit in Anspruch nimmt.
+<a href="#figure:runtimes">Abbildung 6</a> illustriert die verschiedenen Wachstumsfunktionen noch einmal, indem angenommen wird, dass ein Schritt 1 μs Zeit in Anspruch nimmt.
 Auf diese Weise kann man für die verschiedenen Wachstumsfunktionen berechnen, wie der Algorithmus jeweils zur Ausführung benötigt.
 
 <figure id="figure:runtimes" markdown="1">
@@ -240,7 +258,7 @@ Auf diese Weise kann man für die verschiedenen Wachstumsfunktionen berechnen, w
 | 2<sup>x</sup>       | 1 ms         | 1 s          | 17,8 min     | 12,7 d       |
 | x!                  | 3,6 s        | 77.164 y     | 8 ⋅ 10<sup>18</sup> y       |
 
-<figcaption>Abbildung 5: Laufzeiten für verschiedene Wachstumsfunktionen (1 Schritt = 1 μs)</figcaption>
+<figcaption>Abbildung 6: Laufzeiten für verschiedene Wachstumsfunktionen (1 Schritt = 1 μs)</figcaption>
 </figure>
 
 #### Beispiel 2 (ArrayList)
@@ -322,6 +340,8 @@ Wenn wir uns an die Implementierung einer `ArrayList` erinnern, musste das Array
 Beim Vergrößern des Arrays müssen alle Elemente, die bereits in der Liste waren, kopiert werden.
 Daher ist das Vergrößern des Arrays in $$\mathcal{O}(n)$$, wobei *n* die Größe des Arrays ist.
 Diese Kopieraktion muss aber nur durchgeführt werden, wenn wir bereits eine ganze Reihe von Elementen eingefügt haben. Genauer gesagt, müssen wir erst nach dem Einfügen von *n* Elementen einmal *n* Elemente kopieren.
+
+[^1]: Dabei gilt $$\mathbb{R}_{>0} = \{ x \in \mathbb{R} \mid x \gt 0 \}$$.
 
 <div class="nav">
     <ul class="nav-row">

@@ -1,0 +1,30 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+
+\begin{document}
+\begin{tikzpicture}[yscale=0.1, xscale=0.5, samples=30]
+  \draw[->] (0,0)coordinate(O) -- (25,0);
+  \draw[->] (0,0) -- (0,120);
+
+  % Ticks on the x axis
+  \foreach \tick in {5, 10, ..., 20} {
+    \draw (\tick, 10 * -2.5pt) -- (\tick, 10 * 2.5pt) node[below=8pt] {\tick};
+  }
+
+  % Ticks on the y axis
+  \foreach \tick in {10, 20, ..., 110} {
+    \draw (2 * -2.5pt, \tick) -- (2 * 2.5pt, \tick) node[left=8pt] {\tick};
+  }
+
+  % \draw[domain=1:25,smooth,variable=\x,black] plot ({\x},{1})node[below, black]{$f(x) = 1$};
+  \draw[domain=1:25,smooth,variable=\x,teal] plot ({\x},{log2(\x)/log2(10)})node[above, black]{$f(x) = \log(x)$};
+  \draw[domain=1:25,smooth,variable=\x,orange] plot ({\x},{\x * log2(\x)/log2(10)})node[above, black]{$f(x) = x \log(x)$};
+  \draw[domain=0:25,smooth,variable=\x, thick, blue] plot ({\x},{\x})node[above, black]{$f(x) = x$};
+  \draw[domain=0:11,smooth,variable=\x, thick, red] plot ({\x},{\x^2})node[right, black]{$f(x) = x^2$};
+  \draw[domain=0:3.35,smooth,variable=\x, thick,violet] plot ({\x},{\x^4})node[left, black]{$f(x) = x^4$};
+  \draw[domain=0:7,smooth,variable=\x, thick, brown] plot ({\x},{2^\x})node[above, black]{$f(x) = 2^x$};
+\end{tikzpicture}
+\end{document}
