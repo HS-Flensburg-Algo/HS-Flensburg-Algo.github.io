@@ -174,12 +174,20 @@ In diesen Beweisen nutzen wir die folgenden Eigenschaften von $$\le$$ auf reelen
 
 <figure id="figure:le-rules" markdown="1">
 $$\begin{align}
-% k \> 0 \wedge m \< n & \Rightarrow k \cdot m \< k \cdot n \label{eq1}\\\\
-% m \< n   & \Rightarrow k + m \< k + n \label{eq2}\\\\
-& \forall k, m, n \in \mathbb{R}: & 0 \le k \wedge m \le n & \Rightarrow k \cdot m \le k \cdot n \tag{1}\label{eq:eq3}\\
-& \forall k, m, n \in \mathbb{R}: & m \le n                & \Rightarrow k + m \le k + n \tag{2}\label{eq:eq4}
+& \forall k, m, n \in \mathbb{R}: & 0 \le k \wedge m \le n & \Rightarrow k \cdot m \le k \cdot n \tag{1}\label{eq:eq1}\\
+& \forall k, m, n \in \mathbb{R}: & m \le n                & \Rightarrow k + m \le k + n \tag{2}\label{eq:eq2}
 \end{align}$$
-  <figcaption>Abbildung 3: Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
+<figcaption>Abbildung 3: Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
+</figure>
+
+Aus den Regeln in <a href="#figure:le-rules">Abbildung 3</a> können wir zwei weitere Regeln ableiten, die wir zur Vereinfachung der Beweise in der folgenden Form nutzen werden.
+
+<figure id="figure:additional-le-rules" markdown="1">
+$$\begin{align}
+& \forall m, n \in \mathbb{R}: & 0 \le m \wedge 1 \le n & \Rightarrow m \le m \cdot n \tag{3}\label{eq:eq3}\\
+& \forall m, n \in \mathbb{R}: & 0 \le n                & \Rightarrow m \le m + n \tag{4}\label{eq:eq4}
+\end{align}$$
+<figcaption>Abbildung 4: Zusätzliche Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
 </figure>
 
 
@@ -199,8 +207,7 @@ Sei $$n \in \mathbb{N}$$ mit $$n \ge n_0$$.
 Dann gilt
 
 $$\begin{align*}
-l(n) & = n && \text{$1$ ist neutrales Element bezüglich $\cdot$}\\
-     & = n \cdot 1 && \text{Regel (\ref{eq:eq3}) ($k := n$, $m := 1$, $n := n$): $0 \le n \wedge 1 \le n$}\\
+l(n) & = n && \text{Regel (\ref{eq:eq3}) ($m := n$, $n := n$): es gilt $0 \le n$ und $1 \le n$}\\
      & \le n \cdot n && \text{$1$ ist neutrales Element bezüglich $\cdot$}\\
      & = 1 \cdot n^2 && \text{$c = 1$}\\
      & = c \cdot n^2\\
