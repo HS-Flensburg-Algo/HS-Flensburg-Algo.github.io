@@ -36,25 +36,25 @@ custom_css: toc
 
 - 3.3. [Größenordnungen](complexity.md#größenordnungen)
 
-### 4. [Algorithmische Methoden](methods.md)
+### 4. [Rekursion](recursion.md)
 
-- 4.1. [Rekursion](methods.md#rekursion)
+- 4.1. [Beispiele](recursion.md#beispiele)
 
-- 4.2. [Einschub: Rekurrenzen](methods.md#einschub-rekurrenzen)
+- 4.2. [Rekurrenzen](recursion.md#rekurrenzen)
 
-- 4.3. [Einschub: Bestimmung von Laufzeiten](methods.md#einschub-bestimmung-von-laufzeiten)
+- 4.3. [Bestimmung von Laufzeiten](recursion.md#bestimmung-von-laufzeiten)
 
-- 4.4. [Divide and Conquer](methods.md#divide-and-conquer)
+<!-- - 4.4. [Divide and Conquer](methods.md#divide-and-conquer)
 
 - 4.5. [Einschub: Beweis mittels starker Induktion](methods.md#einschub-beweis-mittels-starker-induktion)
 
 - 4.6. [Dynamische Programmierung](methods.md#dynamische-programmierung)
 
-- 4.7. [Einschub: Größenordnungen](methods.md#einschub-größenordnungen)
+- 4.7. [Einschub: Größenordnungen](methods.md#einschub-größenordnungen) -->
 
 <!-- - 4.8. [Laufzeit mit dynamischer Programmierung](methods.md#laufzeit-mit-dynamischer-programmierung) -->
 
-- 4.8. [Backtracking](methods.md#backtracking)
+<!-- - 4.8. [Backtracking](methods.md#backtracking) -->
 
 <!--
 - 4.5. [Einschub: Beweis der Laufzeit per Induktion](methods.md#einschub-beweis-der-laufzeit-per-induktion)

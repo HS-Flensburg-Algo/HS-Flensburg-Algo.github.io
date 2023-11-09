@@ -197,9 +197,9 @@ Wir betrachten die Funktionen $$l : \mathbb{N} \rightarrow \mathbb{R}, l
 $$q : \mathbb{N} \rightarrow \mathbb{R}, q(x) = x^2$$. Wir wollen beweisen, dass
 $$l \le_{as} q$$ gilt.
 
-**Beh.:** Es gilt $$l \le_{as} q$$.
+**Behauptung:** Es gilt $$l \le_{as} q$$.
 
-**Bew.:**
+**Beweis:**
 
 Setze $$c = 1$$.
 Setze $$n_0 = 1$$.
@@ -354,6 +354,6 @@ Diese Kopieraktion muss aber nur durchgeführt werden, wenn wir bereits eine gan
     <ul class="nav-row">
         <li class="nav-item nav-left"><a href="linear-data-structures.html">zurück</a></li>
         <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"><a href="methods.html">weiter</a></li>
+        <li class="nav-item nav-right"><a href="recursion.html">weiter</a></li>
     </ul>
 </div>
