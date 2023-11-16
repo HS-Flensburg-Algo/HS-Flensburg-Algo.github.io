@@ -44,31 +44,30 @@ custom_css: toc
 
 - 4.3. [Bestimmung von Laufzeiten](recursion.md#bestimmung-von-laufzeiten)
 
-<!-- - 4.4. [Divide and Conquer](methods.md#divide-and-conquer)
+### 5. [Divide and Conquer](divide-and-conquer.md)
 
-- 4.5. [Einschub: Beweis mittels starker Induktion](methods.md#einschub-beweis-mittels-starker-induktion)
+- 5.1. [Binäre Suche](divide-and-conquer.md#binäre-suche)
 
-- 4.6. [Dynamische Programmierung](methods.md#dynamische-programmierung)
+- 5.2. [Beweis mittels starker Induktion](divide-and-conquer.md#beweis-mittels-starker-induktion)
 
-- 4.7. [Einschub: Größenordnungen](methods.md#einschub-größenordnungen) -->
+<!-- - 4.6. [Dynamische Programmierung](methods.md#dynamische-programmierung)
 
-<!-- - 4.8. [Laufzeit mit dynamischer Programmierung](methods.md#laufzeit-mit-dynamischer-programmierung) -->
+- 4.7. [Einschub: Größenordnungen](methods.md#einschub-größenordnungen)
 
-<!-- - 4.8. [Backtracking](methods.md#backtracking) -->
+- 4.8. [Laufzeit mit dynamischer Programmierung](methods.md#laufzeit-mit-dynamischer-programmierung)
 
-<!--
+- 4.8. [Backtracking](methods.md#backtracking)
+
 - 4.5. [Einschub: Beweis der Laufzeit per Induktion](methods.md#einschub-beweis-der-laufzeit-per-induktion)
  
 - 4.6. [Greedy-Methode]()
--->
 
-<!-- ### 5. [Graphen](graphs.md)
+### 5. [Graphen](graphs.md)
 
 - 5.1. [Grundidee](graphs.md#grundidee)
 
-- 5.2. [Formale Definition](graphs.md#formale-definition) -->
+- 5.2. [Formale Definition](graphs.md#formale-definition)
 
-<!--
 ### 5. [Hashing](polymorphism.md)
 
 - 5.1. [Mengen](polymorphism.md#polymorphe-datentypen)

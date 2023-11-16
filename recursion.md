@@ -207,10 +207,10 @@ Um Summen zu vereinfachen verwenden wir eine Reihe von Regeln, die in [Abbildung
 
 $$\begin{align}
 \sum_{i = 0}^{n - 1} c &= c n & \sum_{i = 1}^{n} c &= c n\tag{1}\label{eqn:constant}\\\\
-\sum_{i = 1}^{n} x_i &= \sum_{i = 0}^{n - 1} x_{i + 1}\tag{2}\label{eqn:shift}\\\\
-\sum_{i = 0}^{n - 1} c x_i &= c \sum_{i = 0}^{n - 1} x_i\tag{3}\label{eqn:distributivity}\\\\
-\sum_{i = 0}^{n - 1} (x_i + y_i) &= \sum_{i = 0}^{n - 1} x_i + \sum_{i = 0}^{n - 1} y_i\tag{4}\label{eqn:associativity}\\\\
-\sum_{i = 0}^{n - 1} i &= \frac{n (n - 1)}{2}\tag{5}\label{eqn:gauß}
+\sum_{i = 0}^{n - 1} c x_i &= c \sum_{i = 0}^{n - 1} x_i\tag{2}\label{eqn:distributivity}\\\\
+\sum_{i = 0}^{n - 1} (x_i + y_i) &= \sum_{i = 0}^{n - 1} x_i + \sum_{i = 0}^{n - 1} y_i\tag{3}\label{eqn:associativity}\\\\
+\sum_{i = 0}^{n - 1} i &= \frac{n (n - 1)}{2}\tag{4}\label{eqn:gauß}\\\\
+\sum_{i = 1}^{n} x_i &= \sum_{i = 0}^{n - 1} x_{i + 1}\tag{5}\label{eqn:shift}
 \end{align}$$
 
 <figcaption>Abbildung 1: Regeln zur Umformung von Gleichungen</figcaption>
@@ -308,8 +308,8 @@ T_{\texttt{multiplicationTable}}(n) &= \sum_{i = 1}^{n} \left( \sum_{i = 1}^{n} 
 &= c_1 n^2 + c_2 n + c_3
 \end{align}$$
 
-
-<!-- `log2` ist eine Methode, die den Logarithmus zur Basis zwei berechnet.
+<!-- Als finales Beispiel wollen wir uns eine Methode anschauen, die zwar zwei ineinander geschachtelte Schleifen verwendet, deren Laufzeit aber dennoch linear ist.
+Wir betrachten dazu eine leicht vereinfachte Variante der Methode `expandArray` aus der Klasse `Arrays`.
 
 ```java
 static int[] expandArray(int[] array) {
@@ -319,10 +319,25 @@ static int[] expandArray(int[] array) {
     }
     return newArray;
 }
+```
 
-static int[] resizeArray(int max) {
+Im Folgenden wollen wir simulieren, wie die Methode `expandArray` aufgerufen wird, wenn wir zu einer `ArrayList` wiederholt Elemente mithilfe der Methode `add` hinzufügen.
+In der Methode `growArray` gibt das Argument `minSize`
+Beim wiederholten Hinzufügen starten wir mit einem Array mit nur einem Eintrag.
+Wir rufen dann immer wieder die Methode `expandArray` auf, bis die gewünschte Größe für das Array erreicht ist.
+Wenn wir ein Array der Größe `4` erhalten möchten, müssen wir zweimal die Methode `expandArray` aufrufen.
+Um ein Array der Größe `8` zu erhalten, müssen wir die Methode `expandArray` dreimal aufrufen.
+Insgesamt ergibt sich die Anzahl der Aufrufe als Zweier-Logarithmus der Zahl `minSize`.
+Im Folgenden stellt die Methode `log2` ist eine Methode, die den Logarithmus zur Basis zwei berechnet.
+Bei Werten für `minSize`, die kein Zweierpotenz sind, müssen wir etwas aufpassen.
+Wenn wir zum Beispiel ein Array der Größe `5` erhalten möchten, müssen wir die Methode `expandArray` dreimal aufrufen, da das erzeugte Array erst dann eine Größe hat, die mindestens `5` beträgt.
+Daher wird in der folgenden Methoden auf das Ergebnis der Methode `log2` noch die Methode `Math.ceil` aufgerufen.
+Diese Methode liefert uns die nächstgrößere ganze Zahl.
+
+```java
+static int[] growArray(int minSize) {
     var array = new int[1];
-    for (int i = 1; i <= log2(max); i++) {
+    for (int i = 1; i <= Math.ceil(log2(minSize)); i++) {
         array = expandArray(array);
     }
     return array;
@@ -337,7 +352,6 @@ $$\begin{align}
 
 <figcaption>Abbildung 1: Regeln zur Umformung von Gleichungen</figcaption>
 </figure>
-
 
 $$\begin{align}
 T_{\texttt{expandArray}}(n) &= \sum_{i = 0}^{n - 1} c_1 + c_2\text{Regel (\ref{eqn:constant})}\\\\
@@ -359,6 +373,6 @@ T_{\texttt{resizeArray}}(n) &= \sum_{i = 1}^{\log_2(n)} T_{\texttt{expandArray}}
     <ul class="nav-row">
         <li class="nav-item nav-left"><a href="complexity.html">zurück</a></li>
         <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"></li>
+        <li class="nav-item nav-right"><a href="divide-and-conquer.html">weiter</a></li>
     </ul>
 </div>
