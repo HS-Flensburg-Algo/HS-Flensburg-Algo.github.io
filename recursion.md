@@ -202,15 +202,16 @@ Die Laufzeit einer einfachen Zählschleife werden wir durch eine mathematische S
 Dadurch erhalten wir als Laufzeit für eine Methode mit Schleife eine Funktion, die mehrere mathematische Summen nutzt.
 Wir müssen diese Funktion dann in den meisten Fällen noch in die Form eines Polynoms bringen, um zu bestimmen, in welcher Größenordnung die Laufzeit einer Methode ist.
 Um Summen zu vereinfachen verwenden wir eine Reihe von Regeln, die in [Abbildung 1](#figure:rules) zu sehen sind.
+Um die Regeln nicht unnötig unübersichtlich zu machen, verzichten wir an dieser Stelle darauf, die Quantifizierung der Variablen anzugeben.
+In den Regeln in [Abbildung 1](#figure:rules) sind alle freien Variablen allquantifiziert.
 
 <figure id="figure:rules">
 
 $$\begin{align}
-\sum_{i = 0}^{n - 1} c &= c n & \sum_{i = 1}^{n} c &= c n\tag{1}\label{eqn:constant}\\\\
-\sum_{i = 0}^{n - 1} c x_i &= c \sum_{i = 0}^{n - 1} x_i\tag{2}\label{eqn:distributivity}\\\\
-\sum_{i = 0}^{n - 1} (x_i + y_i) &= \sum_{i = 0}^{n - 1} x_i + \sum_{i = 0}^{n - 1} y_i\tag{3}\label{eqn:associativity}\\\\
-\sum_{i = 0}^{n - 1} i &= \frac{n (n - 1)}{2}\tag{4}\label{eqn:gauß}\\\\
-\sum_{i = 1}^{n} x_i &= \sum_{i = 0}^{n - 1} x_{i + 1}\tag{5}\label{eqn:shift}
+\sum_{i = k}^{n} c &= c (n - k + 1) \tag{1}\label{eqn:constant}\\\\
+\sum_{i = k}^{n} c x_i &= c \sum_{i = k}^{n} x_i\tag{2}\label{eqn:distributivity}\\\\
+\sum_{i = k}^{n} (x_i + y_i) &= \sum_{i = k}^{n} x_i + \sum_{i = k}^{n} y_i\tag{3}\label{eqn:associativity}\\\\
+\sum_{i = 0}^{n} i &= \frac{n (n - 1)}{2}\tag{4}\label{eqn:gauß}
 \end{align}$$
 
 <figcaption>Abbildung 1: Regeln zur Umformung von Gleichungen</figcaption>
@@ -248,7 +249,7 @@ public T get(int index) {
 Zuerst bestimmen wir die Laufzeit der Methode `nodeAt`.
 In diesem Fall übergeben wir als Argument den Index, den wir suchen.
 
-$$T_{\texttt{nodeAt}}(i) = \sum_{j = 0}^{i - 1} c_1 + c_2 \overset{\text{Regel}~(\ref{eqn:constant})}= c_1i + c_2$$
+$$T_{\texttt{nodeAt}}(i) = \sum_{j = 0}^{i - 1} c_1 + c_2 \overset{\text{Regel}~(\ref{eqn:constant})}= c_1(i - 1 - 0 + 1) + c_2 = c_1i + c_2$$
 
 Die Variable *c*<sub>2</sub> steht für die Schritte, die vor und nach der Ausführung der Schleife durchgeführt werden müssen.
 Wir wissen nicht genau, wie viele Schritte es sind, es handelt sich aber um eine konstante Anzahl.
@@ -270,6 +271,7 @@ Wir nutzen nun die Vorarbeiten, um die Laufzeit der Methode `toArray` zu bestimm
 $$\begin{align}
 T_{\texttt{toArray}}(n) &= \sum_{i = 0}^{n - 1} (c_4 + T_{\texttt{get}}(i)) + c_5 & \text{Regel (\ref{eqn:associativity})}\\\\
 & = \sum_{i = 0}^{n - 1} c_4 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_5 & \text{Regel (\ref{eqn:constant})}\\\\
+& = (n - 1 - 0 + 1) c_4 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_5\\\\
 & = n c_4 + \sum_{i = 0}^{n - 1} T_{\texttt{get}}(i) + c_5 & \text{Definition $T_{\texttt{get}}$}\\\\
 & = n c_4 + \sum_{i = 0}^{n - 1} (c_1 i + c_2 + c_3) + c_5 & \text{Regel (\ref{eqn:associativity})}\\\\
 & = n c_4 + \sum_{i = 0}^{n - 1} c_1 i + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_5 & \text{Regel (\ref{eqn:constant})}\\\\
@@ -303,7 +305,8 @@ Auch in diesem Beispiel ignorieren wir die Laufzeit der Initialisierung des Arra
 
 $$\begin{align}
 T_{\texttt{multiplicationTable}}(n) &= \sum_{i = 1}^{n} \left( \sum_{i = 1}^{n} c_1 + c_2 \right) + c_3 & \text{Regel (\ref{eqn:constant})}\\\\
-&= \sum_{i = 1}^{n} (c_1 n + c_2) + c_3 & \text{Regel (\ref{eqn:constant})}\\\\
+&= \sum_{i = 1}^{n} (c_1 (n - 1 + 1) + c_2) + c_3 & \text{Regel (\ref{eqn:constant})}\\\\
+&= \sum_{i = 1}^{n} (c_1 n + c_2) + c_3\\\\
 &= (c_1 n + c_2)n + c_3\\\\
 &= c_1 n^2 + c_2 n + c_3
 \end{align}$$
