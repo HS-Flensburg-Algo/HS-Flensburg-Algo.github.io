@@ -211,7 +211,7 @@ $$\begin{align}
 \sum_{i = k}^{n} c &= c (n - k + 1) \tag{1}\label{eqn:constant}\\\\
 \sum_{i = k}^{n} c x_i &= c \sum_{i = k}^{n} x_i\tag{2}\label{eqn:distributivity}\\\\
 \sum_{i = k}^{n} (x_i + y_i) &= \sum_{i = k}^{n} x_i + \sum_{i = k}^{n} y_i\tag{3}\label{eqn:associativity}\\\\
-\sum_{i = 0}^{n} i &= \frac{n (n - 1)}{2}\tag{4}\label{eqn:gauß}
+\sum_{i = 0}^{n} i &= \frac{1}{2} n (n + 1)\tag{4}\label{eqn:gauß}
 \end{align}$$
 
 <figcaption>Abbildung 1: Regeln zur Umformung von Gleichungen</figcaption>
@@ -251,9 +251,9 @@ In diesem Fall übergeben wir als Argument den Index, den wir suchen.
 
 $$T_{\texttt{nodeAt}}(i) = \sum_{j = 0}^{i - 1} c_1 + c_2 \overset{\text{Regel}~(\ref{eqn:constant})}= c_1(i - 1 - 0 + 1) + c_2 = c_1i + c_2$$
 
-Die Variable *c*<sub>2</sub> steht für die Schritte, die vor und nach der Ausführung der Schleife durchgeführt werden müssen.
+Die Variable $$c_2$$ steht für die Schritte, die vor und nach der Ausführung der Schleife durchgeführt werden müssen.
 Wir wissen nicht genau, wie viele Schritte es sind, es handelt sich aber um eine konstante Anzahl.
-Die Variable *c*<sub>1</sub> steht für die konstante Anzahl an Schritten, die in jedem Durchlauf der Schleife durchgeführt werden.
+Die Variable $$c_1$$ steht für die konstante Anzahl an Schritten, die in jedem Durchlauf der Schleife durchgeführt werden.
 
 Mithilfe der Laufzeit für die Methode `nodeAt` können wir nun die Laufzeit der Methode `get` bestimmen.
 
@@ -261,8 +261,8 @@ $$T_{\texttt{get}}(i) = T_{\texttt{nodeAt}}(i) + c_3 = c_1i + c_2 + c_3$$
 
 Mithilfe dieser Vorarbeiten können wir nun die Laufzeit der Methode `toArray` bestimmen.
 Das Argument der Funktion $$T_{\texttt{toArray}}$$ ist in diesem Fall die Länge der Liste.
-Die Initialisierung eines Arrays hat eine lineare Laufzeit in der Größe des Arrays.
-Wir wollen hier die Laufzeit der Schleife mit einem einfachen Beispiel illustrieren.
+Die Initialisierung eines Arrays hat in Java eine lineare Laufzeit in der Größe des Arrays.
+An dieser Stelle soll der Fokus aber auf dem Aufwand sein, die durch die Verwendung der Schleife entsteht.
 Daher ignorieren wir im Folgenden die Laufzeit der Initialisierung des Arrays, obwohl wir damit die Laufzeit der Methode `toArray` eigentlich nicht korrekt berechnen.
 Das heißt, aus didaktischen Gründen verzichten wir auf die korrekte Berechnung der Laufzeit.
 
@@ -277,8 +277,9 @@ T_{\texttt{toArray}}(n) &= \sum_{i = 0}^{n - 1} (c_4 + T_{\texttt{get}}(i)) + c_
 & = n c_4 + \sum_{i = 0}^{n - 1} c_1 i + \sum_{i = 0}^{n - 1} (c_2 + c_3) + c_5 & \text{Regel (\ref{eqn:constant})}\\\\
 & = n c_4 + \sum_{i = 0}^{n - 1} c_1 i + (c_2 + c_3)n + c_5 & \text{Regel (\ref{eqn:distributivity})}\\\\
 & = n c_4 + c_1 \sum_{i = 0}^{n - 1} i + (c_2 + c_3)n + c_5 & \text{Regel (\ref{eqn:gauß})}\\\\
-& = n c_4 + c_1 \frac{n(n - 1)}{2} + (c_2 + c_3)n + c_5\\\\
-& = n c_4 + c_1 \left(\frac{1}{2} n^2 - \frac{1}{2} n\right) + (c_2 + c_3)n + c_5\\\\
+& = n c_4 + c_1 \frac{1}{2} (n - 1)(n - 1 + 1) + (c_2 + c_3)n + c_5\\\\
+& = n c_4 + c_1 \frac{1}{2} (n - 1)n + (c_2 + c_3)n + c_5\\\\
+& = n c_4 + c_1 \frac{1}{2} (n^2 - n) + (c_2 + c_3)n + c_5\\\\
 & = n c_4 + c_1 \frac{1}{2} n^2 - c_1 \frac{1}{2} n + (c_2 + c_3)n + c_5\\\\
 & = \frac{1}{2} c_1 n^2 + \left(- \frac{1}{2} c_1 + c_2 + c_3 + c_4 \right) n + c_5
 \end{align}$$
@@ -305,8 +306,8 @@ Auch in diesem Beispiel ignorieren wir die Laufzeit der Initialisierung des Arra
 
 $$\begin{align}
 T_{\texttt{multiplicationTable}}(n) &= \sum_{i = 1}^{n} \left( \sum_{i = 1}^{n} c_1 + c_2 \right) + c_3 & \text{Regel (\ref{eqn:constant})}\\\\
-&= \sum_{i = 1}^{n} (c_1 (n - 1 + 1) + c_2) + c_3 & \text{Regel (\ref{eqn:constant})}\\\\
-&= \sum_{i = 1}^{n} (c_1 n + c_2) + c_3\\\\
+&= \sum_{i = 1}^{n} (c_1 (n - 1 + 1) + c_2) + c_3\\\\
+&= \sum_{i = 1}^{n} (c_1 n + c_2) + c_3 & \text{Regel (\ref{eqn:constant})}\\\\
 &= (c_1 n + c_2)n + c_3\\\\
 &= c_1 n^2 + c_2 n + c_3
 \end{align}$$

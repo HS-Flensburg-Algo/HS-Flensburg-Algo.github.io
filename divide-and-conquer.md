@@ -6,9 +6,11 @@ title: "Divide and Conquer"
 
 Bei der Rekursion zerlegen wir ein Problem in eines oder mehrere kleinere Probleme.
 Bei der Implementierung der Fakultät, konnten wir bei der rekursiven Lösung zum Beispiel das Problem in ein kleineres Problem zerlegen, indem wir eine Multiplikation abgespalten haben und die Berechnung einer kleineren Fakultät übrig geblieben ist.
-Im Gegensatz dazu wird bei _Divide and Conquer_ ein Problem in mehrere Teilprobleme zerlegt.
-Wenn wir zum Beispiel mithilfe von _Divide and Conquer_ die Berechung der Faktultät implementieren wollten, müssten wir die Berechnung der Fakultät in zwei kleinere Berechnungen der Fakultät zerlegen.
-Auf diese Weise erhält man sehr effiziente Algorithmen, wie wir im Folgenden sehen werden.
+Das heißt, das Originalproblem war die Berechnung der Fakultät für `n` und das kleinere Problem, das wir rekursiv lösen, ist die Berechnung der Fakultät für `n - 1`.
+Im Gegensatz dazu wird bei _Divide and Conquer_ ein Problem in mehrere gleichgroße Teilprobleme zerlegt.
+Wenn wir zum Beispiel mithilfe von _Divide and Conquer_ die Berechnung der Fakultät implementieren wollten, müssten wir die Berechnung der Fakultät in zwei kleinere Berechnungen der Fakultät zerlegen.
+Zum Beispiel könnte ein _Divide and Conquer_-Ansatz die Berechnung des Produktes `n * ... * 1` in die Berechnung des Produktes `n * ... * n/2` und die Berechnung des Produktes `(n/2-1) * ... * 1` zerlegen.
+Durch die Zerlegung eines Problems in zwei (etwa) gleich große Teilprobleme erhält man sehr effiziente Algorithmen, wie wir im Folgenden sehen werden.
 
 
 Binäre Suche
@@ -228,6 +230,6 @@ Wir erhalten mit der zuvor gezeigten Aussage, dass $$T_{\texttt{binarySearch}} \
     <ul class="nav-row">
         <li class="nav-item nav-left"><a href="recursion.html">zurück</a></li>
         <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"></li>
+        <li class="nav-item nav-right"><a href="dynamic-programming.html">weiter</a></li>
     </ul>
 </div>

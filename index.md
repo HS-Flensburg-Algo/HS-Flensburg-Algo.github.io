@@ -50,11 +50,15 @@ custom_css: toc
 
 - 5.2. [Beweis mittels starker Induktion](divide-and-conquer.md#beweis-mittels-starker-induktion)
 
-<!-- - 4.6. [Dynamische Programmierung](methods.md#dynamische-programmierung)
+### 6. [Dynamische Programmierung](dynamic-programming.md)
 
-- 4.7. [Einschub: Größenordnungen](methods.md#einschub-größenordnungen)
+- 6.1. [Beispiel](dynamic-programming.md#beispiel)
 
-- 4.8. [Laufzeit mit dynamischer Programmierung](methods.md#laufzeit-mit-dynamischer-programmierung)
+- 6.2. [Einschub: Größenordnungen](dynamic-programming.md#einschub-größenordnungen)
+
+<!-- - 6.3. [Laufzeit mit dynamischer Programmierung](methods.md#laufzeit-mit-dynamischer-programmierung) -->
+
+<!--
 
 - 4.8. [Backtracking](methods.md#backtracking)
 
