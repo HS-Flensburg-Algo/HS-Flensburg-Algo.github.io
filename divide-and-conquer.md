@@ -34,8 +34,8 @@ static boolean binarySearch(int[] array, int value) {
     var end = array.length - 1;
 
     while (start <= end && !found) {
-        int mid = start + (end - start) / 2;
-        int midValue = array[mid];
+        var mid = start + (end - start) / 2;
+        var midValue = array[mid];
         if (value < midValue) {
             end = mid - 1;
         } else if (value > midValue) {
