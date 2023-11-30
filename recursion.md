@@ -305,7 +305,7 @@ Auch für diese Methode wolle wir einmal die Laufzeit bestimmen.
 Auch in diesem Beispiel ignorieren wir die Laufzeit der Initialisierung des Arrays `table` aus didaktischen Gründen.
 
 $$\begin{align}
-T_{\texttt{multiplicationTable}}(n) &= \sum_{i = 1}^{n} \left( \sum_{i = 1}^{n} c_1 + c_2 \right) + c_3 & \text{Regel (\ref{eqn:constant})}\\\\
+T_{\texttt{multiplicationTable}}(n) &= \sum_{i = 1}^{n} \left( \sum_{j = 1}^{n} c_1 + c_2 \right) + c_3 & \text{Regel (\ref{eqn:constant})}\\\\
 &= \sum_{i = 1}^{n} (c_1 (n - 1 + 1) + c_2) + c_3\\\\
 &= \sum_{i = 1}^{n} (c_1 n + c_2) + c_3 & \text{Regel (\ref{eqn:constant})}\\\\
 &= (c_1 n + c_2)n + c_3\\\\
@@ -371,7 +371,32 @@ T_{\texttt{resizeArray}}(n) &= \sum_{i = 1}^{\log_2(n)} T_{\texttt{expandArray}}
 &= c_1 \cdot (2^{\log_2(n) + 1} - 1) + c_2 \log_2(n)
 \end{align}$$ -->
 
+<!-- 
+_Arm's length_-Rekursion
+--------------------------
 
+Bei rekursiven Implementierungen kann häufig die konkret Laufzeit verringert werden, indem man rekursive Aufrufe vermeidet.
+Das heißt, der Algorithmus bleibt in der gleichen Größenordnung, man spart aber etwa die Hälfte der konkreten Laufzeit.
+Um dies zu erreichen, wird die Abbruchbedingung vor dem rekursiven Aufruf geprüft, um den Aufruf einzusparen.
+Wir betrachten etwa die folgende alternative Implementierung der rekursiven Fakultät.
+
+``` java
+static int fac(int n) {
+    if (n <= 0) {
+        return 1;
+    } else {
+        return n * fac(n - 1);
+    }
+}
+
+private static int facRec(int n) {
+    if (n <= 1) {
+        return 1;
+    } else {
+        return facRec(n);
+    }
+}
+``` -->
 
 <div class="nav">
     <ul class="nav-row">
