@@ -19,12 +19,12 @@ Binäre Suche
 Wir wollen im Folgenden das Prinzip der binären Suche betrachten.
 Dazu nehmen wir an, dass wir ein Array mit aufsteigend sortierten Zahlen gegeben haben.
 Wir wollen testen, ob dieses Array eine gegebene Zahl enthält.
-Wenn wir ein Array gegeben haben, dessen Einträge bereits aufsteigend sortiert sind und wir suchen einen bestimmten Eintrag, so können wir dieses Problem mit Hilfe einer binären Suche lösen.
+Wenn wir ein Array gegeben haben, dessen Einträge bereits aufsteigend sortiert sind und wir suchen einen bestimmten Eintrag, so können wir dieses Problem mithilfe einer binären Suche lösen.
 Bei der binären Suche schaut man sich zuerst den Eintrag in der Mitte des Arrays an.
 Falls dieser Eintrag dem Wert entspricht, den wir suchen, sind wir fertig.
 Falls der Eintrag in der Mitte kleiner ist als der Wert, den wir suchen, wissen wir, dass wir mit der ersten Hälfte des Arrays fortfahren können.
 Sollte das Element in der Mitte des Arrays bereits größer sein als der Wert, den wir suchen, so fahren wir mit der zweiten Hälfte des Arrays fort.
-In der neu bestimmten Hälfte des Arrays suchen wir wiederum mit Hilfe einer binären Suchen nach dem gesuchten Wert.
+In der neu bestimmten Hälfte des Arrays suchen wir wiederum mithilfe einer binären Suchen nach dem gesuchten Wert.
 Auf diese Weise können wir bei jedem Schritt im schlechtesten Fall die Hälfte der Elemente ignorieren.
 
 ``` java
@@ -35,10 +35,9 @@ static boolean binarySearch(int[] array, int value) {
 
     while (start <= end && !found) {
         var mid = start + (end - start) / 2;
-        var midValue = array[mid];
-        if (value < midValue) {
+        if (value < array[mid]) {
             end = mid - 1;
-        } else if (value > midValue) {
+        } else if (value > array[mid]) {
             start = mid + 1;
         } else {
             found = true;
@@ -93,7 +92,7 @@ $$T_{\texttt{binarySearch}}(n) \le (\log_2 n + 1) c_2 + c_1 = c_2 \log_2 n + c_2
 Das heißt, dass die *worst case*-Laufzeit der Methode `binarySearch` in $$\mathcal{O}(\log_2 n)$$ liegt.
 
 Alle Logarithmen sind in der gleichen Größenordnung.
-Dies lässt sich einfach zeigen, wenn man sich überlegt, wie sich der Logarithmus einer Basis mit Hilfe des Logarithmus einer anderen Basis ausdrücken lässt.
+Dies lässt sich einfach zeigen, wenn man sich überlegt, wie sich der Logarithmus einer Basis mithilfe des Logarithmus einer anderen Basis ausdrücken lässt.
 Für zwei Basen *b*<sub>1</sub> und *b*<sub>2</sub> gilt der folgende Zusammenhang.
 
 $$\log_{b_1} x = \frac{\log_{b_2} x}{\log_{b_2} b_1}.$$
