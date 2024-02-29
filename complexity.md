@@ -55,7 +55,7 @@ public T get(int index) {
 Wir beschreiben die Laufzeit dieser Methode als Funktion, deren Eingabe die Größe des Arrays ist.
 Wir haben bereits gesehen, dass der Zugriff auf ein Element eines Arrays mithilfe einer einfachen Rechnung umgesetzt werden kann.
 Bei der Bestimmung von Laufzeiten von Methoden geht man davon aus, dass der Zugriff auf ein Array einen Schritt benötigt.
-Außerdem wir der Variable `value` ein Wert zugewiesen, dafür zählen wir ebenfalls einen Schritt.
+Außerdem wird der Variable `value` ein Wert zugewiesen, dafür zählen wir ebenfalls einen Schritt.
 Der generische Typ `T` ist in Java nur zur Compile-Zeit existent.
 Das heißt, zur Laufzeit verursacht der _Cast_ keinerlei Aufwand.
 
