@@ -8,8 +8,7 @@ Diese Datenstrukturen können genutzt werden, um mehrere Werte zu einem einzigen
 Man spricht dabei von linearen Datenstrukturen, da die einzelnen Werte in einer linearen Reihenfolge angeordnet werden.
 Genauer gesagt, kann man in einer linearen Datenstruktur jeden Eintrag, der in der Struktur gespeichert wurde, mithilfe einer natürlichen Zahl adressieren.
 
-Arrays
-------
+## Arrays
 
 Aus der Vorlesung zur Programmierung ist die Datenstruktur Array bekannt.
 Diese erlaubt es, eine feste Anzahl von Elementen zu einem Objekt, nämlich einem Array, zusammenzufassen.
@@ -42,8 +41,8 @@ Dieser Speicher ist dabei zusammenhängend, das heißt, die einzelnen Elemente d
 Genauer gesagt, wird für eine Zahl `n` und einen Typ `type` durch einen Ausdruck der Form `new type[n]` Speicher der Größe `n * m` reserviert, wobei `m` der Speicher ist, der für einen Wert vom Typ `type` benötigt wird.
 
 Durch die Verwendung eines zusammenhängenden Speicherabschnitts kann effizient auf die einzelnen Elemente eines Array zugegriffen werden.
-Genauer gesagt, können wir für ein Array `a` vom Typ `type[]` und eine Zahl `n` bei einem Ausdruck der Form `a[n]` ausrechnen, an welcher Stelle im Speicher der Wert liegt.
-Um zu berechnen, an welcher Stelle im Speicher unser Wert vom Typ `type` liegt, nehmen wir einfach die Anfangsstelle unseres Speicherabschnitts und addieren `n`-mal die Größe eines Wertes vom Typ `type`.
+Genauer gesagt, können wir für ein Array `array` vom Typ `type[]` und eine Zahl `index` bei einem Ausdruck der Form `array[index]` ausrechnen, an welcher Stelle im Speicher der Wert liegt.
+Um zu berechnen, an welcher Stelle im Speicher unser Wert vom Typ `type` liegt, nehmen wir einfach die Anfangsstelle unseres Speicherabschnitts und addieren `index`-mal die Größe eines Wertes vom Typ `type`.
 
 Bei vielen Anwendungen möchte man eine dynamische Anzahl an Elementen in einer Datenstruktur speichern. Das heißt, erst nach dem Sammeln der Elemente in einer Datenstruktur ist klar, wie viele Elemente in der Datenstruktur abgelegt werden sollen.
 Wenn wir zum Beispiel einen Warenkorb in einem Web-Shop implementieren, wissen wir nicht, wie viele Gegenstände im Warenkorb gespeichert werden müssen.
@@ -64,14 +63,13 @@ Das heißt, in unserer Anwendung nutzen wir die Klasse und in der Implementierun
 Es muss zum Beispiel gespeichert werden, wie viele Einträge noch in das Array passen und ein größeres Array angelegt werden, wenn der Platz nicht mehr ausreicht.
 Im Abschnitt [ArrayListen](#arraylisten) diskutieren wir, wie eine solche Implementierung umgesetzt werden kann.
 
-Listen
-------
+## Listen
 
 Wie ein Array erlaubt eine Liste das Speichern mehrerer Werte.
 Im Unterschied zu einem Array können wir bei einer Liste aber Werte im Nachhinein hinzufügen oder aus der Liste entfernen.
 Dabei entspricht das Entfernen nicht dem Setzen des Eintrages auf `null` sondern dem kompletten Entfernen aus der Struktur.
 
-Es gibt verschiedene Implementierungen von Listen, die intern unterschiedlich implementiert sind, aber alle die gleichen Methoden zur Verfügung stellen.
+Es gibt verschiedene Implementierungen von Listen, die intern unterschiedlich umgesetzt sind, aber alle die gleichen Methoden zur Verfügung stellen.
 Um über verschiedene Implementierungen zu sprechen, welche die gleichen Methoden zur Verfügung stellen, verwenden wir einen abstrakten Datentyp.
 Ein abstrakter Datentyp (ADT) besteht aus einer Menge von Signaturen.
 Eine Signatur ist dabei der Name einer Methode zusammen mit ihren Argumenttypen und ihrem Ergebnistyp.
@@ -81,7 +79,7 @@ Da wir die Implementierung der Methoden nicht kennen und uns auch nicht dafür i
 In der Theorie werden diese Verhaltensregeln häufig in Form von Gleichungen angegeben, bei denen auf beiden Seiten der Gleichung Terme stehen, die die Operationen des abstrakten Datentyps verwenden.
 In der Praxis wird die Spezifikation in der Regel in Form von umgangssprachlichen Kommentaren angegeben, die wir auch an dieser Stelle verwenden wollen.
 Die Abbildung <a href="#figure:list-adt">Der abstrakte Datentyp Liste</a> zeigt einen abstrakten Datentyp für eine Liste und präsentiert alle Methoden, die wir im Folgenden betrachten werden.
-Das heißt, eine Liste stellt normalerweise mindestens die Methoden in der Abbildung <a href="#list-adt">Der abstrakte Datentyp Liste</a> zur Verfügung.
+Das heißt, eine Liste stellt normalerweise mindestens die Methoden in <a href="#list-adt">Abbildung 1</a> zur Verfügung.
 
 <figure id="figure:list-adt" markdown="1">
 
@@ -98,9 +96,21 @@ Das heißt, eine Liste stellt normalerweise mindestens die Methoden in der Abbil
 
 Die Elemente einer Liste sind mit null startend durchnummeriert.
 Beim Hinzufügen kann man nur an validen Positionen ein Element in die Liste einfügen.
-Hat die Liste *n* Elemente, so sind alle Indizes größer gleich null und kleiner gleich *n* valide Indizes.
-Das heißt, bei einer Liste mit 3 Elementen, können neue Elemente an den Positionen 0, 1, 2 und 3 hinzugefügt werden.
-Beim Entfernen eines Elementes aus einer Liste mit *n* Elementen sind nur die Indizes größer gleich null und kleiner als *n* valide Indizes.
+Hat die Liste `n` Elemente, so sind alle Indizes größer gleich null und kleiner gleich `n` valide Indizes.
+Das heißt, bei einer Liste mit 3 Elementen, können neue Elemente an den Positionen `0`, `1`, `2` und `3` hinzugefügt werden.
+Beim Entfernen eines Elementes aus einer Liste mit `n` Elementen sind nur die Indizes größer gleich null und kleiner als `n` valide Indizes.
+
+Bei mehreren Methoden in <a href="#figure:list-adt">Abbildung 1</a> wird der Typ `T` verwendet.
+`T` ist hier ein Platzhalter, der für den Typ der Elemente in der Liste steht.
+Das heißt, wenn wir eine Liste mit Elementen vom Typ `Integer` betrachten, so steht das `T` für den Typ `Integer` und wenn wir eine Liste mit Elementen vom Typ `String` betrachten, so steht das `T` für den Typ `String`.
+Wir werden später sehen, wie man diese Art von Platzhalter in Java modelliert.
+
+<a href="#examples">Abbildung 2</a> illustriert das Verhalten der Methoden `add` und `remove`.
+An die Methode `add` übergeben wir einen Index und einen Wert, der in der Liste eingetragen werden soll.
+Durch das Einfügen eines Eintrages rutschen die Elemente in einer Liste weiter nach hinten.
+Dadurch wird diesen Elementen auch ein neuer Index zugeordnet.
+Im ersten Beispiel hat der Wert `"b"` vor dem Einfügen zum Beispiel den Index `1`, da er an der zweiten Stelle der Liste steht.
+Nach dem Einfügen des Wertes `"x"` hat das `"b"` aber den Index `2`, da es nun an der dritten Stelle der Liste steht.
 
 <figure id="examples" markdown="1">
 ![add(1,"x")](/assets/graphics/example1.svg){: height="80px" .centered}
@@ -109,29 +119,6 @@ Beim Entfernen eines Elementes aus einer Liste mit *n* Elementen sind nur die In
 ![remove(1)](/assets/graphics/example4.svg){: height="80px" .centered}
   <figcaption>Abbildung 2: Veränderung einer Liste durch Einfügen und Entfernen</figcaption>
 </figure>
-
-Bei mehreren Methoden in der <a href="#figure:list-adt">Abbildung 1</a> wird der Typ `T` verwendet.
-`T` ist hier ein Platzhalter, der für den Typ der Elemente in der Liste steht.
-Das heißt, wenn wir eine Liste mit Elementen vom Typ `Integer` betrachten, so steht das `T` für den Typ `Integer` und wenn wir eine Liste mit Elementen vom Typ `String` betrachten, so steht das `T` für den Typ `String`.
-Wir werden später sehen, wie man diese Art von Platzhalter in Java modelliert.
-
-Programmiersprachen stellen unterschiedliche Konzepte zur Verfügung, um einen abstrakten Datentyp zu implementieren.
-In der Programmiersprache Java können wir die Signatur eines ADT zum Beispiel mithilfe eines Interface umsetzen.
-Wir werden später aber auch noch Beispiele sehen, bei denen wir kein Interface für einen ADT definieren, da wir nur eine einzige Implementierung des ADT angeben und daher nicht die zusätzliche Abstraktion durch ein Interface benötigen.
-
-``` java
-interface List<T> {
-    boolean isEmpty();
-
-    int size();
-
-    T get(int index);
-
-    void add(int index, T elem);
-
-    T remove(int index);
-}
-```
 
 Neben den Methoden in <a href="#figure:list-adt">Abbildung 1</a> stellt eine Liste noch einen Konstruktor zur Verfügung, um eine leere Liste zu erzeugen.
 Das folgende Programm zeigt beispielhaft die Verwendung einer Klasse `ArrayList`, die eine Liste implementiert.
@@ -150,6 +137,25 @@ Am Ende wird noch das Element an Index `1` entfernt, so dass eine Liste mit den 
 Die Methode `remove` entfernt ein Element aus der Liste und liefert den Eintrag als Ergebnis zurück.
 Das heißt, die Variable `elem` enthält nach der Ausführung den `String` `"b"`.
 
+Programmiersprachen stellen unterschiedliche Konzepte zur Verfügung, um einen abstrakten Datentyp zu implementieren.
+In der Programmiersprache Java können wir die Signatur eines ADT zum Beispiel mithilfe eines Interface umsetzen.
+Wir werden später aber auch noch Beispiele sehen, bei denen wir kein Interface für einen ADT definieren, da wir nur eine einzige Implementierung des ADT angeben und daher nicht die zusätzliche Abstraktion durch ein Interface benötigen.
+Die folgende Definition stellt ein Interface für die Implementierung einer Liste in Java zur Verfügung.
+
+``` java
+interface List<T> {
+    boolean isEmpty();
+
+    int size();
+
+    T get(int index);
+
+    void add(int index, T elem);
+
+    T remove(int index);
+}
+```
+
 Das `T` in der Definition des Interface `List` wird als Typparameter bezeichnet und ist ein Platzhalter für einen konkreten Typ.
 Wenn wir das Interface verwenden, geben wir für dieses `T` einen konkreten Typ an.
 In dem Code-Schnipsel oben übergeben wir zum Beispiel `String` als konkreten Typ.
@@ -160,7 +166,8 @@ Der Typ `List<Integer>` ist dagegen der Typ von Listen, deren Einträge ganze Za
 Wenn wir einen konkreten Typ an das Interface `List` übergeben, werden die Vorkommen von `T` in der Definition des Interface durch `String` ersetzt.
 Das heißt, wenn wir eine Klasse vom Typ `List<String>` haben, dann liefert die entsprechende `get`-Methode einen Wert vom Typ `String` als Ergebnis, da das `T` durch `String` ersetzt wird.
 
-### Arraylisten
+
+## Arraylisten
 
 Wir können die Methoden in <a href="#figure:list-adt">Abbildung 1</a> mithilfe eines Arrays implementieren.
 Das heißt, wir können eine Klasse implementieren, die intern ein Array verwendet, um die Elemente einer Liste zu verwalten.
@@ -192,7 +199,7 @@ Im zweiten Schritt werden die Einträge im Array so verschoben, dass anschließe
 Nach dem Durchführen des ersten und zweiten Schrittes hat das Array ausreichend Platz und die Position, an der das Element eingefügt werden soll, ist frei.
 Daher können wir das Element einfach an die freie Stelle schreiben.
 
-### Einfach verkettete Listen
+## Einfach verkettete Listen
 
 Statt die Methoden einer Liste mithilfe eines Arrays zu implementieren, können wir diese Methoden auch mithilfe von Objekten implementieren.
 Wir betrachten zuerst die Implementierung einer Liste mithilfe einer **einfachen Verkettung**.
@@ -249,6 +256,7 @@ Zum Beispiel, ist der Typparameter `T`, der in der Definition der Klasse `Node` 
 Es ist nicht nur möglich, Typparameter bei der Definition einer Klasse einzuführen, sondern auch bei der Definition einer Methode.
 
 Eine einfach verkettete Liste ist ein Objekt vom Typ `SLList`.
+Der Name `SLList` ist eine Abkürzung für _**S**ingly-**L**inked **List**_.
 Die Klasse hält eine Referenz auf den ersten Knoten, also auf ein Objekt vom Typ `Node`.
 Im Folgenden implementieren wir auch gleich eine Methode `isEmpty`, die überprüft, ob die Liste leer ist.
 
@@ -269,7 +277,7 @@ public class SLList<T> {
 Die generische Klasse `SLList<T>` implementiert eine einfach verkettete Liste.
 Die Definition von generischen Typen wurde zur Programmiersprachen Java im Nachhinein hinzugefügt.
 Aus Gründen der Abwärtskompatibilität wird der Typ der Elemente eines Arrays daher anders angegeben als der Typ der Elemente einer Liste.
-Bereits vor der Einführung von generischen Typen konnten in der Programmiersprachen Java bereits verschiedene Typen von Arrays definiert werden.
+Bereits vor der Einführung von generischen Typen konnten in der Programmiersprache Java bereits verschiedene Typen von Arrays definiert werden.
 Als die generischen Klassen zur Programmiersprache Java hinzugefügt wurden, wurde die bereits bestehende Schreibweise für die Arrays beibehalten.
 
 Um die Methoden `get`, `add` und `remove` zu implementieren, implementieren wir eine Hilfsmethode, die das `Node`-Objekt an einer bestimmten Stelle in der Liste heraussucht.
@@ -298,7 +306,7 @@ Mithilfe dieser Methode können wir nun sehr einfach die Methoden `get` und `add
   <figcaption>Abbildung 5: Einfügen eines Elementes durch einen Aufruf <code class="language-java">add(i, x)</code></figcaption>
 </figure>
 
-Die Methode `get` ruft einfach die Methode `nodeAt` auf und selektiert aus dem erhaltenen Knoten den Wert.
+Die Methode `get` ruft die Methode `nodeAt` auf und selektiert aus dem erhaltenen Knoten den Wert.
 
 ``` java
 public T get(int index) {
@@ -307,10 +315,6 @@ public T get(int index) {
 ```
 
 Die Implementierung der Methode `add` ist eine Umsetzung von <a href="#figure:sllist-add">Abbildung 5</a>.
-Wir haben bei der Implementierung einer Methode immer mehrere Möglichkeiten, zum Beispiel könnten wir in der Methode `add` mehr Hilfsvariablen einführen.
-Zum Beispiel könnten wir den neu erzeugten Knoten in Zeile 6 erst einmal in einer Variable speichern, bevor wir den Knoten an die Methode `setNext` übergeben.
-Im Kontext dieser Vorlesung werden wir versuchen, in vielen Fällen auf solche Hilfsvariablen zu verzichten.
-Auf diese Weise soll ein tieferes Verständnis dafür vermittelt werden, wie man in einer Programmiersprache Aufrufe schachteln kann.
 
 ``` java
 public void add(int index, T elem) {
@@ -323,11 +327,17 @@ public void add(int index, T elem) {
 }
 ```
 
-Queues und Stacks
------------------
+Bei der Implementierung der Methode haben wir ein paar Freiheitsgrade.
+Zum Beispiel könnten wir mehr Hilfsvariablen einführen.
+Wir könnten etwa den neu erzeugten Knoten in Zeile 6 erst in einer Variable speichern, bevor wir den Knoten an die Methode `setNext` übergeben.
+Im Kontext dieser Vorlesung werden wir versuchen, in vielen Fällen auf solche Hilfsvariablen zu verzichten.
+Auf diese Weise soll ein tieferes Verständnis dafür vermittelt werden, wie man in einer Programmiersprache Aufrufe schachteln kann.
+
+## Queues und Stacks
 
 Als nächstes wollen wir uns anschauen, wie wir eine Methode `add(T)`[^1] zu unserer Implementierung einer einfach verketteten Liste hinzufügen können.
 Diese Methode fügt ein Element am Ende einer Liste an.
+Im Folgenden ist eine solche Methode implementiert.
 
 ``` java
 public void add(T elem) {
@@ -347,7 +357,7 @@ public void add(T elem) {
 Um am Ende der Liste ein Element anzufügen, müssen wir die gesamte Liste durchlaufen.
 Das Durchlaufen der Liste kostet unter Umständen viel Zeit und kann relativ einfach verhindert werden.
 Wir können uns einfach neben der Referenz auf den Kopf der Liste noch eine Referenz auf das Ende der Liste merken.
-Für ein gutes Verständnis der Implementierung von Datenstrukturen ist es unerlässlich, zu verstehen, wann eine Programmiersprache eine Berechnung ausführt.
+Wir werden später in der Vorlesung noch genauer betrachten, wie diese beiden Ansätze sich unterscheiden.
 
 Im Zusammenhang der Methode `add(T)` wollen wir uns noch einen weiteren abstrakten Datentyp anschauen.
 <a href="#figure:queue-adt">Abbildung 6</a> zeigt den abstrakten Datentyp Queue.
@@ -454,7 +464,7 @@ Um ein Element am Ende der Liste zu entfernen, benötigen wir eine Möglichkeit,
   <figcaption>Abbildung 8: Eine doppelt verkettete Liste mit den Elementen <code class="language-java">a</code>, <code class="language-java">b</code> und <code class="language-java">c</code></figcaption>
 </figure>
 
-Im Vergleich zu einer einfach verketteten Liste, hat bei einer doppelt verketteten Liste jedes Element neben einer Referenz auf seinen Nachfolger noch eine Referenz auf seinen Vorgänger.
+Im Vergleich zu einer einfach verketteten Liste hat bei einer doppelt verketteten Liste jedes Element neben einer Referenz auf seinen Nachfolger noch eine Referenz auf seinen Vorgänger.
 Das heißt, zusätzlich zum Element und der Referenz auf das nächste `Node`-Objekt enthält ein Knoten in einer doppelten Verkettung noch eine Referenz auf den Vorgänger-Knoten.
 Die folgende Klasse implementiert ein Knoten-Objekt für eine doppelte Verkettung.
 
@@ -545,8 +555,8 @@ Die Klasse `LinkedList` implementiert das Interface `List` mithilfe einer doppel
 Neben dem Interface `List<T>` bietet Java auch ein Interface `Queue<T>`.
 Die Klasse `LinkedList` implementiert zum Beispiel das Interface `Queue`.
 Daneben stellt Java auch noch ein Interface `Deque` zur Verfügung.
-Das Wort **Deque** ist eine Kurzform von **_double ended queue_**.
-Das heißt, bei einem Deque handelt es sich um eine Queue, bei der man an beiden Enden hinzufügen und entfernen kann.
+Das Wort **Deque** ist eine Kurzform von **_Double Ended Queue_**.
+Das heißt, bei einem Deque handelt es sich um eine Queue, bei der man an beiden Enden effizient hinzufügen und entfernen kann.
 Da man bei einer doppelt verketteten Liste effizient vorne und hinten hinzufügen und entfernen kann, implementiert die Klasse `LinkedList` das Interface `Deque`.
 Neben diesen Interfaces stellt Java noch eine generische Klasse `Stack` zur Verfügung, welche die Methoden `push` und `pop` zur Verfügung stellt.
 In der Beschreibung dieser Klasse wird allerdings darauf hingewiesen, dass das Interface `Deque` eine umfangreichere Menge von Stack-Operationen zur Verfügung stellt.

@@ -6,21 +6,35 @@ custom_css: toc
 
 ### 0. [Grundlagen](basics.md)
 
-<!-- - 0.1. [Sichtbarkeit von Variablen](basics.md#sichtbarkeit-von-variablen)
+- 0.1. [Sichtbarkeit von Variablen](basics.md#sichtbarkeit-von-variablen)
 
-- 0.2. [Primitive Typen und Objekttypen](basics.md#primitive-typen-und-objekttypen)
+- 0.2. [Die Klasse `Object`](basics.md#die-klasse-object)
 
-- 0.3. [Gleichheit](basics.md#gleichheit)
+- 0.3. [Primitive Typen](basics.md#primitive-typen)
 
-- 0.4. [Modifikator `final`](basics.md#modifikator-final) -->
+- 0.4. [Gleichheit](basics.md#gleichheit)
+
+- 0.5. [Modifikator `final`](basics.md#modifikator-final)
+
+- 0.6. [Lokale Typinferenz](basics.md#lokale-typinferenz)
 
 ### 1. [Einleitung](introduction.md)
+
+- 1.1. [Was ist ein Algorithmus?](introduction.md#was-ist-ein-algorithmus)
+
+- 1.2. [Was ist eine Datenstruktur?](introduction.md#was-ist-eine-datenstruktur)
+
+- 1.3. [Was ist eine Komplexität?](introduction.md#was-ist-eine-komplexität)
 
 ### 2. [Lineare Datenstrukturen](linear-data-structures.md)
 
 - 2.1. [Arrays](linear-data-structures.md#arrays)
 
 - 2.2. [Listen](linear-data-structures.md#listen)
+
+- 2.3. [Arraylisten](linear-data-structures.md#arraylisten)
+
+- 2.4. [Einfach verkettete Listen](linear-data-structures.md#einfach-verkettete-listen)
 
 - 2.3. [Queues und Stacks](linear-data-structures.md#queues-und-stacks)
 

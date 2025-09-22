@@ -9,7 +9,7 @@ Des Weiteren sind sie in der Lage, den abstrakten Algorithmus in eine konkrete I
 Bei der konkreten Implementierung werden Grundregeln guter Programmierung beachtet, wie Formatierung, Wahl von Bezeichnern und Strukturierung des Codes.
 Zu guter Letzt sind die Studierenden in der Lage, Laufzeiten von Algorithmen zu vergleichen und bei der Wahl eines geeigneten Algorithmus zu berücksichtigen.
 
-## Was ist überhaupt ein Algorithmus?
+## Was ist ein Algorithmus?
 
 Ein Algorithmus ist eine **exakte** und **abstrakte** Beschreibung eines systematischen Vorgehens zur **Lösung eines Problems**.
 Die “Lösung eines Problems” bedeutet dabei, dass ein Algorithmus aus einer definierten Menge von Eingaben eine bestimmte Ausgabe errechnet.
@@ -20,18 +20,19 @@ Aus diesem Grund werden Algorithmen häufig in Form von Pseudocode angegeben.
 Dabei handelt es sich um eine Programmiersprache, welche die Konstrukte typischer imperativer bzw. objektorientierter Programmiersprachen wie Zuweisungen, Konditionale und Schleifen zur Verfügung stellt.
 Diese Programmiersprachen sind aber nicht ausführbar wie “normale” Programmiersprachen, da es keine Implementierung für die Sprache gibt.
 Das heißt, es gibt weder einen Interpreter noch einen Compiler für die Sprache.
-Einzelne Anweisungen werden in Pseudocode außerdem häufig umgangssprachlich oder mathematisch beschreiben.
+Einzelne Anweisungen werden in Pseudocode außerdem häufig umgangssprachlich oder mathematisch beschrieben.
 In dieser Vorlesung werden wir in den allermeisten Fällen Java-Programme verwenden und keinen Pseudocode.
 Die Ideen der Implementierungen in dieser Vorlesung sind aber nicht auf Java beschränkt sondern können in allen imperativen bzw. objektorientierten Programmiersprachen umgesetzt werden.
 
-## Was ist überhaupt eine Datenstruktur?
+## Was ist eine Datenstruktur?
 
-Eine Datenstruktur ist eine strukturierte Art und Weise Daten zu organisieren und zu speichern.
-Darüber hinaus bietet eine Datenstruktur Operationen für den Zugriff und die Veränderung der Daten.
-Datenstrukturen sind eng mit Algorithmen verwandt, da Algorithmen genutzt werden, um Datenstrukturen zu verarbeiten/modifizieren.
-Dabei ist die Wahl der Datenstruktur häufig entscheidend für den Aufwand, den die Durchführung eines Algorithmus erzeugt.
+Eine Datenstruktur ist ein systematischer Ansatz, Daten zu organisieren und zu speichern.
+Darüber hinaus bietet sie Operationen für den Zugriff und die Veränderung der Daten.
+Algorithmen und Datenstrukturen gehen dabei Hand in Hand.
+Einerseits kann man komplexere Operationen auf Datenstrukturen als einfache Algorithmen verstehen, andererseits verwenden Algorithmen Datenstrukturen, um Probleme effizient zu lösen.
+Die Wahl der Datenstruktur bestimmt häufig die Laufzeit und den Speicheraufwand eines Algorithmus.
 
-## Komplexität
+## Was ist eine Komplexität?
 
 Die abstrakte Klassifikation des Aufwandes, den ein Algorithmus benötigt, wird als Komplexität des Algorithmus bezeichnet.
 Die Komplexität beschreibt dabei nicht die reale Zeit, die die Ausführung eines Algorithmus benötigt, sondern eine abstrakte Größenordnung.
