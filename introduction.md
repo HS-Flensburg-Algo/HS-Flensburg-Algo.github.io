@@ -38,10 +38,4 @@ Die Komplexität beschreibt dabei nicht die reale Zeit, die die Ausführung eine
 Man verwendet eine solche abstrakte Klassifikation, um von der konkreten Wahl der Programmiersprache und des Rechners, auf dem der Algorithmus ausgeführt wird, abstrahieren zu können.
 Diese Klassifikation dient vor allem, um die Effizienz von verschiedenen Algorithmen schnell gegeneinander abschätzen zu können.
 
-<div class="nav">
-    <ul class="nav-row">
-        <li class="nav-item nav-left"><a href="basics.html">zurück</a></li>
-        <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"><a href="linear-data-structures.html">weiter</a></li>
-    </ul>
-</div>
+{% include bottom-nav.html previous="basics.html" next="linear-data-structures.html" %}

@@ -350,10 +350,4 @@ Diese Kopieraktion muss aber nur durchgeführt werden, wenn wir bereits eine gan
 
 [^1]: Dabei gilt $$\mathbb{R}_{>0} = \{ x \in \mathbb{R} \mid x \gt 0 \}$$.
 
-<div class="nav">
-    <ul class="nav-row">
-        <li class="nav-item nav-left"><a href="linear-data-structures.html">zurück</a></li>
-        <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"><a href="recursion.html">weiter</a></li>
-    </ul>
-</div>
+{% include bottom-nav.html previous="linear-data-structures.html" next="recursion.html" %}

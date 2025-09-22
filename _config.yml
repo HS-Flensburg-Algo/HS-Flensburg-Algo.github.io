@@ -7,8 +7,6 @@ description: >
 
 markdown: kramdown
 remote_theme: jekyll/minima
-header_pages:
-  - index.md
 
 kramdown:
   syntax_highlighter_opts:

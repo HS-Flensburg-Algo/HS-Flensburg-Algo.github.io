@@ -1,62 +1,164 @@
+/* Make arbitrary content float right */
+
+.float-right {
+    float: right;
+    padding: 10px 0 10px 10px;
+}
+
+/* Make arbitrary content small */
+
+.small {
+    width: 200px;
+}
+
+/* Make figure captions centered */
+
 figcaption {
     text-align: center;
 }
 
-figure img {
-    vertical-align: bottom;
-}
+/* Make images centered */
 
-.nav {
-    display: table;
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-.nav-row {
-    display: table-row;
-    list-style: none;
-}
-
-.nav-item {
-    display: table-cell;
-    width: 33%;
-}
-
-.nav-left {
-    text-align: left;
-}
-
-.nav-center {
-    text-align: center;
-}
-
-.nav-right {
-    text-align: right;
-}
-
-.centered {
+img.centered {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-pre {
-    padding: 0;
-    border-style: none;
+/* Style navigation at the bottom */
+
+.bottom-nav {
+    display: table;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-table.rouge-table {
-    margin-bottom: 0;
+.bottom-nav-row {
+    display: table-row;
+    list-style: none;
 }
 
-table td.rouge-gutter {
-    border-style: none;
+.bottom-nav-item {
+    display: table-cell;
+    width: 33%;
 }
 
-table td.rouge-code {
-    border-style: none;
+.bottom-nav-left {
+    text-align: left;
 }
+
+.bottom-nav-center {
+    text-align: center;
+}
+
+.bottom-nav-right {
+    text-align: right;
+}
+
+/* Colors */
+
+a {
+    color: #6b3e91;
+}
+
+a:visited {
+    color: #2c2f88;
+}
+
+/* Spacing of line numbering */
 
 table td.rouge-gutter {
     width: 1em;
+}
+
+pre.highlight {
+    padding: 0;
+}
+
+/* Background color of code blocks */
+
+code,
+pre {
+    background-color: color-mix(in srgb, #aaddf9 20%, white);
+}
+
+/* Borders of code blocks */
+
+div.highlight {
+    border: 1px solid color-mix(in srgb, #aaddf9 60%, white);
+    border-radius: 3px;
+}
+
+/* Background color and borders of inline code */
+
+code.highlighter-rouge {
+    background-color: color-mix(in srgb, #aaddf9 20%, white);
+    border: 1px solid color-mix(in srgb, #aaddf9 60%, white);
+    border-radius: 3px;
+}
+
+h2 code.highlighter-rouge {
+    font-size: 2rem;
+}
+
+/* Colors of syntax highlighting */
+
+/* definition key words */
+
+.highlight .kd {
+    color: #e30613;
+}
+
+/* keywords */
+
+.highlight .k {
+    color: #e30613;
+}
+
+/* types */
+
+.highlight .kt {
+    color: #ec6707;
+}
+
+.highlight .nc {
+    color: #ec6707;
+}
+
+/* method names */
+
+.highlight .nf {
+    color: #2c2f88;
+}
+
+.highlight .o {
+    color: grey;
+}
+
+.highlight .n {
+    color: #2c2f88;
+}
+
+.highlight .na {
+    color: #6b3e91;
+}
+
+.highlight .mi {
+    color: #d35378;
+}
+
+.highlight .s {
+    color: #a35494;
+}
+
+/* Comment */
+
+.highlight .c1 {
+    color: color-mix(in srgb, #2c2f88 50%, white);
+}
+
+/* Line numbers */
+
+.highlight .lineno {
+    color: #aaddf9;
 }

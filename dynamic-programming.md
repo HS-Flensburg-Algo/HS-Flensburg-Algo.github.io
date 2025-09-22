@@ -256,3 +256,4 @@ Eine Kante verbindet dabei zwei Knoten.
         <li class="nav-item nav-right"></li>
     </ul>
 </div>
+{% include bottom-nav.html previous="recurion.html" %}

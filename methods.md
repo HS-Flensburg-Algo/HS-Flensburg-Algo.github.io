@@ -779,10 +779,4 @@ Falls der erste Aufruf, also `subsetsum(array, sum - array[index], index + 1)` a
 <a href="#figure:subsetsum-calls">Abbildung 4</a> zeigt den Rekursionsbaum der Methode `subsetsum` mit dem Array `{2, 1, 5, 4}` und der Summe `7`.
 Die Argumente, die in den Knoten angegeben sind, sind die noch übrige Summe und der aktuelle Index.
 
-<div class="nav">
-    <ul class="nav-row">
-        <li class="nav-item nav-left"><a href="complexity.html">zurück</a></li>
-        <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"></li>
-    </ul>
-</div>
+{% include bottom-nav.html previous="complexity.html" %}

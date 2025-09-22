@@ -226,10 +226,4 @@ Das heißt, das Beispiel von oben kann mit lokaler Typinferenz wie folgt geschri
 var list = new ArrayList<String>();
 ```
 
-<div class="nav">
-    <ul class="nav-row">
-        <li class="nav-item nav-left"></li>
-        <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"><a href="introduction.html">weiter</a></li>
-    </ul>
-</div>
+{% include bottom-nav.html next="introduction.html" %}

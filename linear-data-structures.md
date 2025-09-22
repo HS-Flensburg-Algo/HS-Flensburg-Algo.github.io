@@ -554,10 +554,4 @@ Da man bei einem Deque effizient vorne und hinten hinzufügen und entfernen kann
 
 [^1]: Bei überladenen Methoden kann mithilfe des Namens nicht eindeutig eine Methode referenziert werden. Daher geben wir neben dem Namen der Methode noch die Typen der Argumente an. Diese beiden Informationen zusammen erlauben es, eine Methode in Java eindeutig zu identifizieren.
 
-<div class="nav">
-    <ul class="nav-row">
-        <li class="nav-item nav-left"><a href="introduction.html">zurück</a></li>
-        <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"><a href="complexity.html">weiter</a></li>
-    </ul>
-</div>
+{% include bottom-nav.html previous="introduction.html" next="complexity.html" %}

@@ -225,10 +225,4 @@ Damit ist die Behauptung gezeigt.
 
 Wir erhalten mit der zuvor gezeigten Aussage, dass $$T_{\texttt{binarySearch}} \in \mathcal{O}(\log n)$$ gilt.
 
-<div class="nav">
-    <ul class="nav-row">
-        <li class="nav-item nav-left"><a href="recursion.html">zurück</a></li>
-        <li class="nav-item nav-center"><a href="index.html">Inhaltsverzeichnis</a></li>
-        <li class="nav-item nav-right"><a href="dynamic-programming.html">weiter</a></li>
-    </ul>
-</div>
+{% include bottom-nav.html previous="recursion.html" next="dynamic-programming.html" %}
