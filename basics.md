@@ -15,9 +15,9 @@ In Java sind Variablen zuerst einmal nur in den Anweisungen hinter ihrer Deklara
 
 ```java
 public static void main(String[] args) {
-    <hier kann x nicht verwendet werden>
+    // hier kann x nicht verwendet werden
     int x;
-    <hier kann x verwendet werden>
+    // hier kann x verwendet werden
 }
 ```
 
@@ -31,34 +31,34 @@ Im folgenden Beispiel wird die Deklaration der Variable `x` zum Beispiel durch d
 
 ```java
 public static void main(String[] args) {
-    <hier kann x nicht verwendet werden>
+    // hier kann x nicht verwendet werden
     if (args.length < 1) {
-        <hier kann x nicht verwendet werden>
+        // hier kann x nicht verwendet werden
     } else { 
-        <hier kann x nicht verwendet werden>
+        // hier kann x nicht verwendet werden
         int x;
-        <hier kann x verwendet werden>
+        // hier kann x verwendet werden>
     }
-    <hier kann x nicht verwendet werden>
+    // hier kann x nicht verwendet werden
 }
 ```
 
-Dieser Block startet mit der `{` in Zeile 5 und endet mit der `}` in Zeile 11.
+Dieser Block startet mit der `{` in Zeile 5 und endet mit der `}` in Zeile 9.
 Das heißt, die Variable `x` ist nur in der Zeile 8 sichtbar.
 
 Im folgenden Beispiel sind die beiden Zweige der `if`-Anweisung noch einmal vertauscht.
 
 ```java
 public static void main(String[] args) {
-    <hier kann x nicht verwendet werden>
+    // hier kann x nicht verwendet werden
     if (args.length < 1) {
-        <hier kann x nicht verwendet werden>
+        // hier kann x nicht verwendet werden
         int x;
-        <hier kann x verwendet werden>
+        // hier kann x verwendet werden
     } else {
-        <hier kann x nicht verwendet werden>
+        // hier kann x nicht verwendet werden
     }
-    <hier kann x nicht verwendet werden>
+    // hier kann x nicht verwendet werden
 }
 ```
 
@@ -97,7 +97,7 @@ Da alle Klassen Unterklassen von `Object` sind, können also alle Werte von Obje
 Im folgenden Abschnitt sehen wir Beispiele für Werte in Java, die nicht in eine Variable vom Typ `Object` geschrieben werden können, da es sich nicht um Objekttypen handelt.
 
 
-## Primitive Typen und Objekttypen
+## Primitive Typen
 
 In Java unterscheidet man zwei unterschiedliche Arten von Typen.
 Typen, die mit einem kleinen Anfangsbuchstaben starten, wie `int` und `boolean`, werden als primitive Typen bezeichnet.
@@ -134,7 +134,7 @@ In Java gibt es zwei Möglichkeiten, um Werte von Objekten miteinander zu vergle
 Der Operator `==` überprüft, ob es sich bei den beiden übergebenen Argumenten um dasselbe Objekt handelt.
 Das heißt, der Operator `==` überprüft, ob die beiden Objekte an derselben Stelle im Speicher stehen.
 Die Objektmethode `equals(Object)` überprüft dagegen, ob es sich um die gleichen Objekte handelt.
-Um zu überprüfen, ob zwei Objekte gleich sind, müssen in den meisten Fällen für alle Attribute getestet werden, ob sie gleich sind.
+Um zu überprüfen, ob zwei Objekte gleich sind, muss in den meisten Fällen für alle Attribute getestet werden, ob sie gleich sind.
 Der Vergleich der beiden Speicherstellen ist sehr effizient möglich, der Vergleich aller Attribute kann dagegen etwas Zeit in Anspruch nehmen.
 
 Die Methode `equals(Object)` ist in der Klasse `Object` definiert und steht somit für alle Klassen in Java zur Verfügung.
@@ -201,7 +201,7 @@ Diese Methode prüft, ob beide Argumente identisch sind. -->
 ## Lokale Typinferenz
 
 In der Vorlesung und für die Bearbeitung der Aufgaben wird ein Java-Feature genutzt, das **lokale Typinferenz** heißt.
-Wenn eine Programmiersprache eine Typinferenz implementiert, ist der Compiler der Sprache in der Lage, den Typ eines Ausdrucks oder einer Anweisung selbst zu berechnen.
+Wenn eine Programmiersprache eine Typinferenz implementiert, ist der Compiler der Sprache in der Lage, den Typ eines Ausdrucks oder einer Anweisung selbst zu bestimmen.
 Das heißt, der Nutzer muss den Typ nicht mehr manuell angeben.
 In statischen Programmiersprachen wie Java müssen an sehr vielen Stellen Typen angegeben werden.
 Der folgende Java-Code erzeugt zum Beispiel eine Variable mit einer Liste.
@@ -213,7 +213,7 @@ ArrayList<String> list = new ArrayList<String>();
 Die Information, dass die Variable `list` den Typ `ArrayList<String>` hat, ist hier eigentlich unnötig, da wir an der rechten Seite der Zuweisung diese Information ebenfalls ablesen können.
 Eine Typinferenz erlaubt es uns, solche unnötigen Typannotationen wegzulassen.
 
-Java stellt stellt seit Version 10 eine Typinferenz zur Verfügung. 
+Java stellt seit Version 10 eine Typinferenz zur Verfügung.
 Diese Typinferenz wird als lokal bezeichnet, da für die Inferenz nur Informationen herangezogen werden, die sich in unmittelbarer Nähe befinden.
 In Java wird zum Beispiel nur die rechte Seite der Zuweisung für die Typinferenz herangezogen.
 Bei einer (nicht-lokalen) Typinferenz wird auch berücksichtigt, wie die Variable `list` verwendet wird, um den Typ der Variable zu inferieren.
@@ -225,5 +225,9 @@ Das heißt, das Beispiel von oben kann mit lokaler Typinferenz wie folgt geschri
 ```java
 var list = new ArrayList<String>();
 ```
+
+Wir werden im Folgenden die lokale Typinferenz immer nutzen, wenn es möglich ist.
+Wir werden im Laufe der Vorlesung auch Beispiele kennenlernen, bei denen wir die lokale Typinferenz nicht nutzen können und stattdessen einen konkreten Typen annotieren müssen.
+
 
 {% include bottom-nav.html next="introduction.html" %}
