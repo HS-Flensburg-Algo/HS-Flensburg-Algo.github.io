@@ -29,7 +29,7 @@ Der Knoten `fib(5)` hat zum Beispiel die Nachfolger `fib(4)` und `fib(3)`.
 </figure>
 
 <a href="#figure:fib-calls">Abbildung 3</a> zeigt, dass viele Aufrufe der Methode `fib` mehrfach durchgeführt werden.
-Mit Hilfe der dynamischen Programmierung können wir die mehrfache Berechnung dieser Werte vermeiden.
+Mithilfe der dynamischen Programmierung können wir die mehrfache Berechnung dieser Werte vermeiden.
 
 Bei der dynamischen Programmierung werden die Ergebnisse einer Methode in einer Datenstruktur gespeichert.
 Wird die Methode dann mit den gleichen Argumenten noch einmal aufgerufen, so wird das Ergebnis nicht erneut berechnet, sondern in der Datenstruktur nachgeschlagen.
@@ -58,7 +58,7 @@ private static int fibDyn(Integer[] memo, int n) {
 
 Um zu verstehen, wie die Aufrufe im Array `memo` nachgeschlagen werden, müssen wir wissen, dass Java die Argumente einer Methode von links nach rechts auswertet.
 Das heißt, beim Aufruf `fibDyn(memo, n - 1) + fibDyn(memo, n - 2)` wird der Aufruf `fibDyn(memo, n - 1)` ausgeführt bevor der Aufruf `fibDyn(memo, n - 2)` ausgeführt wird.
-Die folgende Abbildung zeigt die Aufrufstruktur mit Hilfe der dynamischen Programmierung. 
+Die folgende Abbildung zeigt die Aufrufstruktur mithilfe der dynamischen Programmierung. 
 
 <figure id="figure:fib-calls" markdown="1">
 
@@ -96,9 +96,9 @@ Mithilfe der starken Induktion wollen wir nun zeigen, dass $$T_{\texttt{fib}}(n)
 Dazu müssen wir zeigen, dass ein $$c \in \mathbb{R}$$ mit $$c > 0$$ und ein $$n_0 \in \mathbb{N}$$ existieren, so dass $$T_{\texttt{fib}}(n) \le c \cdot 2^n$$ für alle $$n \in \mathbb{N}$$ mit $$n \ge n_0$$ gilt.
 Wir zeigen zunächst eine Hilfsaussage.
 
-**Beh.:** $$\forall n \in \mathbb{N} \colon n \ge 1 \Rightarrow T_{\texttt{fib}}(n) \le c_1 \cdot 2^n$$
+**Behauptung:** $$\forall n \in \mathbb{N} \colon n \ge 1 \Rightarrow T_{\texttt{fib}}(n) \le c_1 \cdot 2^n$$
 
-**Bew.:**
+**Beweis:**
 
 Zur Lesbarkeit nennen wir die Funktion $$T_{\texttt{fib}}$$ im Folgenden $$T$$.
 

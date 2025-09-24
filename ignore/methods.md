@@ -63,9 +63,21 @@ private static int sumRec(int start) {
 }
 ```
 
+Die Verwendung von Rekursion ist erst einmal sehr ungewohnt, wenn man zuvor nur in Schleifen gedacht hat.
+Bei der Entwicklung einer rekursiven Methode nimmt man im Grunde an, dass die Methode bereits für größere bzw. kleinere Argumente korrekt funktioniert.
+Das heißt, wenn wir eine rekursive Methode `sumRec` schreiben wollen, gehen wir davon aus, dass es bereits eine rekursive Methode `sumRec` gibt, die für größere Argumente korrekt funktioniert.
+Wir müssen uns dabei insbesondere klar werden, was es bedeutet, dass die Methode "korrekt funktioniert".
+Im Fall der Methode `sumRec` gehen wir davon aus, dass es bereits eine Methode gibt, die startend mit dem Argument `start + 1` in der Lage ist, alle Zahlen bis einschließlich `100` aufzusummieren.
+Nun überlegen wir uns, wie wir die Methode `sumRec` implementieren können, indem wir die Methode rekursiv verwenden.
+Das heißt, wir überlegen uns, wie können wir die Summe `start + (start + 1) + ... + 100` berechnen.
+Wir haben gesagt, wir gehen davon aus, dass die Methode `sumRec` für das Argument `start + 1` korrekt funktioniert.
+Das heißt, wir wissen, dass der Aufruf `sumRec(start + 1)` die Summe `(start + 1) + ... + 100` berechnet.
+Uns ursprünglicher Aufruf von `sumRec(int start)` soll aber die Summe `start + (start + 1) + ... + 100` berechnen.
+Das heißt, wir müssen nur den Aufruf `sumRec(start + 1)` durchführen und auf das Ergebnis noch den Wert `start` hinzuaddieren.
+
 Die Methoden `fac` und `sumRec` implementieren recht einfache Rekursionsmuster.
 In beiden Methoden gibt es zum Beispiel nur einen rekursiven Aufruf.
-Um zu illustrieren, dass es bei rekursiven Methoden auf mehrere rekursive Aufrufe geben kann, betrachten wird die Fibonacci-Sequenz.
+Um zu illustrieren, dass es bei rekursiven Methoden auch mehrere rekursive Aufrufe geben kann, betrachten wird die Fibonacci-Sequenz.
 Die Sequenz der Fibonacci-Zahlen kann durch die folgende Funktion definiert werden.
 
 $$\begin{align}
@@ -98,7 +110,7 @@ Einschub: Rekurrenzen
 ---------------------
 
 Wir wollen uns an dieser Stelle auch einmal Gedanken über die Laufzeit der Methode `fac` machen. Um die Laufzeit einer Methode zu beschreiben, nutzt man ebenfalls häufig Rekursion. 
-Genauer gesagt gibt man eine sogenannte Rekurrenz an, eine rekursive mathematische Funktion, welche die Laufzeit der Methode beschreibt. Dieses Verfahren wollen wir einmal an Hand der Methode `fac` illustrieren.
+Genauer gesagt gibt man eine sogenannte Rekurrenz an, eine rekursive mathematische Funktion, welche die Laufzeit der Methode beschreibt. Dieses Verfahren wollen wir einmal anhand der Methode `fac` illustrieren.
 Die Größe des Problems ist im Fall der Berechnung der Fakultät die Größe der Zahl, für die wir die Fakultät berechnen.
 
 In Abschnitt [Konkrete Laufzeiten](complexity.md#konkrete-laufzeiten) haben die Anzahl an Schritten, die eine Methode durchführt, zuerst genau gezählt.
@@ -144,7 +156,7 @@ Wenn wir diese beiden Tatsachen gezeigt haben, erhalten wir
 
 $$\forall n \in \mathbb{N} \colon \operatorname{A}(n),$$
 
-also dass die Aussage für alle natürlichen Zahlen gilt.
+also, dass die Aussage für alle natürlichen Zahlen gilt.
 
 Wir wollen mithilfe der klassischen Induktion jetzt die oben angegebene geschlossene Form der Laufzeit von `fac` beweisen.
 
@@ -223,13 +235,13 @@ Dazu betrachten wir die Implementierung der Methode `get` in einer einfach verke
 private Node<T> nodeAt(int index) {
     var current = this.first;
     for (int i = 0; i < index; i++) {
-        current = current.next;
+        current = current.next();
     }
     return current;
 }
 
 public T get(int index) {
-    return nodeAt(index).value;
+    return nodeAt(index).value();
 }
 ```
 
@@ -274,6 +286,22 @@ T_{\texttt{toArray}}(n) &= T_{\texttt{new_Integer[]}}(n) + \sum_{i = 0}^{n - 1} 
 Analog zu den Beweisen aus dem Kapitel [Komplexität](complexity.md) können wir mit dieser Information zeigen, dass $$T_{\texttt{toArray}} \le_{as} q$$ gilt, wobei $$q : \mathbb{N} \rightarrow \mathbb{R}$$, $$q(x) = x^2$$.
 Diese Argumentation zeigt etwas formaler als wir es zuvor durchgeführt haben, dass die Laufzeit von `toArray` in $$\mathcal{O}(n^2)$$ liegt, wobei $$n$$ die Länge der Liste ist.
 
+```java
+static int[][] multiplicationTable(int n) {
+    var table = new int[n][n];
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++){
+            table[i][j] = (i+1)*(j+1);
+        }
+    }
+    return table;
+}
+```
+
+
+
+
+
 Divide and Conquer
 ------------------
 
@@ -296,9 +324,9 @@ Auf diese Weise können wir bei jedem Schritt im schlechtesten Fall die Hälfte 
 
 ``` java
 static boolean binarySearch(int[] array, int value) {
-    boolean found = false;
-    int start = 0;
-    int end = array.length - 1;
+    var found = false;
+    var start = 0;
+    var end = array.length - 1;
 
     while (start <= end && !found) {
         int mid = start + (end - start) / 2;

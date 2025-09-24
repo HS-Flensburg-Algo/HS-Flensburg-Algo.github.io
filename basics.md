@@ -76,22 +76,23 @@ Da alle Klassen von der Klasse `Object` erben, erben somit alle Klasse die Metho
 In einer Programmiersprache mit Vererbung kann ein Wert von einer Unterklasse in eine Variable der Oberklasse geschrieben werden.
 
 ```java
-public static void main(String[] args) {
-    String s1 = "test";
-    Object o = s1;
-    String s2 = o;
-    char c = s2.charAt(0);
-}
+String string1 = "test";
+
+Object object = string1;
+String result1 = object.toString();
+
+String string2 = object;
+char result2 = string2.charAt(0);
 ```
 
 Die Zuweisung in Zeile 3 ist erlaubt.
-Da `String` eine Unterklasse von `Object` ist, können wir auf das Objekt `o` nur Methoden aufrufen, die es auch in der Klasse `String` gibt.
+Da `String` eine Unterklasse von `Object` ist, können wir auf das Objekt `object` nur Methoden aufrufen, die es auch in der Klasse `String` gibt.
 Daher ist die Zuweisung in Zeile 3 in einer Sprache mit Vererbung sicher.
-Im Unterschied dazu ist die Zuweisung in Zeile 4 nicht erlaubt.
-Das heißt, die Zuweisung in Zeile 4 verursacht einen Fehler beim Kompilieren.
-Die Zuweisung in Zeile 4 ist nicht erlaubt, da sie nicht sicher ist.
-Wenn die Zuweisung erlaubt wäre, könnten wir auf den `String` `s2` eine Methode aufrufen, die es in der Klasse `Object` gar nicht gibt.
-Zum Beispiel könnten wir den Aufruf in Zeile 5 durchführen, die Methode `charAt` gibt es auf dem Typ `Object` aber gar nicht.
+Im Unterschied dazu ist die Zuweisung in Zeile 6 nicht erlaubt.
+Das heißt, die Zuweisung in Zeile 6 verursacht einen Fehler beim Kompilieren.
+Die Zuweisung in Zeile 6 ist nicht erlaubt, da sie nicht sicher ist.
+Wenn die Zuweisung erlaubt wäre, könnten wir auf den `String` `string2` eine Methode aufrufen, die es in der Klasse `Object` gar nicht gibt.
+Zum Beispiel könnten wir den Aufruf in Zeile 7 durchführen, die Methode `charAt` gibt es auf dem Typ `Object` aber gar nicht.
 
 Da alle Klassen Unterklassen von `Object` sind, können also alle Werte von Objekttypen in eine Variable vom Typ `Object` geschrieben werden.
 Im folgenden Abschnitt sehen wir Beispiele für Werte in Java, die nicht in eine Variable vom Typ `Object` geschrieben werden können, da es sich nicht um Objekttypen handelt.

@@ -42,7 +42,7 @@ custom_css: toc
 
 - 2.5. [Listen in Java](linear-data-structures.md#listen-in-java)
 
-### 3. [Komplexität](complexity.md)
+<!-- ### 3. [Komplexität](complexity.md)
 
 - 3.1. [Konkrete Laufzeiten](complexity.md#konkrete-laufzeiten)
 
@@ -68,7 +68,7 @@ custom_css: toc
 
 - 6.1. [Beispiel](dynamic-programming.md#beispiel)
 
-- 6.2. [Einschub: Größenordnungen](dynamic-programming.md#einschub-größenordnungen)
+- 6.2. [Einschub: Größenordnungen](dynamic-programming.md#einschub-größenordnungen) -->
 
 <!-- - 6.3. [Laufzeit mit dynamischer Programmierung](methods.md#laufzeit-mit-dynamischer-programmierung) -->
 
@@ -99,3 +99,9 @@ custom_css: toc
 - 6.2. [Insertionsort](recursion.md#anonyme-funktionen)
 
 - 6.3. [Quicksort](recursion.md#gecurryte-funktionen) -->
+
+<!-- ### A. [Versionskontrolle](version-control.md)
+
+### B. [IntelliJ](intellij.md)
+
+### C. [Programmierregeln](linter-rules.md) -->
