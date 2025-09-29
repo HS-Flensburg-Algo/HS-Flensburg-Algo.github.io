@@ -3,16 +3,6 @@ layout: post
 title: "IntelliJ"
 ---
 
-1. [Übersicht](#übersicht)
-2. [Benutzererstellung und Aktivierung](#benutzererstellung-und-Aktivierung)
-3. [Import eines Projekts](#import-eines-projekts)
-4. [JUnit-Testfälle](#junit-testfälle)
-5. [Git-Integration](#git-integration)
-6. [Einstellungen](#einstellungen)
-
-
-## Übersicht
-
 Im Rahmen der Vorlesung wird [IntelliJ](https://www.jetbrains.com/de-de/idea/) des Unternehmens JetBrains als IDE verwendet.
 IntelliJ wird in zwei Versionen angeboten:
 
@@ -59,20 +49,42 @@ Die Verknüpfung findet dabei über GitHub statt.
 
 Den Import eines Projekts von GitHub können Sie wie folgt in IntelliJ durchführen.
 
-1. Clonen Sie das Projekt in einen beliebigen Ordner auf Ihrem Rechner.
-2. Öffnen Sie IntelliJ und wählen Sie `File > New > Project from Existing Sources...`.
+1. Klonen Sie das Projekt in einen beliebigen Ordner auf Ihrem Rechner.
+2. Öffnen Sie IntelliJ und wählen Sie `Open`.
 3. Navigieren Sie zu dem Ordner, in dem Sie das Projekt abgelegt haben, und wählen Sie diesen aus.
-4. Nun erscheint der "Import Project"-Dialog.
-   Wählen Sie `Create project from existing sources` und bestätigen Sie mit `Next`.
-   Nutzen Sie die Standardeinstellungen und bestätigen Sie noch einmal `Next`.
-5. Nutzen Sie die Standardeinstellungen und bestätigen Sie `Create`.
+
+Ihre Projektstruktur in IntelliJ sollte nun etwa wie folgt aussehen.
+Es dauert einen kleinen Moment bis IntelliJ die Struktur analysiert hat und korrekt anzeigt.
+
+![JUnit-Dialog](assets/images/intellij/project-structure.png)
+
+## Einstellungen
+
+### Formatierung
+
+Sie sollten IntelliJ so konfigurieren, dass die Java-Dateien automatisch beim Speichern formatiert werden.
+Die Linter-Regeln überprüfen, ob die Dateien, die Sie hochladen, formatiert sind.
+Gehen Sie zum Aktivieren des automatischen Formatierens in die Einstellungen und wählen Sie unter `Tools > Actions on Save` die Option `Reformat code`.
+Beim nächsten Speichern ihrer Klassen sollte IntelliJ die Datei formatieren.
+
+
+### Design
+
+IntelliJ startete mit der Version 2022.3 den Umstieg auf ein neues Design, welches in kommenden Updates als Standard festgelegt werden wird. 
+Einen Vergleich können Sie dem folgenden Screenshot entnehmen, wobei links das neue und rechts das alte Design zu sehen ist. 
+
+![Vergleich IntelliJ Interface](assets/images/intellij/intellij-layout-comparison.png)
+
+Welches Design sie verwenden, bleibt Ihnen überlassen, die Einstellungen finden Sie unter `File > Settings > Appearance & Behavior > New UI`.
 
 ## JUnit-Testfälle
+
+In diesem Abschnitt erfahren Sie, wie sie Testfälle in IntelliJ ausführen können.
 
 ### Ausführen
 
 Wenn die Aufgabenstellung Testfälle zur Verfügung stellt, können diese mit einem Rechtsklick auf das Projekt und Auswahl des Menüpunkts `Run 'Tests in '[Name]''` ausgeführt werden. 
-Alternativ kann auch der Kurzbefehl `Ctrl + Shift + F10` verwendet werden.
+Alternativ kann auch der Kurzbefehl `Ctrl + Shift + F10` (oder `Ctrl + Shift + R` unter MacOS) verwendet werden.
 
 ![JUnit-Dialog](assets/images/intellij/junit-run-tests-dialog.png)
 
@@ -150,30 +162,3 @@ java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
 - Zeile 3: Die Exception wurde beim Ausführen der Funktion `expandArray` der Klasse `Arrays` im Package `de.fuas.algorithms` ausgelöst. `Arrays.java:7` informiert Sie darüber, dass der Fehler in Zeile `7` aufgetreten ist.
 - Zeile 4: Die Funktion `expandArray` wurde innerhalb der Funktion `add` der Klasse `ArrayList` aufgerufen. 
 - Zeile 5: Die Funktion `add` wurde innerhalb der Funktion `testAddNull` der Klasse `ArrayListTest` aufgerufen.
-
-
-## Git-Integration
-
-IntelliJ erkennt automatisch, ob es sich bei dem geöffnetem Projekt um ein Git Repository handelt und bietet Ihnen entsprechende Funktionen an. 
-Darunter fallen unter anderem die Verwaltung von Commits, Branches und Tags. 
-
-Die Commitverwaltung können Sie über die Seitenleiste oder alternativ über das Tastenkürzen `ALT + 0` aufrufen.
-
-![Git Commit Dialog](assets/images/intellij/git-commit-dialog.png)
-
-Der obige Screenshot zeigt die geöffnete Commit-Ansicht. 
-Hier können Sie eine Dateiauswahl treffen, eine Commit Message schreiben und beides über `Commit` in den lokalen Branch committen oder über `Commit and Push` direkt in den Remote-Branch pushen.
-
-Weitere Git-Funktionen, etwa zum nachträglichen pushen, können Sie über `Git` im Menüband aufrufen.
-
-
-## Einstellungen
-
-### Design
-
-IntelliJ startete mit der Version 2022.3 den Umstieg auf ein neues Design, welches in kommenden Updates als Standard festgelegt werden wird. 
-Einen Vergleich können Sie dem folgenden Screenshot entnehmen, wobei links das neue und rechts das alte Design zu sehen ist. 
-
-![Vergleich IntelliJ Interface](assets/images/intellij/intellij-layout-comparison.png)
-
-Welches Design sie verwenden, bleibt Ihnen überlassen, die Einstellungen finden Sie unter `File > Settings > Appearance & Behavior > New UI`.

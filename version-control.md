@@ -3,10 +3,7 @@ layout: post
 title: "Versionskontrolle"
 ---
 
-1. [Installation von Git unter Windows](#installation-von-git-unter-windows)
-2. [Konfiguration des Nutzers](#konfiguration-des-nutzers)
-3. [Git über die Konsole bedienen](#git-über-die-konsole-bedienen)
-4. [Commit-Nachrichten schreiben](#commit-nachrichten-schreiben)
+Auf dieser Seite finden Sie Informationen zum Umgang mit der Versionskontrolle Git.
 
 
 ## Installation von Git unter Windows

@@ -100,8 +100,10 @@ custom_css: toc
 
 - 6.3. [Quicksort](recursion.md#gecurryte-funktionen) -->
 
-<!-- ### A. [Versionskontrolle](version-control.md)
+### A. [Versionskontrolle](version-control.md)
 
 ### B. [IntelliJ](intellij.md)
 
-### C. [Programmierregeln](linter-rules.md) -->
+### C. [Feedback](feedback.md)
+
+### D. [Programmierregeln](linter-rules.md)
