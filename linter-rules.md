@@ -21,11 +21,37 @@ Grundsätzlich sollte man immer Konsistenz anstreben.
 Das heißt, wenn es zweimal eine ähnliche Methode gibt, sollten diese auch ähnlich implementiert sein.
 Wenn man dagegen bei einer der Methoden eine andere Implementierung wählt, erwarten Lesende, dass dieser Unterschied einen inhaltlichen Grund hat.
 
+1. [FinalParameters](#finalparameters)
+1. [NoCommonCodeInIf](#nocommoncodeinif)
 1. [NoLoopBreak](#noloopbreak)
+1. [PreferExpressions](#preferexpressions)
+1. [ReduceScope](#reducescope)
+1. [UseElse](#useelse)
 1. [UseLocalTypeInference](#uselocaltypeinference)
 
 
-### DuplicateInConditionalCheck
+### FinalParameters
+
+Diese Regel prüft, dass Parameter von Methoden und Konstruktoren als [`final`](http://hs-flensburg-algo.github.io/basics.html#final) deklariert sind.
+Grundsätzlich können die Parameter von Methoden in Java verändert werden.
+Das heißt, wir können zum Beispiel die folgende Methode implementieren.
+
+```java
+static int method(int arg) {
+   arg = 23;
+   ...
+   return arg;
+}
+```
+
+Das Ändern des Parameters auf einen anderen Wert kann in der restlichen Methode sehr verwirrend sein, da man normalerweise davon ausgeht, dass in der Variable `arg` das Argument steht, das beim Aufruf der Methode übergeben wird.
+Um das Verändern der Parameter zu verhindern, gibt es in einigen Java-Projekten die Konvention, dass alle Parameter als [`final`](http://hs-flensburg-algo.github.io/basics.html#final) deklariert werden müssen.
+Auf diese Weise erhalten wir einen Kompilierfehler, wenn wir versuchen eine Methode wie `method` zu verwenden.
+
+Diese Regel wird erst in einer späteren Laboraufgabe aktiviert, um zu Beginn des Semesters den Code nicht zu überfrachten.
+
+
+### NoCommonCodeInIf
 
 Wir betrachten die folgende Methode, die testet, ob eine Zahl gerade ist.
 
@@ -60,12 +86,12 @@ static boolean even(int i) {
 }
 ```
 
-Die gleiche Anmerkung kann auch auftreten, bei einem `else if` auftreten.
+Die gleiche Anmerkung kann auch bei einem `else if` auftreten.
 Wir betrachten die folgende Methode. 
 
 ```java
 static int signum(int i) {
-    boolean result;
+    int result;
     if (i == 0) {
         return 0;
     } else if (i < 0) {
@@ -78,15 +104,15 @@ static int signum(int i) {
 }
 ```
 
-Für diese Methode erhalten wir die Anmerkung, dass die letzte Anweisung der Zweige der `if`-Anweisung gleich sind.
+Für diese Methode erhalten wir die Anmerkung, dass die letzten Anweisungen der beiden Zweige der `if`-Anweisung identisch sind.
 An dieser Stelle wird in beiden Zweigen die Anweisung `return result` durchgeführt.
-Wir können hier aber nicht ohne weiteres die Anweisung aus der `if`-Anweisung ziehen, da es noch einen dritten Fall gibt.
+Wir können hier aber nicht ohne weiteres die Anweisung `return result` aus der `if`-Anweisung herausziehen, da es noch einen dritten Fall gibt.
 Um bei diesem Beispiel eine Umformung vorzunehmen, müssen wir das `else if` zuerst in zwei geschachtelte `if`-Anweisungen umformen.
 Wir erhalten dadurch die folgende Definition.
 
 ```java
 static int signum(int i) {
-    boolean result;
+    int result;
     if (i == 0) {
         return 0;
     } else {
@@ -105,7 +131,7 @@ In dieser Variante können wir nun die Anweisung `return result` aus der inneren
 
 ```java
 static int signum(int i) {
-    boolean result;
+    int result;
     if (i == 0) {
         return 0;
     } else {
@@ -146,16 +172,16 @@ stmt
 return false;
 ```
 
-Dies in der Methode `contains1` aber nicht der Fall.
+Dies ist in der Methode `contains1` aber nicht der Fall.
 Die Anweisung `return false` wird hier nur ausgeführt, falls die Schleife nicht zuvor die Methode verlassen hat.
-Anders ausgedrückt wird der Code, der ggf. nach einer Schleife folgt, nicht immer ausführt.
+Anders ausgedrückt wird der Code, der ggf. nach einer Schleife folgt, nicht immer ausgeführt.
 Diese Eigenschaft ist relativ fehleranfällig, da man sie nur an dem `return`, das irgendwo in der Schleife vorkommt, identifizieren kann.
 
 Aus dieser Argumentation folgt, dass die folgende Implementierung in einer imperativen Sprache zu bevorzugen ist.
 
 ```java
 static boolean contains2(int[] array, int v) {
-    boolean found = false;
+    var found = false;
     for (int i = 0; i < array.length; i++) {
         if (array[i] == v) {
             found = true;
@@ -175,7 +201,7 @@ Da wir diese Variable in der verbesserten Variante auf jeden Fall benötigen, k�
 
 ```java
 static boolean contains3(int[] array, int v) {
-    boolean found = false;
+    var found = false;
     for (int i = 0; i < array.length && !found; i++) {
         if (array[i] == v) {
             found = true;
@@ -188,7 +214,8 @@ static boolean contains3(int[] array, int v) {
 Bei dieser Implementierung sehen wir in der Schleifenbedingung bereits, wann die Schleife beendet wird.
 Das heißt, wir müssen nicht mehr in den Code des Schleifenrumpfes schauen, wann die Schleife abbricht, sondern können diese Information an der Stelle ablesen, an der wir sie auch erwarten würden, im Schleifenkopf.
 
-Anders ausgedrückt, würde man normalerweise auch nicht auf die Idee kommen, die folgende Implementierung zu nutzen.
+Ggf. kommt an dieser Stelle der Einwand, dass das Verlassen einer Schleife mittels `return` und `break` in einer imperativen Sprache sehr natürlich ist.
+Um zu illustrieren, dass das Verlassen einer Schleife mittels `return` oder `break` nicht per se natürlich ist, betrachten wir eine Variante der Methode, die diesen Ansatz auf die Spitze treibt.
 
 ```java
 static boolean contains4(int[] array, int v) {
@@ -205,76 +232,19 @@ static boolean contains4(int[] array, int v) {
 ```
 
 Hier wird die Abbruchbedingung der Schleife gar nicht mehr im Schleifenkopf definiert sondern lediglich im Code des Rumpfes.
-Bei dieser Variante muss man bei komplexeren Methode ggf. viel Code danach überprüfen, ob ein `return` verwendet wird, um den restlichen Code zu verstehen. -->
-
-
-
-
-### FinalParameters
-
-Diese Regel prüft, dass Parameter von Methoden und Konstruktoren als [`final`](http://hs-flensburg-algo.github.io/basics.html#final) deklariert sind.
-Grundsätzlich können die Parameter von Methoden in Java verändert werden.
-Das heißt, wir können zum Beispiel die folgende Methode implementieren.
-
-```java
-static int method(int arg) {
-   arg = 23;
-   ...
-   return arg;
-}
-```
-
-Das Ändern des Parameters auf einen anderen Wert kann in der restlichen Methoden sehr verwirrend sein, da man normalerweise davon ausgeht, dass in der Variable `arg` das Argument steht, das beim Aufruf der Methode übergeben wird.
-Um das Verändern der Parameter zu verhindern, gibt es in einigen Java-Projekten die Konvention, dass alle Parameter als [`final`](http://hs-flensburg-algo.github.io/basics.html#final) deklariert werden müssen.
-Auf diese Weise erhalten wir einen Kompilierfehler, wenn wir versuchen eine Methode `method` zu verwenden.
-
-Diese Regel wird erst in einer späteren Laboraufgabe aktiviert, um zu Beginn des Semesters den Code nicht zu überfrachten.
-
-
-### UseLocalTypeInference
-
-Java stellt seit Version 10 eine lokale Typinferenz zur Verfügung.
-Statt eine Zeile der Form
-
-```java
-int i = 23;
-```
-
-zu schreiben, ist es daher möglich
-
-```java
-var i = 23;
-```
-
-zu nutzen.
-Der Java-Compiler ist in der Lage aus dem Wert, der der Variable zugewiesen wird, abzuleiten, welchen Typ die Variable hat.
-
-Im Kontext einer Lehrveranstaltung kann es durchaus sinnvoll sein, die Typen von Variablen immer zu annotieren.
-Dies hilft noch einmal darüber nachzudenken, welche Art von Wert überhaupt in einer Variable stehen kann.
-Auf der anderen Seite haben statisch getypte Programmiersprachen manchmal einen schlechten Ruf, da man in Sprachen wie Java sehr viele Typen angeben muss.
-So erscheint eine Zeile der Form
-
-```java
-ArrayList<Integer> list = new ArrayList<Integer>();
-```
-
-zu Recht sehr redundant.
-An sich ist es in statisch getypen Sprachen aber gar nicht notwendig, so viel Typinformation anzugeben.
-Die Sprache Java ist schlichtweg ein schlechtes Beispiel.
-In anderen statisch getypten Programmiersprachen sind durch das Konzept einer Typinferenz gar keine Typangaben notwendig.
-
-Um zu illustrieren, dass statisch getypte Sprachen gar nicht so viele Typangaben erfordern müssen, wird dieses Sprachfeature in der Vorlesung, wo möglich, verwendet.
+Bei dieser Variante muss man bei komplexeren Methoden ggf. viel Code danach überprüfen, ob ein `return` verwendet wird, um den restlichen Code zu verstehen.
+Dieses Beispiel soll illustrieren, dass es durchaus einen Mehrwert hat, die Bedingung, bei der eine Schleife beendet wird, in den Schleifenkopf zu schreiben.
 
 
 ### PreferExpressions
 
-Bei der Programmierung in einer imperativen Programmiersprachen hat man häufig die Wahl zwischen einem Programmierstil, der eher anweisungsorientiert ist und einem Stil, der eher ausdrucksorientiert ist.
+Bei der Programmierung in einer imperativen Programmiersprache hat man häufig die Wahl zwischen einem Programmierstil, der eher anweisungsorientiert ist und einem Stil, der eher ausdrucksorientiert ist.
 Diese Regel soll dafür sorgen, dass in bestimmten Fällen der ausdrucksorientierte Stil verwendet wird.
 Wir betrachten dazu die folgende Java-Methode.
 
 ```java
 static int addAndInc(int arg1, int arg2) {
-    int result = 0;
+    var result = 0;
     result = result + arg1;
     result = result + arg2;
     result++;
@@ -292,6 +262,8 @@ static int addAndInc(int arg1, int arg2) {
 }
 ```
 
+Die Regel `PreferExpressions` sorgt dafür, dass diese ausdrucksorientierte Variante verwendet wird.
+
 
 ### ReduceScope
 
@@ -304,7 +276,7 @@ Wir betrachten zum Beispiel die folgende Methode.
 
 ```java
 static void main(String[] args) {
-    int x = 1;
+    var x = 1;
     if (args.length == 0) {
         ...
     } else {
@@ -323,7 +295,7 @@ Wir betrachten einmal das folgende Beispiel.
 
 ```java
 static void main(String[] args) {
-    int x = 1;
+    var x = 1;
     if (args.length == 0) {
         ...
     } else if (arg.length == 1) {
@@ -342,7 +314,7 @@ Wir können die obige Methode auch wie folgt definieren.
 
 ```java
 static void main(String[] args) {
-    int x = 1;
+    var x = 1;
     if (args.length == 0) {
         ...
     } else {
@@ -403,7 +375,7 @@ static int min(int x, int y) {
 Bei dieser Variante ist für den Leser sofort offensichtlich, dass die Methode zwei logische Pfade hat, die voneinander unabhängig sind.
 Wir sehen sofort, dass der Code entweder den einen Pfad oder den anderen Pfad nehmen wird.
 
-Diese Regel schlägt außerdem an, wenn nach einer `if`-Anweisung, welche die Methode verlässt, weitere Anweisungen folgen.
+Die Regel `UseElse` schlägt außerdem an, wenn nach einer `if`-Anweisung, welche die Methode verlässt, weitere Anweisungen folgen.
 Wir betrachten einmal das folgende Beispiel.
 
 ```java
@@ -442,6 +414,42 @@ Nach dieser Änderung des Codes können andere Regeln angewendet werden, um die 
 Zum Beispiel wird die Variable `result` in diesem Beispiel jetzt nur noch im `else`-Zweig der `if`-Anweisung genutzt und sollte somit auch dort deklariert werden.
 
 
+### UseLocalTypeInference
+
+Java stellt seit Version 10 eine lokale Typinferenz zur Verfügung.
+Statt eine Zeile der Form
+
+```java
+int i = 23;
+```
+
+zu schreiben, ist es daher möglich
+
+```java
+var i = 23;
+```
+
+zu nutzen.
+Der Java-Compiler ist in der Lage aus dem Wert, der der Variable zugewiesen wird, abzuleiten, welchen Typ die Variable hat.
+
+Im Kontext einer Lehrveranstaltung kann es durchaus sinnvoll sein, die Typen von Variablen immer zu annotieren.
+Dies hilft noch einmal darüber nachzudenken, welche Art von Wert überhaupt in einer Variable stehen kann.
+Auf der anderen Seite haben statisch getypte Programmiersprachen manchmal einen schlechten Ruf, da man in Sprachen wie Java sehr viele Typen angeben muss.
+So erscheint eine Zeile der Form
+
+```java
+ArrayList<Integer> list = new ArrayList<Integer>();
+```
+
+zu Recht sehr redundant.
+An sich ist es in statisch getypen Sprachen aber gar nicht notwendig, so viel Typinformation anzugeben.
+Die Sprache Java ist schlichtweg ein schlechtes Beispiel.
+In anderen statisch getypten Programmiersprachen sind durch das Konzept einer Typinferenz gar keine Typangaben notwendig.
+
+Um zu illustrieren, dass statisch getypte Sprachen gar nicht so viele Typangaben erfordern müssen, wird dieses Sprachfeature in der Vorlesung, wo möglich, verwendet.
+
+
+<!--
 ### VariableDeclarationUsageDistance
 
 Diese Regel überprüft den Abstand zwischen der Deklaration einer Variable und ihrer ersten Verwendung.
@@ -449,4 +457,5 @@ Hinweis: Variablendeklarationen und -initialisierungen werden bei der Berechnung
 
 Der Geltungsbereich (_Scope_) für Variablen sollte möglichst klein gewählt werden, um Nebeneffekte durch z.B. Methodenaufrufe auszuschließen, also letztlich sicherzustellen, dass der zugewiesene Wert sich nicht verändert bis zur Verwendung der Variable.
 Wenn es nicht möglich ist, den Abstand zwischen Deklaration und Verwendung zu verringern, kann eine Variable alternativ als [`final`](http://hs-flensburg-algo.github.io/basics.html#final) deklariert werden.
-Diese Deklaration verhindert ebenfalls, dass die Variable ungewollt verändert wird. -->
+Diese Deklaration verhindert ebenfalls, dass die Variable ungewollt verändert wird.
+ -->

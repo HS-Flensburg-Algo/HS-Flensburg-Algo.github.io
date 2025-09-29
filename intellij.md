@@ -23,9 +23,13 @@ Beide Versionen lassen sich von der [Produktseite](https://www.jetbrains.com/de-
 Sollten Sie sich für die Ultimate-Version entscheiden, ist eine Registrierung und Bestätigung Ihres Studierendenstatus erforderlich. 
 Folgen Sie dazu den entsprechenden Anweisungen im Abschnitt [Benutzererstellung und Aktivierung](#benutzererstellung-und-aktivierung). 
 
-## Benutzererstellung und Aktivierung (nur für Ultimate)
+## Konfiguration
 
-*Dieser Abschnitt ist nur relevant, wenn Sie die Ultimate-Version nutzen möchten.*
+In diesem Abschnitt erhalten Sie ein paar Information zur Konfiguration von IntelliJ.
+
+### Aktivierung (nur relevant bei Ultimate-Version)
+
+**Dieser Abschnitt ist nur relevant, wenn Sie die Ultimate-Version nutzen möchten.**
 
 Um die Ultimate-Version nutzen zu können, benötigen Sie einen JetBrains-Account und müssen diesen mit Ihrem Studierendenstatus verknüpfen.
 Die Verknüpfung findet dabei über GitHub statt.
@@ -45,20 +49,6 @@ Die Verknüpfung findet dabei über GitHub statt.
 12. Folgen Sie den Anweisungen des Formulars und klicken Sie auf `Kostenlose Produkte beantragen`
 13. Über die [Lizenzverwaltung](https://account.jetbrains.com/licenses) können Sie nun Ihr `JetBrains Product Pack for Students` aktivieren und alle Produkte von JetBrains herunterladen.
 
-## Import eines Projekts
-
-Den Import eines Projekts von GitHub können Sie wie folgt in IntelliJ durchführen.
-
-1. Klonen Sie das Projekt in einen beliebigen Ordner auf Ihrem Rechner.
-2. Öffnen Sie IntelliJ und wählen Sie `Open`.
-3. Navigieren Sie zu dem Ordner, in dem Sie das Projekt abgelegt haben, und wählen Sie diesen aus.
-
-Ihre Projektstruktur in IntelliJ sollte nun etwa wie folgt aussehen.
-Es dauert einen kleinen Moment bis IntelliJ die Struktur analysiert hat und korrekt anzeigt.
-
-![JUnit-Dialog](assets/images/intellij/project-structure.png)
-
-## Einstellungen
 
 ### Formatierung
 
@@ -76,6 +66,21 @@ Einen Vergleich können Sie dem folgenden Screenshot entnehmen, wobei links das 
 ![Vergleich IntelliJ Interface](assets/images/intellij/intellij-layout-comparison.png)
 
 Welches Design sie verwenden, bleibt Ihnen überlassen, die Einstellungen finden Sie unter `File > Settings > Appearance & Behavior > New UI`.
+Die Screenshots auf dieser Seite nutzen das neue UI.
+
+
+## Import eines Projekts
+
+Den Import eines Projekts von GitHub können Sie wie folgt in IntelliJ durchführen.
+
+1. Klonen Sie das Projekt in einen beliebigen Ordner auf Ihrem Rechner.
+2. Öffnen Sie IntelliJ und wählen Sie `Open`.
+3. Navigieren Sie zu dem Ordner, in dem Sie das Projekt abgelegt haben, und wählen Sie diesen aus.
+
+Ihre Projektstruktur in IntelliJ sollte nun etwa wie folgt aussehen.
+Es dauert einen kleinen Moment bis IntelliJ die Struktur analysiert hat und korrekt anzeigt.
+
+![JUnit-Dialog](assets/images/intellij/project-structure.png)
 
 ## JUnit-Testfälle
 
@@ -128,7 +133,7 @@ Ein bestandener Test wird durch einen grünen Haken gekennzeichnet.
 Durch die Voreinstellungen werden bestandene Tests ausgeblendet. 
 Die Anzeigeeinstellung können Sie über den ersten Button in der Symbolleiste ändern.
 
-#### ![JUnit Symbol Fehler](assets/images/intellij/junit-symbol-error.png) - Nicht Erfolgreich
+#### ![JUnit Symbol Fehler](assets/images/intellij/junit-symbol-error.png) - Nicht erfolgreich
 
 Das rote Kreuz kennzeichnet, dass mindestens ein Test fehlgeschlagen ist. 
 Dieser Fall tritt ein, wenn der Code fehlerfrei ausgeführt wird, sich das Testergebnis aber von dem erwarteten Wert unterscheidet. 
@@ -137,12 +142,12 @@ Um nähere Informationen zu erhalten, können Sie den fehlgeschlagenen Test im D
 In der Konsole wird Ihnen dann ausgegeben, wie sich der erwartete und tatsächliche Wert unterscheiden.
 Sie können auch einen Doppelklick auf den fehlerhaften Test tätigen, um automatisch die entsprechende Klasse zu öffnen und zur betreffenden Stelle im Code zu springen.
 
-#### ![JUnit Symbol Exception](assets/images/intellij/junit-symbol-exception.png) - Exception
+#### ![JUnit Symbol Exception](assets/images/intellij/junit-symbol-exception.png) - _Exception_
 
-Durch ein rotes Ausrufezeichen wird gekennzeichnet, dass das Ausführen des Codes zu einer Exception geführt hat und abgebrochen wurde. 
+Durch ein rotes Ausrufezeichen wird gekennzeichnet, dass das Ausführen des Codes zu einer _Exception_ geführt hat und abgebrochen wurde.
 
-Gründe für das Auftreten von Exceptions sind vielfältig.
-Daher empfiehlt es sich weitere Informationen darüber einzuholen, welche Exception ausgelöst wurde und wodurch. 
+Gründe für das Auftreten von _Exceptions_ sind vielfältig.
+Daher empfiehlt es sich weitere Informationen darüber einzuholen, welche _Exception_ ausgelöst wurde und wodurch.
 Die Informationen können Sie sich analog zu den nicht erfolgreichen Tests über einen Klick auf den Test anzeigen lassen.
 
 Anhand des folgenden Beispiels können Sie nachvollziehen, welche Informationen Sie aus einer Fehlermeldung ziehen können:
@@ -156,9 +161,9 @@ java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
     at de.fuas.algorithms.ArrayList.add(ArrayList.java:23)
     at de.fuas.algorithms.ArrayListTest.testAddNull(ArrayListTest.java:63)
 ```
-- Zeile 1: Es wurde eine Exception ausgelöst, weil auf einen Index `1` zugegriffen wurde, welcher außerhalb der zugewiesenen Array-Länge `1` liegt.
+- Zeile 1: Es wurde eine _Exception_ ausgelöst, weil auf einen Index `1` zugegriffen wurde, welcher außerhalb der zugewiesenen Array-Länge `1` liegt.
   - Gültig wäre hier nur ein Index `0 <= index <= array.length() - 1`.
-- Zeile 2: Bei der Exception handelt es sich um eine `ArrayIndexOutOfBoundsException`.
-- Zeile 3: Die Exception wurde beim Ausführen der Funktion `expandArray` der Klasse `Arrays` im Package `de.fuas.algorithms` ausgelöst. `Arrays.java:7` informiert Sie darüber, dass der Fehler in Zeile `7` aufgetreten ist.
-- Zeile 4: Die Funktion `expandArray` wurde innerhalb der Funktion `add` der Klasse `ArrayList` aufgerufen. 
-- Zeile 5: Die Funktion `add` wurde innerhalb der Funktion `testAddNull` der Klasse `ArrayListTest` aufgerufen.
+- Zeile 2: Bei der _Exception_ handelt es sich um eine `ArrayIndexOutOfBoundsException`.
+- Zeile 3: Die _Exception_ wurde beim Ausführen der Methode `expandArray` der Klasse `Arrays` im Package `de.fuas.algorithms` ausgelöst. `Arrays.java:7` informiert Sie darüber, dass der Fehler in Zeile `7` aufgetreten ist.
+- Zeile 4: Die Methode `expandArray` wurde innerhalb der Methode `add` der Klasse `ArrayList` aufgerufen.
+- Zeile 5: Die Methode `add` wurde innerhalb der Methode `testAddNull` der Klasse `ArrayListTest` aufgerufen.
