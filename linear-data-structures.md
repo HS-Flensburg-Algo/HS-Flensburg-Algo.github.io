@@ -203,8 +203,8 @@ Daher können wir das Element einfach an die freie Stelle schreiben.
 
 Statt die Methoden einer Liste mithilfe eines Arrays zu implementieren, können wir diese Methoden auch mithilfe von Objekten implementieren.
 Wir betrachten zuerst die Implementierung einer Liste mithilfe einer **einfachen Verkettung**.
-Man nennt eine solche Liste eine einfach verkettete Liste.
-Eine Liste besteht dabei aus einer Menge von Knoten.
+Man nennt eine solche Liste eine **einfach verkettete Liste**.
+Eine Liste besteht dabei aus einer Sequenz von Knoten.
 Jeder Knoten einer einfach verketteten Liste besteht aus zwei Informationen, dem Element und einer Referenz auf den nächsten Knoten.
 <a href="#figure:sllist">Abbildung 4</a> illustriert die Struktur einer einfach verketteten Liste mit drei Elementen.
 
@@ -318,7 +318,7 @@ Die Implementierung der Methode `add` ist eine Umsetzung von <a href="#figure:sl
 
 ``` java
 public void add(int index, T elem) {
-    if (index <= 0) {
+    if (index == 0) {
         this.first = new Node<T>(elem, this.first);
     } else {
         var pred = nodeAt(index - 1);
@@ -331,7 +331,7 @@ Bei der Implementierung der Methode haben wir ein paar Freiheitsgrade.
 Zum Beispiel könnten wir mehr Hilfsvariablen einführen.
 Wir könnten etwa den neu erzeugten Knoten in Zeile 6 erst in einer Variable speichern, bevor wir den Knoten an die Methode `setNext` übergeben.
 Im Kontext dieser Vorlesung werden wir versuchen, in vielen Fällen auf solche Hilfsvariablen zu verzichten.
-Auf diese Weise soll ein tieferes Verständnis dafür vermittelt werden, wie man in einer Programmiersprache Aufrufe schachteln kann.
+Auf diese Weise soll ein tieferes Verständnis dafür vermittelt werden, wie man in einer Programmiersprache Ausdrücke schachteln kann.
 
 ## Queues und Stacks
 
@@ -361,7 +361,7 @@ Wir werden später in der Vorlesung noch genauer betrachten, wie diese beiden An
 
 Im Zusammenhang der Methode `add(T)` wollen wir uns noch einen weiteren abstrakten Datentyp anschauen.
 <a href="#figure:queue-adt">Abbildung 6</a> zeigt den abstrakten Datentyp Queue.
-Die Queue ist dabei parametrisiert über dem Typ `T` der Elemente der Queue.
+Die Queue ist dabei parametrisiert über `T`, den Typ der Elemente der Queue.
 Eine **Queue (Warteschlange)** ist eine Container-Datenstruktur, die, ähnlich einem Array oder einer Liste, mehrere Werte zusammenfasst.
 Eine Queue arbeitet nach dem sogenannten **FIFO-Prinzip (first in, first out)**.
 Dieses Prinzip besagt, dass man als nächstes Element aus der Schlange das Element erhält, das zuerst zur Schlange hinzugefügt wurde.
@@ -431,7 +431,8 @@ Das heißt, ein Stack funktioniert — wie der Name schon sagt — genau wie ein
 Der Stack ist eine sehr wichtige Datenstruktur.
 Zum Beispiel wird bei der Ausführung eines Methodenaufrufs in einer Programmiersprache ein Stack verwendet.
 Dieser Stack wird genutzt, um Informationen an die aufgerufene Methode zu übergeben und nach Abarbeitung einer Methode zu wissen, welcher Teil eines Programms nach der Rückkehr aus einem Methodenaufruf ausgeführt werden soll.
-Wir werden bei der Diskussion von Rekursion sehen, warum man zur Ausführung einer Methode einen Stack verwendet.
+Diese Informationen werden oben auf den Stack gelegt.
+Wenn wir mit der Abarbeitung der Methode fertig sind, werden die Informationen oben vom Stack genommen.
 
 <a href="#figure:stack-adt">Abbildung 7</a> zeigt den abstrakten Datentyp Stack.
 Wir können diesen einfach mithilfe einer einfachen Verkettung implementieren und benötigen dabei nur die Referenz auf das erste Element.

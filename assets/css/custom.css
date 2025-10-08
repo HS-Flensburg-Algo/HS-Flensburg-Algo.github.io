@@ -143,6 +143,10 @@ h2 code.highlighter-rouge {
     color: #6b3e91;
 }
 
+.highlight .kc {
+    color: #d35378;
+}
+
 .highlight .mi {
     color: #d35378;
 }
