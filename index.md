@@ -104,6 +104,8 @@ custom_css: toc
 
 ### B. [IntelliJ](intellij.md)
 
-### C. [Feedback](feedback.md)
+### C. [GitHub-Classroom](classroom.md)
 
-### D. [Programmierregeln](linter-rules.md)
+### D. [Feedback](feedback.md)
+
+### E. [Programmierregeln](linter-rules.md)
