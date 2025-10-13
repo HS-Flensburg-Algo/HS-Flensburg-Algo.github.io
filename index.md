@@ -16,7 +16,9 @@ custom_css: toc
 
 - 0.5. [Modifikator `final`](basics.md#modifikator-final)
 
-- 0.6. [Lokale Typinferenz](basics.md#lokale-typinferenz)
+- 0.6. [Expliziter Konstruktoraufruf](basics.md#expliziter-konstruktoraufruf)
+
+- 0.7. [Lokale Typinferenz](basics.md#lokale-typinferenz)
 
 ### 1. [Einleitung](introduction.md)
 

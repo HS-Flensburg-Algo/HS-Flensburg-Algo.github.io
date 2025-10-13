@@ -177,6 +177,44 @@ Wir können den Modifikator `final` nicht nur für Variablen nutzen, sondern auc
 - **finale Methoden:** können in abgeleiteten Klassen nicht überschrieben werden
 
 
+## Expliziter Konstruktoraufruf
+
+In Java ist es möglich, aus einem Konstruktor heraus, einen anderen Konstruktor aufzurufen.
+Dieses Muster entsteht, da es häufig einen Konstruktor gibt, der es erlaubt, viele Werte zu übergeben und einige Hilfskonstruktoren, die weniger Argumente erhalten und _Default_-Werte für die fehlenden Argumente nutzen.
+Um einen Konstruktor aus einem anderen Konstruktor heraus aufzurufen, wird das Schlüsselwort `this` verwendet.
+Das folgende Beispiel stammt aus der [Java Dokumentation](https://docs.oracle.com/javase/tutorial/java/javaOO/thiskey.html).
+
+```java
+public class Rectangle {
+    private int x;
+    private int y;
+    private int width,
+    private int height;
+
+    public Rectangle() {
+        this(0, 0, 1, 1);
+    }
+
+    public Rectangle(int width, int height) {
+        this(0, 0, width, height);
+    }
+
+    public Rectangle(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+}
+```
+
+In diesem Beispiel wird ein Konstruktor für Rechtecke definiert, der die Startposition sowie Breite und Höhe erhält.
+Außerdem werden zwei Konstruktoren definiert, die für einige bzw. alle Parameter _Default_-Werte nutzen.
+Wenn ein Konstruktor mittels `this(..)` aufgerufen wird, wird -- wie sonst bei Überladung in Java auch üblich -- anhand der Anzahl der Argumente und der Typen der Argumente bestimmt, welcher Konstruktor aufgerufen werden soll.
+
+In der Definition eines Konstruktors muss der explizite Konstruktoraufruf die erste Anweisung sein.
+
+
 <!-- ## JUnit-Testklassen
 
 JUnit-Testfälle werden in einer normalen Java-Klasse definiert.
