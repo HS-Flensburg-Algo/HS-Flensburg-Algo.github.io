@@ -231,11 +231,11 @@ final class Node<T> {
         this.next = next;
     }
 
-    T value() {
+    T getValue() {
         return this.value;
     }
 
-    Node<T> next() {
+    Node<T> getNext() {
         return this.next;
     }
 
@@ -286,7 +286,7 @@ Um die Methoden `get`, `add` und `remove` zu implementieren, implementieren wir 
 private Node<T> nodeAt(int index) {
     var current = this.first;
     for (int i = 0; i < index; i++) {
-        current = current.next();
+        current = current.getNext();
     }
     return current;
 }
@@ -310,7 +310,7 @@ Die Methode `get` ruft die Methode `nodeAt` auf und selektiert aus dem erhaltene
 
 ``` java
 public T get(int index) {
-    return nodeAt(index).value();
+    return nodeAt(index).getValue();
 }
 ```
 
@@ -322,7 +322,7 @@ public void add(int index, T elem) {
         this.first = new Node<T>(elem, this.first);
     } else {
         var pred = nodeAt(index - 1);
-        pred.setNext(new Node<T>(elem, pred.next()));
+        pred.setNext(new Node<T>(elem, pred.getNext()));
     }
 }
 ```
@@ -346,8 +346,8 @@ public void add(T elem) {
         this.first = node;
     } else {
         var current = this.first;
-        while (current.next() != null) {
-            current = current.next();
+        while (current.getNext() != null) {
+            current = current.getNext();
         }
         current.setNext(node);
     }
@@ -415,11 +415,11 @@ Die Methode `remove` kann wie folgt implementiert werden.
 
 ``` java
 public T remove() {
-    var value = this.first.value();
-    if (this.first.next() == null) {
+    var value = this.first.getValue();
+    if (this.first.getNext() == null) {
         this.last = null;
     }
-    this.first = this.first.next();
+    this.first = this.first.getNext();
     return value;
 }
 ```
@@ -481,11 +481,11 @@ final class DLNode<T> {
         this.next = next;
     }
 
-    T value() {
+    T getValue() {
         return this.value;
     }
 
-    DLNode<T> prev() {
+    DLNode<T> getPrev() {
         return this.prev;
     }
 
@@ -493,7 +493,7 @@ final class DLNode<T> {
         this.prev = prev;
     }
 
-    DLNode<T> next() {
+    DLNode<T> getNext() {
         return this.next;
     }
 
