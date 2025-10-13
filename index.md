@@ -40,7 +40,7 @@ custom_css: toc
 
 - 2.3. [Queues und Stacks](linear-data-structures.md#queues-und-stacks)
 
-- 2.4. [Doppelt verketete Listen](linear-data-structures.md#doppelt-verkettete-listen)
+- 2.4. [Doppelt verkettete Listen](linear-data-structures.md#doppelt-verkettete-listen)
 
 - 2.5. [Listen in Java](linear-data-structures.md#listen-in-java)
 
