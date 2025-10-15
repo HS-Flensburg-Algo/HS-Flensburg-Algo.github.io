@@ -7,13 +7,14 @@ mathjax: true
 Zur Beschreibung des Aufwandes eines Algorithmus werden häufig zwei Kennzahlen betrachtet, die Laufzeit des Algorithmus und sein Speicherverbrauch.
 Wir werden uns hier vor allem mit der Laufzeit beschäftigen.
 Bei der Komplexität wird dabei eine abstrakte Einheit zur Beschreibung dieser Kennzahlen verwendet und nicht die tatsächlich verbrauchte Zeit oder der tatsächlich verbrauchte Speicher.
-So wird für die Laufzeit etwa angenommen, dass bestimmte Operationen, wie zum Beispiel das Vergleichen von zwei Zahlen oder die Berechnung einer arithmetischen Operation **eine Zeiteinheit/einen Schritt** in Anspruch nehmen.
-Man bezeichnet die Operationen, für die man eine feste Anzahl an Schritten annimmt, als primitive Operationen.
-Auf diese Weise verliert man natürlich Genauigkeit, da der Algorithmus je nach tatsächlichem Aufwand schneller oder langsamer ausgeführt wird, man erhält aber eine Vergleichbarkeit verschiedener Algorithmen unabhängig von ihrer konkreten Umsetzung in einer bestimmten Programmiersprache oder einer bestimmten Rechnerarchitektur.
+So wird für die Laufzeit etwa angenommen, dass bestimmte Operationen, wie zum Beispiel das Vergleichen von zwei Zahlen oder die Berechnung einer arithmetischen Operation, **eine Zeiteinheit/einen Schritt** in Anspruch nehmen.
+Man bezeichnet die Operationen, für die man eine feste Anzahl an Schritten annimmt, als **primitive Operationen**.
+Auf diese Weise verliert man natürlich Genauigkeit, da der Algorithmus je nach tatsächlichem Aufwand schneller oder langsamer ausgeführt wird.
+Man erhält aber eine Vergleichbarkeit verschiedener Algorithmen unabhängig von ihrer konkreten Umsetzung in einer bestimmten Programmiersprache oder einer bestimmten Rechnerarchitektur.
 
 Die Komplexität eines Algorithmus wird dabei in der Größe der Eingabedaten ausgedrückt.
 So wird das Suchen eines Wertes in einer Liste zum Beispiel je mehr Zeit in Anspruch nehmen, desto mehr Elemente die Liste hat.
-Formal wird die Komplexität durch eine Funktion ausdrückt, die die Größe der Eingabe als Argument erhält und als Ergebnis die Anzahl der benötigten Schritte liefert.
+Formal wird die Komplexität durch eine Funktion ausgedrückt, die die Größe der Eingabe als Argument erhält und als Ergebnis die Anzahl der benötigten Schritte liefert.
 Dabei hängt es vom betrachteten Problem ab, wie "die Größe der Eingabe" definiert ist.
 Bei der Suche eines Elementes in einer Liste bietet sich zum Beispiel die Länge der Liste an.
 Man muss für jedes Problem aber einzeln bestimmen, welchen Begriff von Größe man verwendet.
@@ -38,7 +39,7 @@ Konkrete Laufzeiten
 Im Folgenden werden wir uns die konkreten Laufzeiten einiger Methoden auf linearen Datenstrukturen anschauen.
 Konkrete Laufzeit bedeutet dabei, dass wir mathematische Funktionen angeben, die berechnen, wie viele Schritte eine Methode benötigt.
 Die konkreten Laufzeiten, die wir hier angeben, dienen nur zur Illustration.
-Wir werden im zweiten Schritt sehen, dass wir an den ganz genauen Anzahlen an Schritten, die eine Methode durchführt gar nicht interessiert sind.
+Wir werden im zweiten Schritt sehen, dass wir an den ganz genauen Anzahlen an Schritten, die eine Methode durchführt, gar nicht interessiert sind.
 
 ### Arrays
 
@@ -59,8 +60,10 @@ Außerdem wir der Variable `value` ein Wert zugewiesen, dafür zählen wir ebenf
 Der generische Typ `T` ist in Java nur zur Compile-Zeit existent.
 Das heißt, zur Laufzeit verursacht der _Cast_ keinerlei Aufwand.
 
-Das heißt, die folgende Funktion beschreibt die Laufzeit dieser Methode.
-$$T_{\texttt{get}} : \mathbb{N} \rightarrow \mathbb{R}, T_{\texttt{get}}(x) = 2$$
+Die folgende mathematische Funktion beschreibt die Laufzeit der Methode `get` einer `ArrayList`.[^1]
+
+$$T_{\texttt{get}} : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, T_{\texttt{get}}(x) = 2$$
+
 In diesem Beispiel kann noch erwähnt werden, dass sich bei der Methode `get` der `ArrayList` die *best case*- und *worst case*-Laufzeit nicht unterscheiden.
 Unabhängig davon, wie die Liste aussieht und welchen Index wir suchen, benötigt die Methode immer zwei Schritte.
 
@@ -73,17 +76,17 @@ Dazu schauen wir uns noch einmal die Implementierung dieser Methode an.
 
 ``` java
 public T get(int index) {
-    return nodeAt(index).value();
+    return nodeAt(index).getValue();
 }
 ```
 
-Die Methode ist mithilfe der Methode `nodeAt` implementiert, wir müssen uns also anschauen, wie diese Methode implementiert ist.
+Die Methode ist mithilfe der Methode `nodeAt` implementiert, wir müssen uns also anschauen, wie die Methode `nodeAt` ist.
 
 ``` java
 private Node<T> nodeAt(int index) {
     var current = this.first;
     for (int i = 0; i < index; i++) {
-        current = current.next();
+        current = current.getNext();
     }
     return current;
 }
@@ -91,34 +94,39 @@ private Node<T> nodeAt(int index) {
 
 Wir hatten erwähnt, dass *best case*-, *average case*- und *worst case*-Laufzeiten betrachtet werden.
 Wir wollen uns in diesem Fall die *worst case*-Laufzeit der Methode `get` anschauen.
-Der *worst case* der Methode `get` tritt ein, wenn die Methode mit dem letzten Index, also *n* − 1 &mdash; wenn *n* die Länge der Liste ist &mdash; aufgerufen wird.
+Der *worst case* der Methode `get` tritt ein, wenn die Methode mit dem letzten Index, also $$n − 1$$ &mdash; wenn $$n$$ die Länge der Liste ist &mdash; aufgerufen wird.
 
 Wir können bei einer solchen Methode jetzt einfach analysieren, wie viele primitive Operationen durchgeführt werden.
 Wir schauen uns dazu einmal die Methode `nodeAt` genauer an.
 Jeder Aufruf der Methode initialisiert die Variable `current` und weist ihr das Attribut `this.first` zu.
 Außerdem initialisiert jeder Aufruf die Variable `i`.
+Das heißt, die Methode `nodeAt` führt 3 primitive Operationen vor der Schleife durch.
 Wie viele Operationen durch die Schleife durchgeführt werden, hängt von der Größe des Index ab.
-Wir wollen uns die *worst case*-Laufzeit anschauen, daher hat der Index den Wert *n* − 1.
-Dadurch macht die Schleife *n* − 1 Durchläufe. Bei jedem Schleifendurchlauf muss die Bedingung `i < index` überprüft und der Zähler `i` erhöht werden.
-Außerdem wird bei jedem Schleifendurchlauf der Rumpf der Schleife ausgeführt, also `current = current.next()`.
-Nach der Schleife muss unabhängig von der Anzahl der Durchläufe immer noch einmal der Vergleich `i < index` durchgeführt werden, der in diesem Fall aber fehlschlägt. Außerdem wird das `return` ausgeführt.
+Wir wollen uns die *worst case*-Laufzeit anschauen, daher hat der Index den Wert $$n − 1$$.
+Wenn der Index den Wert $$n - 1$$ hat, führt die Schleife $$n - 1$$ Durchläufe durch.
+Bei jedem Schleifendurchlauf muss die Bedingung `i < index` überprüft und der Zähler `i` erhöht werden.
+Außerdem wird bei jedem Schleifendurchlauf der Rumpf der Schleife ausgeführt, also `current = current.getNext()`.
+Das heißt, in jedem Schleifendurchlauf wird noch die Methode `getNext` ausgeführt und die Variable `current` zugewiesen.
+In jedem Schleifendurchlauf führen wir also 4 primitive Operationen durch.
+Nach der Schleife muss unabhängig von der Anzahl der Durchläufe immer noch einmal der Vergleich `i < index` durchgeführt werden, der in diesem Fall aber fehlschlägt.
+Außerdem wird das `return` ausgeführt.
+Daher werden nach der Schleife noch 2 weitere primitive Operationen durchgeführt.
 
 An dieser Stelle ist nicht relevant, wie viele Schritte die einzelnen Operationen, wie eine Zuweisung genau benötigen, es geht nur darum, dass es grundsätzlich möglich ist, die Schritte einfach zu zählen.
 Wir werden im Folgenden sehen, dass eine so genaue Analyse gar nicht notwendig ist.
 Wir stellen uns trotzdem einmal vor, dass wir die Analyse durchgeführt haben und die folgende Funktion die Anzahl der Schritte der Methode `nodeAt` beschreibt.
 
-$$T_{\texttt{nodeAt}} : \mathbb{N} \rightarrow \mathbb{R}, T_{\texttt{nodeAt}}(x) = 5 x - 1$$
+$$T_{\texttt{nodeAt}} : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, T_{\texttt{nodeAt}}(x) = 4 x + 5$$
 
-Da die Methode `get` noch einen zusätzlichen Methodenaufruf durchführt
-und auf ein Attribut zugreift, erhalten wir insgesamt folgende Laufzeit.
+Da die Methode `get` noch einen zusätzlichen Methodenaufruf durchführt, auf ein Attribut zugreift und ein `return` ausführt, erhalten wir insgesamt folgende Laufzeit.
 
-$$T_{\texttt{get}}(x) = T_{\texttt{nodeAt}}(x) + 2 = 5 x + 1$$
+$$T_{\texttt{get}}(x) = T_{\texttt{nodeAt}}(x) + 3 = 4 x + 8$$
 
 Wir haben am Unterschied zwischen den Laufzeiten der Methoden `get` und `nodeAt` eigentlich kein großes Interesse.
 Wenn die Eingabe sehr groß ist, ist der Unterschied zwischen diesen beiden Methoden verschwindend gering.
-Bei einer Liste mit 10.000 Elementen benötigt `nodeAt` zum Beispiel 49.999 Schritte, während `get` 50.001 Schritte benötigt.
+Bei einer Liste mit 10.000 Elementen benötigt `nodeAt` zum Beispiel 50.005 Schritte, während `get` 50.008 Schritte benötigt.
 Im Gegensatz dazu sind wir am Unterschied zwischen der Methode `get` auf einer einfach verketteten Liste und der Methode `get` auf einer `ArrayList` aber sehr wohl interessiert.
-So benötigt die Methode auf der einfach verketteten Liste bei einer Liste mit 10.000 Elementen 50.001 Schritte, die Methode auf einer `ArrayList` aber nur 2 Schritte.
+So benötigt die Methode auf der einfach verketteten Liste bei einer Liste mit 10.000 Elementen 50.008 Schritte, die Methode auf einer `ArrayList` aber nur 2 Schritte.
 Das heißt, wir wollen bestimmte Arten von Unterschieden zwischen Funktionen vernachlässigen, während wir andere weiterhin unterscheiden möchten. Mithilfe von asymptotischen Laufzeiten wird die Klassifikation, die wir uns wünschen, vorgenommen.
 
 Asymptotisches Wachstum
@@ -147,13 +155,13 @@ Die folgende Definition erfüllt alle Anforderungen, die wir uns bisher erarbeit
 #### Definition 1 (Asymptotisch kleiner gleich)
 
 Wir definieren eine Relation $$\le_{as}$$ mit der wir Funktionen vergleichen können.
-Für zwei Funktionen $$f, g : \mathbb{N} \rightarrow \mathbb{R}$$ definieren wir, dass $$f$$ genau dann asymptotisch kleiner gleich $$g$$ ist ($$f \le_{as} g$$), wenn die folgende Bedingung erfüllt ist.[^1]
+Für zwei Funktionen $$f, g : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}$$ definieren wir, dass $$f$$ genau dann asymptotisch kleiner gleich $$g$$ ist ($$f \le_{as} g$$), wenn die folgende Bedingung erfüllt ist.[^2]
 
 $$\exists c \in \mathbb{R}_{>0}: \exists n_0 \in \mathbb{N} : \forall n \in \mathbb{N}: n \geq n_0 \Rightarrow f(n) \leq c \cdot g(n)$$
 
 In Worten gesprochen ist eine Abbildung $$f$$ asymptotisch kleiner gleich einer Abbildung $$g$$, falls es ein Argument $$n_0$$ gibt, ab dem das Ergebnis von $$g$$ (multipliziert mit einem Faktor $$c$$) immer größer gleich dem Ergebnis von $$f$$ ist.
 Den Faktor $$c$$ müssen wir allerdings ganz zu Anfang wählen.
-Das heißt, der Wert, den wir für $$c$$ wählen kann weder von $$n_0$$ abhängen, noch von dem $$n$$, das wir uns anschauen.
+Das heißt, der Wert, den wir für $$c$$ wählen, kann weder von $$n_0$$ abhängen, noch von dem $$n$$, das wir uns anschauen.
 
 <a href="#figure:o-notation">Abbildung 1</a> veranschaulicht, wann eine Funktion $$f$$ asymptotisch kleiner gleich einer Funktion $$g$$ ist.
 
@@ -348,6 +356,8 @@ Beim Vergrößern des Arrays müssen alle Elemente, die bereits in der Liste war
 Daher ist das Vergrößern des Arrays in $$\mathcal{O}(n)$$, wobei *n* die Größe des Arrays ist.
 Diese Kopieraktion muss aber nur durchgeführt werden, wenn wir bereits eine ganze Reihe von Elementen eingefügt haben. Genauer gesagt, müssen wir erst nach dem Einfügen von *n* Elementen einmal *n* Elemente kopieren.
 
-[^1]: Dabei gilt $$\mathbb{R}_{>0} = \{ x \in \mathbb{R} \mid x \gt 0 \}$$.
+[^1]: Dabei gilt $$\mathbb{R}_{\ge 0} = \{ x \in \mathbb{R} \mid x \ge 0 \}$$.
 
-{% include bottom-nav.html previous="linear-data-structures.html" next="recursion.html" %}
+[^2]: Dabei gilt $$\mathbb{R}_{>0} = \{ x \in \mathbb{R} \mid x \gt 0 \}$$.
+
+{% include bottom-nav.html previous="linear-data-structures.html" %}
