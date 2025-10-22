@@ -33,8 +33,7 @@ Die *best case*-Laufzeit beschreibt, wie viele Schritte der Algorithmus im beste
 Beim Suchen eines Elementes in einer Liste könnte die beste Laufzeit zum Beispiel auftreten, wenn gleich das erste Element der Liste das gesuchte Element ist.
 Die *best case*-Laufzeit hat die geringste Bedeutung, da man auf diese Weise wenig über das allgemeine Verhalten eines Algorithmus aussagen kann.
 
-Konkrete Laufzeiten
--------------------
+## Konkrete Laufzeiten
 
 Im Folgenden werden wir uns die konkreten Laufzeiten einiger Methoden auf linearen Datenstrukturen anschauen.
 Konkrete Laufzeit bedeutet dabei, dass wir mathematische Funktionen angeben, die berechnen, wie viele Schritte eine Methode benötigt.
@@ -56,16 +55,17 @@ public T get(int index) {
 Wir beschreiben die Laufzeit dieser Methode als Funktion, deren Eingabe die Größe des Arrays ist.
 Wir haben bereits gesehen, dass der Zugriff auf ein Element eines Arrays mithilfe einer einfachen Rechnung umgesetzt werden kann.
 Bei der Bestimmung von Laufzeiten von Methoden geht man davon aus, dass der Zugriff auf ein Array einen Schritt benötigt.
-Außerdem wir der Variable `value` ein Wert zugewiesen, dafür zählen wir ebenfalls einen Schritt.
+Außerdem wird der Variable `value` ein Wert zugewiesen, dafür zählen wir ebenfalls einen Schritt.
 Der generische Typ `T` ist in Java nur zur Compile-Zeit existent.
 Das heißt, zur Laufzeit verursacht der _Cast_ keinerlei Aufwand.
+Für die `return`-Anweisung zählen wir einen weiteren Schritt.
 
 Die folgende mathematische Funktion beschreibt die Laufzeit der Methode `get` einer `ArrayList`.[^1]
 
-$$T_{\texttt{get}} : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, T_{\texttt{get}}(x) = 2$$
+$$T_{\texttt{get}} : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, T_{\texttt{get}}(x) = 3$$
 
 In diesem Beispiel kann noch erwähnt werden, dass sich bei der Methode `get` der `ArrayList` die *best case*- und *worst case*-Laufzeit nicht unterscheiden.
-Unabhängig davon, wie die Liste aussieht und welchen Index wir suchen, benötigt die Methode immer zwei Schritte.
+Unabhängig davon, wie die Liste aussieht und welchen Index wir suchen, benötigt die Methode immer 3 Schritte.
 
 
 ### Einfach verkettete Listen
@@ -110,7 +110,7 @@ Das heißt, in jedem Schleifendurchlauf wird noch die Methode `getNext` ausgefü
 In jedem Schleifendurchlauf führen wir also 4 primitive Operationen durch.
 Nach der Schleife muss unabhängig von der Anzahl der Durchläufe immer noch einmal der Vergleich `i < index` durchgeführt werden, der in diesem Fall aber fehlschlägt.
 Außerdem wird das `return` ausgeführt.
-Daher werden nach der Schleife noch 2 weitere primitive Operationen durchgeführt.
+Daher werden nach der Schleife noch zwei weitere primitive Operationen durchgeführt.
 
 An dieser Stelle ist nicht relevant, wie viele Schritte die einzelnen Operationen, wie eine Zuweisung genau benötigen, es geht nur darum, dass es grundsätzlich möglich ist, die Schritte einfach zu zählen.
 Wir werden im Folgenden sehen, dass eine so genaue Analyse gar nicht notwendig ist.
@@ -120,23 +120,22 @@ $$T_{\texttt{nodeAt}} : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, T_{\texttt{no
 
 Da die Methode `get` noch einen zusätzlichen Methodenaufruf durchführt, auf ein Attribut zugreift und ein `return` ausführt, erhalten wir insgesamt folgende Laufzeit.
 
-$$T_{\texttt{get}}(x) = T_{\texttt{nodeAt}}(x) + 3 = 4 x + 8$$
+$$T_{\texttt{get}} : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, T_{\texttt{get}}(x) = T_{\texttt{nodeAt}}(x) + 3 = 4 x + 8$$
 
 Wir haben am Unterschied zwischen den Laufzeiten der Methoden `get` und `nodeAt` eigentlich kein großes Interesse.
 Wenn die Eingabe sehr groß ist, ist der Unterschied zwischen diesen beiden Methoden verschwindend gering.
 Bei einer Liste mit 10.000 Elementen benötigt `nodeAt` zum Beispiel 50.005 Schritte, während `get` 50.008 Schritte benötigt.
 Im Gegensatz dazu sind wir am Unterschied zwischen der Methode `get` auf einer einfach verketteten Liste und der Methode `get` auf einer `ArrayList` aber sehr wohl interessiert.
-So benötigt die Methode auf der einfach verketteten Liste bei einer Liste mit 10.000 Elementen 50.008 Schritte, die Methode auf einer `ArrayList` aber nur 2 Schritte.
+So benötigt die Methode auf der einfach verketteten Liste bei einer Liste mit 10.000 Elementen 50.008 Schritte, die Methode auf einer `ArrayList` aber nur 3 Schritte.
 Das heißt, wir wollen bestimmte Arten von Unterschieden zwischen Funktionen vernachlässigen, während wir andere weiterhin unterscheiden möchten. Mithilfe von asymptotischen Laufzeiten wird die Klassifikation, die wir uns wünschen, vorgenommen.
 
-Asymptotisches Wachstum
------------------------
+## Asymptotisches Wachstum
 
 Wir haben motiviert, dass wir bei der Betrachtung der Komplexität bestimmte Funktionen nicht unterscheiden, also als gleich auffassen, möchten.
 Bevor wir eine formale Definition hierfür angeben, wollen wir noch kurz motivieren, dass wir auch in anderer Hinsicht bestimmte Funktionen als gleich auffassen wollen.
 Wir stellen uns einmal vor, dass wir eine Laufzeit betrachten, die wie folgt definiert ist.
 
-$$T_{\texttt{method1}}(x) = \begin{cases}
+$$T_{\texttt{method1}} : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, T_{\texttt{method1}}(x) = \begin{cases}
   2,     & \text{falls}~x < 10\\
   3 x,  & \text{sonst}
 \end{cases}$$
@@ -144,7 +143,7 @@ $$T_{\texttt{method1}}(x) = \begin{cases}
 Wir wollen eine solche Funktion nicht von einer Funktion unterscheiden, die immer $$3 x$$ Schritte benötigt.
 Auf der anderen Seite wollen wir eine Funktion der Form
 
-$$T_{\texttt{method2}}(x) = \begin{cases}
+$$T_{\texttt{method2}} : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, T_{\texttt{method2}}(x) = \begin{cases}
   3 x,  & \text{falls}~x < 10\\
   2,     & \text{sonst}
 \end{cases}$$
@@ -154,8 +153,8 @@ Die folgende Definition erfüllt alle Anforderungen, die wir uns bisher erarbeit
 
 #### Definition 1 (Asymptotisch kleiner gleich)
 
-Wir definieren eine Relation $$\le_{as}$$ mit der wir Funktionen vergleichen können.
-Für zwei Funktionen $$f, g : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}$$ definieren wir, dass $$f$$ genau dann asymptotisch kleiner gleich $$g$$ ist ($$f \le_{as} g$$), wenn die folgende Bedingung erfüllt ist.[^2]
+Wir definieren eine Relation $$\le_{\text{as}}$$ mit der wir Funktionen vergleichen können.
+Für zwei Funktionen $$f, g : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}$$ definieren wir, dass $$f$$ genau dann asymptotisch kleiner gleich $$g$$ ist ($$f \le_{\text{as}} g$$), wenn die folgende Bedingung erfüllt ist.[^2]
 
 $$\exists c \in \mathbb{R}_{>0}: \exists n_0 \in \mathbb{N} : \forall n \in \mathbb{N}: n \geq n_0 \Rightarrow f(n) \leq c \cdot g(n)$$
 
@@ -182,8 +181,8 @@ In diesen Beweisen nutzen wir die folgenden Eigenschaften von $$\le$$ auf reelen
 
 <figure id="figure:le-rules" markdown="1">
 $$\begin{align}
-& \forall k, m, n \in \mathbb{R}: & 0 \le k \wedge m \le n & \Rightarrow k \cdot m \le k \cdot n \tag{1}\label{eq:eq1}\\
-& \forall k, m, n \in \mathbb{R}: & m \le n                & \Rightarrow k + m \le k + n \tag{2}\label{eq:eq2}
+& \forall k, x, y \in \mathbb{R}: & k \ge 0 \wedge x \le y & \Rightarrow k \cdot x \le k \cdot y \tag{1}\label{eq:eq1}\\
+& \forall k, x, y \in \mathbb{R}: & x \le y                & \Rightarrow k + x \le k + y \tag{2}\label{eq:eq2}
 \end{align}$$
 <figcaption>Abbildung 3: Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
 </figure>
@@ -192,20 +191,22 @@ Aus den Regeln in <a href="#figure:le-rules">Abbildung 3</a> können wir zwei we
 
 <figure id="figure:additional-le-rules" markdown="1">
 $$\begin{align}
-& \forall m, n \in \mathbb{R}: & 0 \le m \wedge 1 \le n & \Rightarrow m \le m \cdot n \tag{3}\label{eq:eq3}\\
-& \forall m, n \in \mathbb{R}: & 0 \le n                & \Rightarrow m \le m + n \tag{4}\label{eq:eq4}
+& \forall x, y \in \mathbb{R}: & x \ge 0 \wedge y \ge 1 & \Rightarrow x \le x \cdot y \tag{3}\label{eq:eq3}\\
+& \forall x, y \in \mathbb{R}: & y \ge 0                & \Rightarrow x \le x + y \tag{4}\label{eq:eq4}
 \end{align}$$
-<figcaption>Abbildung 4: Zusätzliche Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
+<figcaption>Abbildung 4: Abgeleitete Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
 </figure>
 
+Aufgrund der Kommutativität der Operatoren $$\cdot$$ und $$+$$ gelten diese Regeln auch jeweils mit vertauschten Argumenten für $$\cdot$$ und $$+$$.
+Wenn wir die jeweils duale Regel anwenden, werden wir neben der jeweiligen Regel noch angeben, dass wir Kommutativität angewendet haben.
 
-#### Beispiel 1 (Lineares und quadratisches Wachstum (Beweis))
+#### Beweis 1 (Lineares Wachstum kleiner gleich quadratischem)
 
-Wir betrachten die Funktionen $$l : \mathbb{N} \rightarrow \mathbb{R}, l(x) = x$$ und
-$$q : \mathbb{N} \rightarrow \mathbb{R}, q(x) = x^2$$. Wir wollen beweisen, dass
-$$l \le_{as} q$$ gilt.
+Wir betrachten die Funktionen $$l : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, l(x) = x$$ und
+$$q : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, q(x) = x^2$$. Wir wollen beweisen, dass
+$$l \le_{\text{as}} q$$ gilt.
 
-**Behauptung:** Es gilt $$l \le_{as} q$$.
+**Behauptung:** Es gilt $$l \le_{\text{as}} q$$.
 
 **Beweis:**
 
@@ -215,29 +216,154 @@ Sei $$n \in \mathbb{N}$$ mit $$n \ge n_0$$.
 Dann gilt
 
 $$\begin{align*}
-l(n) & = n && \text{Regel (\ref{eq:eq3}) ($m := n$, $n := n$): es gilt $0 \le n$ und $1 \le n$}\\
-     & \le n \cdot n && \text{$1$ ist neutrales Element bezüglich $\cdot$}\\
-     & = 1 \cdot n^2 && \text{$c = 1$}\\
-     & = c \cdot n^2\\
+l(n) & = n\\
+     & \le n \cdot n && \text{(1)}\\
+     & = n^2\\
+     & = 1 \cdot n^2 && \text{$1$ ist neutrales Element bezüglich $\cdot$}\\
+     & = c \cdot n^2 && c = 1\\
      & = c \cdot q(n)
 \end{align*}$$
 
-Dies zeigt, dass $$l \le_{as} q$$ gilt.
+Bei Schritt $$(1)$$ müssen wir noch argumentieren, warum dieser Schritt korrekt ist.
+Dazu wenden wir Regel (\ref{eq:eq3}) mit $$x := n$$ und $$y := n$$ an.
+Wir müssen dann noch zeigen, dass $$n \ge 0$$ und $$n \ge 1$$ gilt.
+Beide Aussagen gelten, da $$n \ge n_0 = 1$$.
+
+Dies zeigt, dass $$l \le_{\text{as}} q$$ gilt.
 
 <figure id="figure:linear-quadratic">
 <div class="centered" style="width:100%;" markdown="1">
 ![](/assets/graphics/linear-function.svg){: width="365px"}
 ![](/assets/graphics/quadratic-function.svg){: width="365px"}
 </div>
-<figcaption>Abbildung 4: Lineares und quadratisches Wachstum</figcaption>
+<figcaption>Abbildung 5: Lineares und quadratisches Wachstum</figcaption>
 </figure>
 
 <a href="#figure:linear-quadratic">Abbildung 4</a> illustriert diese Aussage.
 Wir sehen, dass die Funktion $$q$$ ab der Stelle $$n_0 = 1$$ immer oberhalb von $$l$$ liegt.
-<a href="#figure:linear-quadratic">Abbildung 4</a> illustriert außerdem an den Beispielen von $$c = 2$$ und $$c = 3$$, dass $$q \not \le_{as} l$$, da die Funktion $$q(x)$$ die Funktion $$c \cdot l(x)$$ für jedes $$c$$ immer irgendwann "überholt".
-Wir werden hier nicht formal beweisen, dass eine Funktion nicht asymptotisch kleiner gleich einer anderen Funktion ist.
-Wir werden stattdessen nur für bestimmte Klassen von Funktionen lernen, dass sie nicht asymptotisch kleiner gleich einer anderen Klasse von Funktionen sind.
-Um zu beweisen, dass die Funktion $$q$$ nicht asymptotisch kleiner gleich der Funktion $$l$$ ist, müssten wir die logische Aussage in der Definition von $$\le_{as}$$ negieren und einen Beweis für diese negierte Formel führen.
+<a href="#figure:linear-quadratic">Abbildung 4</a> illustriert außerdem an den Beispielen von $$c = 2$$ und $$c = 3$$, dass $$q \not \le_{\text{as}} l$$, da die Funktion $$q(x)$$ die Funktion $$c \cdot l(x)$$ für jedes $$c$$ immer irgendwann "überholt".
+<!-- Wir werden hier nicht formal beweisen, dass eine Funktion nicht asymptotisch kleiner gleich einer anderen Funktion ist.
+Wir werden stattdessen nur für bestimmte Klassen von Funktionen lernen, dass sie nicht asymptotisch kleiner gleich einer anderen Klasse von Funktionen sind. -->
+Um zu beweisen, dass die Funktion $$q$$ nicht asymptotisch kleiner gleich der Funktion $$l$$ ist, müssten wir zeigen, dass die beiden Funktionen nicht in der der $$\le_{\text{as}}$$-Relation stehen.
+Dazu müssen wir die logische Aussage in der Definition von $$\le_{\text{as}}$$ negieren und einen Beweis für diese negierte Formel führen.
+
+#### Beweis 2 (Quadratisches Wachstum nicht kleiner gleich linearem)
+
+Wir betrachten wieder die Funktionen $$l : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, l(x) = x$$ und
+$$q : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, q(x) = x^2$$.
+Wir wollen beweisen, dass $$q \le_{\text{as}} l$$ nicht gilt.
+Bevor wir mit dem Beweis starten, wollen wir ein paar Vorüberlegungen durchführen.
+Um zu zeigen, dass die Aussage nicht gilt, müssen wir zeigen, dass die negierte Aussage gilt.
+Zuerst müssen wir die Aussage von $$q \le_{\text{as}} l$$ also negieren.
+
+$$\begin{align*}
+\neg (q \le_{\text{as}} l) & \Leftrightarrow \neg (\exists c \in \mathbb{R}_{>0}: \exists n_0 \in \mathbb{N} : \forall n \in \mathbb{N}: n \geq n_0 \Rightarrow q(n) \leq c \cdot l(n))\\
+     & \Leftrightarrow \forall c \in \mathbb{R}_{>0}: \neg (\exists n_0 \in \mathbb{N} : \forall n \in \mathbb{N}: n \geq n_0 \Rightarrow q(n) \leq c \cdot l(n))\\
+     & \Leftrightarrow \forall c \in \mathbb{R}_{>0}: \forall n_0 \in \mathbb{N} : \neg (\forall n \in \mathbb{N}: n \geq n_0 \Rightarrow q(n) \leq c \cdot l(n))\\
+     & \Leftrightarrow \forall c \in \mathbb{R}_{>0}: \forall n_0 \in \mathbb{N} : \exists n \in \mathbb{N}: \neg (n \geq n_0 \Rightarrow q(n) \leq c \cdot l(n))\\
+     & \Leftrightarrow \forall c \in \mathbb{R}_{>0}: \forall n_0 \in \mathbb{N} : \exists n \in \mathbb{N}: \neg (\neg (n \geq n_0) \vee q(n) \leq c \cdot l(n))\\
+     & \Leftrightarrow \forall c \in \mathbb{R}_{>0}: \forall n_0 \in \mathbb{N} : \exists n \in \mathbb{N}: \neg \neg (n \geq n_0) \wedge \neg (q(n) \leq c \cdot l(n))\\
+     & \Leftrightarrow \forall c \in \mathbb{R}_{>0}: \forall n_0 \in \mathbb{N} : \exists n \in \mathbb{N}: n \geq n_0 \wedge q(n) > c \cdot l(n)
+\end{align*}$$
+
+Wir müssen jetzt eigentlich "nur" diese formale Aussage beweisen.
+Um vor dem Beweis eine Intuition für den Beweis zu vermitteln, nehmen wir einmal an, jemand behauptet, $$q \le_{\text{as}} l$$ gilt.
+Um die Text im Folgenden etwas zu vereinfachen, nennen wir diese Person im Folgenden Professor Klein.
+Professor Klein behauptet also, dass $$q \le_{\text{as}} l$$ gilt.
+Wir sind aber sofort skeptisch.
+Daher verlangen wir von Professor Klein als Beleg Werte für $$c$$ und $$n_0$$.
+Professor Klein gibt also $$c = 2$$ und $$n_0 = 0$$ an.
+Professor Klein behauptet also, dass $$q(n) = n^2 \le 2 \cdot n = c \cdot l(n)$$ für alle $$n \in \mathbb{N}$$ mit $$n \ge 0$$ gilt.
+Diese Aussage können wir aber sofort als falsch belegen.
+Wir sagen Professor Klein, dass diese Aussage für $$n = 3$$ nicht wahr ist, denn es gilt $$q(3) = 3^2 = 3 \cdot 3 > 2 \cdot 3 = c \cdot l(3)$$.
+
+Wir wollen Professor Klein noch eine Chance geben.
+Er darf also noch einmal Werte für $$c$$ und $$n_0$$ angeben.
+Dieses Mal nennt Professor Klein $$c = 1$$ und $$n_0 = 2$$ an.
+Professor Klein behauptet also, dass $$q(n) = n^2 \le n = 1 \cdot n = c \cdot l(n)$$ für alle $$n \in \mathbb{N}$$ mit $$n \ge 2$$ gilt.
+Aber auch diese Aussage können wir sofort als falsch belegen.
+Wir sagen Professor Klein, dass diese Aussage für $$n = 2$$ nicht wahr ist, denn es gilt $$q(2) = 2^2 = 2 \cdot 2 > 1 \cdot 2 = c \cdot l(2)$$.
+
+Bei einem genaueren Blick auf unsere Gegenbeispiele können wir ein Muster erkennen.
+Wir müssen unser Gegenbeispiel $$n$$ nur so groß wählen, dass es größer als $$c$$ ist, da in diesem Fall $$n \cdot n$$ größer ist als $$c \cdot n$$.
+Da das $$n$$ die Bedingung $$n \ge n_0$$ erfüllen soll, müssen wir das $$n$$ außerdem so wählen, dass es mindestens so groß ist wie $$n_0$$.
+Diese Idee wird durch den folgenden Beweis formal umgesetzt.
+Dabei entsteht noch eine technische Schwierigkeit.
+Der Wert der Variable $$n$$ muss eine natürliche Zahl sein, der Wert der Variable $$c$$ ist aber eine reele Zahl.
+Das heißt, Professor Klein könnte als Wert für $$c$$ zum Beispiel $$0,12345$$ oder $$\sqrt 2$$ angeben.
+Wir müssen daraus dann eine natürliche Zahl konstruieren, die größer ist als $$c$$.
+Zu diesem Zweck nutzen wir die mathematische Operation zum Aufrunden, die als $$\lceil c \rceil$$ geschrieben wird.
+
+In dem folgenden Beweis werden wir die folgenden formalen Eigenschaften des Maximums und des Aufrundens verwenden.
+Außerdem verwenden wir Regeln für $$<$$, die analog zu den Regeln für $$\le$$ sind.
+
+<figure id="figure:max-rules" markdown="1">
+$$\begin{align}
+& \forall x, y \in \mathbb{R}: & \max \{ x, y \} & \ge x \tag{5}\label{eq:eq5}
+\end{align}$$
+<figcaption>Abbildung 6: Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">max</span></figcaption>
+</figure>
+
+<figure id="figure:-ceil-rules" markdown="1">
+$$\begin{align}
+& \forall x \in \mathbb{R}: & \lceil x \rceil \ge x \tag{6}\label{eq:eq6}
+\end{align}$$
+<figcaption>Abbildung 7: Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;"><</span></figcaption>
+</figure>
+
+<figure id="figure:lt-rules" markdown="1">
+$$\begin{align}
+& \forall k, x, y \in \mathbb{R}: & k > 0 \wedge x < y & \Rightarrow k \cdot x < k \cdot y \tag{7}\label{eq:eq7}\\
+& \forall k, x, y \in \mathbb{R}: & x < y              & \Rightarrow k + x < k + y \tag{8}\label{eq:eq8}
+\end{align}$$
+<figcaption>Abbildung 3: Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;">≤</span></figcaption>
+</figure>
+
+<figure id="figure:additional-le-rules" markdown="1">
+$$\begin{align}
+& \forall x, y \in \mathbb{R}: & x > 0 \wedge y > 1 & \Rightarrow x < x \cdot y \tag{9}\label{eq:eq9}\\
+& \forall x, y \in \mathbb{R}: & y > 0              & \Rightarrow x < x + y \tag{10}\label{eq:eq10}
+\end{align}$$
+<figcaption>Abbildung 4: Abgeleitete Regeln für <span class="mo" id="MathJax-Span-286" style="font-family: STIXGeneral-Regular; padding-left: 0.313em;"><</span></figcaption>
+</figure>
+
+**Behauptung:** Die Aussage $$q \le_{\text{as}} l$$ gilt nicht.
+
+**Beweis:**
+Um diese Aussage zu beweisen, beweisen wir, dass $$\neg (q \le_{\text{as}} l)$$ wahr ist.
+
+Sei $$c \in \mathbb{R}_{>0}$$.
+Sei $$n_0 \in \mathbb{N}$$.
+Setze $$n = \max \{\lceil c \rceil + 1, n_0\}$$.
+Dann gilt
+
+$$\begin{align*}
+q(n) & = n^2\\
+     & = n \cdot n &&\\
+     & = \max \{\lceil c \rceil + 1, n_0\} \cdot n && n = \max \{\lceil c \rceil + 1, n_0\}\\
+     & \ge (\lceil c \rceil + 1) \cdot n && \text{(1)}\\
+     & = \lceil c \rceil \cdot n + \lceil c \rceil \cdot 1 && \text{Distributivität}\\
+     & = \lceil c \rceil \cdot n + \lceil c \rceil && \text{$1$ ist neutrales Element bezüglich $\cdot$}\\
+     & > \lceil c \rceil \cdot n && \text{(2)}\\
+     & \ge c \cdot n && \text{(3)}\\
+     & = c \cdot l(n)
+\end{align*}$$
+
+Bei den Schritten $$(1)$$, $$(2)$$ und $$(3)$$ müssen wir noch argumentieren, warum diese Schritte korrekt sind.
+
+Bei Schritt $$(1)$$ wenden wir Kommutativität von $$\cdot$$ an und Regel (\ref{eq:eq1}).
+Wir nutzen dabei $$k := n$$, $$x := \lceil c \rceil + 1$$ und $$y := \max \{\lceil c \rceil + 1, n_0\}$$ und müssen dann noch zeigen, dass $$n \ge 0$$ und $$\lceil c \rceil + 1 \le \max \{\lceil c \rceil + 1, n_0\}$$ gilt.
+Da $$n \in \mathbb{N}$$, gilt auch $$n \ge 0$$ und $$\lceil c \rceil + 1 \le \max \{\lceil c \rceil + 1, n_0\}$$ folgt aus Regel (\ref{eq:eq5}) mit $$x := \lceil c \rceil + 1$$ und $$y := n_0$$.
+
+Bei Schritt $$(2)$$ wenden wir Regel (\ref{eq:eq10}) mit $$x := \lceil c \rceil \cdot n$$ und $$y := \lceil c \rceil$$ an.
+Wir müssen dann noch zeigen, dass $$\lceil c \rceil > 0$$ gilt.
+Mit Regel (\ref{eq:eq6}) und den Voraussetzung für $$c$$ folgt $$\lceil c \rceil \ge c > 0$$.
+
+Bei Schritt $$(3)$$ wenden wir Kommutativität von $$\cdot$$ an und Regel (\ref{eq:eq1}).
+Wr nutzen dabei $$k := n$$, $$x := c$$ und $$y := \lceil c \rceil$$ und müssen dann noch zeigen, dass $$n \ge 0$$ und $$\lceil c \rceil \ge c$$ gilt.
+Da $$n \in \mathbb{N}$$, gilt auch $$n \ge 0$$ und $$\lceil c \rceil \ge c$$ foglt aus Regel (\ref{eq:eq6}) mit $$x := c$$.
+
+Dies zeigt, dass $$q \le_{\text{as}} l$$ nicht gilt.
 
 <figure id="figure:growth">
 <div class="centered" style="width:100%;" markdown="1">
@@ -254,7 +380,7 @@ Dagegen wird bei $$f(x) = x \log(x)$$ auch von quasilinearem Wachstum gespro
 Dies ist aber nicht der Fall, so gilt zum Beispiel 16<sup>4</sup> = 65.536 und 2<sup>16</sup> = 65.536, aber 17<sup>4</sup> = 83.521 und 2<sup>17</sup> = 131.072.
 Außerdem gilt 100<sup>4</sup> = 100.000.000, aber 2<sup>100</sup> = 1.267.650.600.228.229.401.496.703.205.376
 Insbesondere gilt für jede Funktion der Form $$f(x) = x^p$$, wobei $$p$$ eine natürliche Zahl ist, dass $$e(x) = 2^x$$ schneller wächst als das Polynom.
-Anders ausgedrückt gilt für jedes Polynom $$p$$ die Aussage $$p \le_{as} e$$ und $$e \not \le_{as} p$$.
+Anders ausgedrückt gilt für jedes Polynom $$p$$ die Aussage $$p \le_{\text{as}} e$$ und $$e \not \le_{\text{as}} p$$.
 
 <a href="#figure:runtimes">Abbildung 6</a> illustriert die verschiedenen Wachstumsfunktionen noch einmal, indem angenommen wird, dass ein Schritt 1 μs Zeit in Anspruch nimmt.
 Auf diese Weise kann man für die verschiedenen Wachstumsfunktionen berechnen, wie der Algorithmus jeweils zur Ausführung benötigt.
@@ -281,11 +407,11 @@ Auf diese Weise kann man für die verschiedenen Wachstumsfunktionen berechnen, w
 Wir betrachten die Methode `get` der Klasse `ArrayList`.
 Wir haben festgestellt, dass die folgende Funktion die Anzahl der Schritte der Funktion beschreibt.
 
-$$T_{\texttt{get}} : \mathbb{N} \rightarrow \mathbb{R}, T_{\texttt{get}}(x) = 2$$
+$$T_{\texttt{get}} : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, T_{\texttt{get}}(x) = 3$$
 
-Wir betrachten die Funktion $$k : \mathbb{N} \rightarrow \mathbb{R}, k(x) = 1$$.
-Es gilt $$T_{\texttt{get}} \le_{as} k$$.
-Außerdem gilt $$k \le_{as} T_{\texttt{get}}$$.
+Wir betrachten die Funktion $$k : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, k(x) = 1$$.
+Es gilt $$T_{\texttt{get}} \le_{\text{as}} k$$.
+Außerdem gilt $$k \le_{\text{as}} T_{\texttt{get}}$$.
 Das heißt, die Funktionen $$T_{\texttt{get}}$$ und $$k$$ wachsen gleich schnell.
 
 #### Beispiel 3 (Einfach verkettete Listen)
@@ -293,18 +419,17 @@ Das heißt, die Funktionen $$T_{\texttt{get}}$$ und $$k$$ wachsen gleich schnell
 Wir betrachten die Methode `get` einer einfach verketteten Liste.
 Wir haben festgestellt, dass die folgende Funktion die Anzahl der Schritte dieser Methode angibt.
 
-$$T_{\texttt{get}} : \mathbb{N} \rightarrow \mathbb{R}, T_{\texttt{get}}(x) = 5 n + 1$$
+$$T_{\texttt{get}} : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, T_{\texttt{get}}(x) = 4 x + 8$$
 
-Wir betrachten die Funktion $$l : \mathbb{N} \rightarrow \mathbb{R}, l(x) = x$$.
-Es gilt $$T_{\texttt{get}} \le_{as} l$$.
-Außerdem gilt $$l \le_{as} T_{\texttt{get}}$$.
-Für $$k : \mathbb{N} \rightarrow \mathbb{R}, k(x) = 1$$
-gilt $$T_{\texttt{get}} \not \le_{as} k$$.
-Es gilt allerdings $$k \le_{as} T_{\texttt{get}}$$.
+Wir betrachten die Funktion $$l : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, l(x) = x$$.
+Es gilt $$T_{\texttt{get}} \le_{\text{as}} l$$.
+Außerdem gilt $$l \le_{\text{as}} T_{\texttt{get}}$$.
+Für $$k : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, k(x) = 1$$
+gilt $$T_{\texttt{get}} \not \le_{\text{as}} k$$.
+Es gilt allerdings $$k \le_{\text{as}} T_{\texttt{get}}$$.
 Das heißt $$T_{\texttt{get}}$$ wächst schneller als $$k$$.
 
-Größenordnungen
----------------
+## Größenordnungen
 
 Eine Größenordnung ist eine Menge von Funktionen, die — bis auf eine gewisse Abweichung — alle ähnlich schnell wachsen.
 Wir führen dafür die $$\mathcal{O}$$-Notation ein, mit deren Hilfe man eine Größenordnung beschreiben kann.
@@ -313,7 +438,7 @@ Wir führen dafür die $$\mathcal{O}$$-Notation ein, mit deren Hilfe man eine Gr
 
 Wir definieren
 
-$$\mathcal{O}(f) := \{ g: \mathbb{N} \rightarrow \mathbb{R} \mid g \le_{as} f \}.$$
+$$\mathcal{O}(f) := \{ g: \mathbb{N} \rightarrow \mathbb{R}_{\ge 0} \mid g \le_{\text{as}} f \}.$$
 
 Das heißt, in der Menge $$\mathcal{O}(f)$$ sind die Funktionen, die höchstens so schnell wachsen wie die Funktion $$f$$.
 An Stelle einer Abbildung verwendet man für $$f$$ häufig den Funktionswert der Funktion.
@@ -322,11 +447,11 @@ Bei beiden Varianten sollte man immer angeben, welchen Wert die Variable $$n$$ d
 Im Fall von Listen wäre dies etwa die Länge der Liste.
 
 Wir betrachten wieder die Methode `get` einer ArrayList.
-In <a href="#beispiel-2-arraylist">Beispiel 2</a> haben wir bereits gesehen, dass für $$k : \mathbb{N} \rightarrow \mathbb{R}, k(x) = 1$$ die Aussage $$T_{\texttt{get}} \le_{as} k$$ gilt.
+In <a href="#beispiel-2-arraylist">Beispiel 2</a> haben wir bereits gesehen, dass für $$k : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, k(x) = 1$$ die Aussage $$T_{\texttt{get}} \le_{\text{as}} k$$ gilt.
 Also gilt auch $$T_{\texttt{get}} \in \mathcal{O}(k)$$ und wir schreiben dafür auch $$T_{\texttt{get}} \in \mathcal{O}(1)$$.
 
 Wir betrachten wieder die Methode `get` einer einfach verketteten Liste.
-In <a href="#beispiel-3-einfach-verkettete-listen">Beispiel 3</a> haben wir bereits gesehen, dass für $$l : \mathbb{N} \rightarrow \mathbb{R}, l(x) = x$$ die Aussage $$T_{\texttt{get}} \le_{as} l$$ gilt.
+In <a href="#beispiel-3-einfach-verkettete-listen">Beispiel 3</a> haben wir bereits gesehen, dass für $$l : \mathbb{N} \rightarrow \mathbb{R}_{\ge 0}, l(x) = x$$ die Aussage $$T_{\texttt{get}} \le_{\text{as}} l$$ gilt.
 Also gilt auch $$T_{\texttt{get}} \in \mathcal{O}(l)$$ und wir schreiben dafür auch $$T_{\texttt{get}} \in \mathcal{O}(n)$$, wobei $$n$$ die Länge der Liste ist.
 
 Wir haben gesehen, dass die Laufzeit der Methode `get` einer ArrayList konstant ist, während die Methode `get` einer einfach verketteten Liste eine lineare Laufzeit hat.
